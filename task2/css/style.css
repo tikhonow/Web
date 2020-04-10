@@ -1,12 +1,9 @@
-/* { 
-  box-sizing: border-box; 
-}*/
 html {
   height: 100%;
   width: 100%;
 }
 :root {
-  --bg-color: linear-gradient(90deg, rgba(13, 13, 134, 0.404),rgba(120, 248, 248, 0.685), rgba(5, 130, 255, 0.514));
+  --bg-color: linear-gradient(90deg, rgba(147, 147, 202, 0.404),rgba(111, 155, 155, 0.685), rgba(145, 170, 196, 0.514));
 }
 ::-webkit-scrollbar-button {
 background-image:url('');
@@ -21,7 +18,7 @@ box-shadow:0px 0px 3px #000 inset;
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  background-color:#e9eba6;
+  background-color:#fffffe;
   box-shadow:0px 1px 1px #fff inset;
   background-image:url('https://yraaa.ru/_pu/24/59610063.png');
   background-position:center;
@@ -51,6 +48,61 @@ body {
 header, footer, article, #mainNav, #siteAds{
   padding: 20px;
   background:var(--bg-color);
+}
+/*меню*/
+.menu* {
+  background-color: rgb(233, 255, 224);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  }
+  .menu ul{
+  position: relative;
+  z-index: 3;
+  list-style: none;
+  }
+
+  .menu > ul{
+  display: flex;
+  }
+  .menu > ul li a{
+  font-family: 'Gloria Hallelujah', cursive;
+  font-family: 'Satisfy', cursive;
+  padding: 15px;
+  display: block;
+  background: rgb(186, 221, 221);
+  font-size: 18px;
+  color: rgb(59, 53, 53);
+  text-decoration: none;
+  }
+  .menu li a:hover{
+  background:rgb(186, 221, 221);
+  color: white;
+  box-shadow: 1px 5px 10px -5px #454547;
+  }
+  
+  .menu li ul{
+  position: absolute;
+  margin: -40px;
+  margin-top: 1px;
+  min-width: 125.2px;
+  display: none;
+  }
+
+  .menu li > ul li a{
+  padding: 15px;
+  text-transform: none;
+  background: white;
+  }
+  .menu li:hover > ul{
+  display: block;
+  }
+  .menu li > ul li ul{
+  width: 200px;
+  position: absolute;
+  top:-2px;
+  right: -202px;
+  margin: -1px;
   }
 .article_poem {
   text-align: center; 
@@ -75,6 +127,21 @@ div img {
 .gif {
   height: auto;
   width: auto;
+}
+.leftimage{
+  float: left;
+  height: 300px;
+  width: 260px;
+  margin: 17px 17px 17px 0
+}
+.rightimage{
+  float: right;
+  height: 180px;
+  width: 320px;
+  margin: 17px 17px 17px 17px
+}
+.display{
+  display: none;
 }
 #pageHeader {
   grid-area: header;
@@ -103,68 +170,6 @@ div img {
   float:left; /* Выравнивание по левому краю */
   margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
 }
-/*меню*/
-.menu* {
-  background-color: rgb(233, 255, 224);
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  
-  }
-  .menu ul{
-  position: relative;
-  z-index: 3;
-  list-style: none;
-  }
-  
-  .menu > ul{
-  display: flex;
-  }
-
-  .menu > ul li a{
-  font-family: 'Gloria Hallelujah', cursive;
-  font-family: 'Satisfy', cursive;
-  padding: 15px;
-  display: block;
-  background: deepskyblue;
-  font-size: 18px;
-  color: black;
-  text-decoration: none;
-  }
-
-  
-  .menu li a:hover{
-  background:rgb(98, 236, 236);
-  color: white;
-  box-shadow: 1px 5px 10px -5px #454547;
-  }
-  
-  .menu li ul{
-  position: absolute;
-  margin: -40px;
-  margin-top: 1px;
-  min-width: 125.2px;
-  display: none;
-  }
-
-  .menu li > ul li a{
-  padding: 15px;
-  text-transform: none;
-  background: white;
-  }
-  
-  .menu li:hover > ul{
-  display: block;
-  }
-  
-  .menu li > ul li ul{
-  width: 200px;
-  position: absolute;
-  top:-2px;
-  right: -202px;
-  margin: -1px;
-  }
-  
 /*стандартная для прокрутки*/
 @media all and (min-width: 976px) {
   .scrolling {
@@ -217,18 +222,26 @@ div img {
     width:100%;
     height: 100%;
   }
+  .rightimage{
+    float: none;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+  .display{
+    display: grid;
+  }
   }
   @media print {
     body {
         color: rgb(0, 0, 0);
         font-size: x-large;
     }
-
     img {
         display: none;
     }
     iframe {
         display: none;
     }
-
 }
