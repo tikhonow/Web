@@ -1,0 +1,248 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+:root {
+    --bg-color: linear-gradient(90deg, rgba(147, 147, 202, 0.404),rgba(111, 155, 155, 0.685), rgba(145, 170, 196, 0.514));
+}
+::-webkit-scrollbar-button {
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:6px;
+    height:0px
+}
+::-webkit-scrollbar-track {
+    background-color:#32312e;
+    box-shadow:0px 0px 3px #000 inset;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color:#fffffe;
+    box-shadow:0px 1px 1px #fff inset;
+    background-image:url('https://yraaa.ru/_pu/24/59610063.png');
+    background-position:center;
+    background-repeat:no-repeat;
+}
+::-webkit-resizer{
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:7px;
+    height:0px
+}
+::-webkit-scrollbar{
+    width: 11px;
+}
+body {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "header header header"
+    "nav article ads"
+    "footer footer footer";
+    grid-template-columns: 15% 1fr 15%;
+    grid-gap: 0px;
+    height: 100vh;
+    margin: 0;
+}
+header, footer, article, #pageLeft, #pageRight{
+    padding: 20px;
+    background:var(--bg-color);
+}
+/*меню*/
+.menu * {
+    background-color: rgb(233, 255, 224);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+.menu ul{
+    position: relative;
+    z-index: 3;
+    list-style: none;
+  }
+
+.menu > ul{
+    display: flex;
+  }
+.menu > ul li a{
+    font-family: 'Gloria Hallelujah', cursive;
+    font-family: 'Satisfy', cursive;
+    padding: 15px;
+    display: block;
+    background: rgb(186, 221, 221);
+    font-size: 18px;
+    color: rgb(59, 53, 53);
+    text-decoration: none;
+  }
+.menu li a:hover{
+    background:rgb(186, 221, 221);
+    color: white;
+    box-shadow: 1px 5px 10px -5px #454547;
+  }
+  
+.menu li ul{
+    position: absolute;
+    margin: -40px;
+    margin-top: 1px;
+    min-width: 125.2px;
+    display: none;
+  }
+
+.menu li > ul li a{
+    padding: 15px;
+    text-transform: none;
+    background: white;
+  }
+.menu li:hover > ul{
+    display: block;
+  }
+.menu li > ul li ul{
+    width: 200px;
+    position: absolute;
+    top:-2px;
+    right: -202px;
+    margin: -1px;
+  }
+.article_poem {
+    text-align: center; 
+}
+.font {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-family: 'Satisfy', cursive;
+    font-size: 11pt;
+}
+iframe {
+    height:250px;
+    width: 50%;
+    border: 0px;
+}
+.write {
+    text-align: right;
+    font-style: italic;
+}
+div img {
+    width: 150px;
+}
+.gif {
+    height: auto;
+    width: auto;
+}
+.leftimage{
+    float: left;
+    height: 300px;
+    width: 260px;
+    margin: 17px 17px 17px 0
+}
+.rightimage{
+    float: right;
+    height: 180px;
+    width: 320px;
+    margin: 17px 17px 17px 17px
+}
+.leftvideo {
+    float:left;
+    margin: 7px 7px 7px 0;
+}
+.display{
+    display: none;
+}
+#pageHeader {
+    grid-area: header;
+
+}
+#pageFooter {
+    grid-area: footer;
+}
+#mainArticle {
+    grid-area: article;
+}
+#pageLeft{
+    grid-area: nav;
+}
+#pageLeft img {
+    width: 100px;
+    height:100px;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+  }
+#pageRight {
+    grid-area: ads;
+}
+
+/*стандартная для прокрутки*/
+@media all and (min-width: 976px) {
+  .scrolling {
+      width:auto;
+      height:auto;
+      background: var(--bg-color);
+      overflow: auto;
+    }
+}
+/* Планшет */
+@media all and (max-width: 975px) {
+  body{
+      grid-template-areas:
+      "header header"
+      "nav nav"
+      "ads article"
+      "footer footer";
+      grid-template-rows: auto;
+      grid-template-columns: 1fr;
+  }
+  #pageLeft{
+      display: grid;
+      grid-auto-flow: column;
+  }
+  #pageRight {
+      display: grid;
+      align-items: initial;
+  }
+  
+  }
+ /* Смартфон. */
+@media all and (max-width: 575px) {
+    body{
+        grid-template-areas:
+        "header"
+        "nav"
+        "article"
+        "footer";
+        grid-template-rows: auto;
+        grid-template-columns: 1fr;
+    }
+    #pageRight {
+        display: none;
+    }
+    #pageLeft{
+        display: grid;
+        grid-auto-flow: column;
+      }
+    iframe {
+        width:100%;
+        height: 100%;
+    }
+    .rightimage{
+      float: none;
+      display: grid;
+      margin-left: auto;
+      margin-right: auto;
+      
+    }
+    .display{
+      display: grid;
+    }
+  }
+  @media print {
+    body {
+        color: rgb(0, 0, 0);
+        font-size: x-large;
+    }
+    img {
+        display: none;
+    }
+    iframe {
+        display: none;
+    }
+}
