@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Главная</title>
+  <meta name="viewport" content="width=device-width, initial scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Подключаем Bootstrap JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Подключаем Bootstrap JS -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Основной код -->
+  <!--Навбар-->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+      <a class="navbar-brand" href="#">photoRU</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand hid" href="#">photoRU</a>
+      <div class="container">
+        <div class="mx-auto">
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+              <li class="nav-item">
+                <a class="nav-link hid" href="#">Вход/Регистрация</a>
+              </li>
+              <a class="nav-link" href="#">Главная
+                <span class="sr-only">(current)</span>
+              </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Галерея</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Задания
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Задания
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                    <a class="dropdown-item" href="#">SVG рисунок</a>
+                    <a class="dropdown-item" href="#">Старая версия сайта</a>
+                  </div>
+                  <a class="dropdown-item" href="#">SVG рисунок</a>
+                  <a class="dropdown-item" href="#">Старая версия сайта</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
+          data-target="#exampleModal">Вход</button>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="col">
+
+                <h5 class="modal-title" id="exampleModalLabel">Вход <span class="badge badge-secondary">В
+                    разработке</span></h5>
+              </div>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Извините, так как я только начал изучать веб програмирование, я еще не могу написать Back-end , чтобы
+              здесь
+              все работало. Но ничего - скоро все будет!
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+</body>
+<div class="container-fluid p-5">
+  <ol class="breadcrumb">
+      <li class="active">Главная</li>
+    </ol>
+</div>
+</div>
+
+
+</html>

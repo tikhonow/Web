@@ -1,77 +1,89 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <!--auto compiled css & Js-->
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js">
-    </script>
-    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
-    </script>
-    <link rel="stylesheet" type="text/css"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- JavaScript for adding  
-     slider for multiple images 
-     shown at once-->
-     <script type="text/javascript"> 
-        $(window).load(function() { 
-            $(".carousel .item").each(function() { 
-                var i = $(this).next(); 
-                i.length || (i = $(this).siblings(":first")), 
-                  i.children(":first-child").clone().appendTo($(this)); 
-                
-                for (var n = 0; n < 4; n++)(i = i.next()).length || 
-                  (i = $(this).siblings(":first")), 
-                  i.children(":first-child").clone().appendTo($(this)) 
-            }) 
-        }); 
-    </script> 
-
+  <meta charset="utf-8">
+  <title>Главная</title>
+  <meta name="viewport" content="width=device-width, initial scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <!-- container class for bootstrap card-->
-    <div class="container">
-        <!-- bootstrap card with row name myCarousel as row 1-->
-        <div class="carousel slide" id="myCarousel">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="d-block w-100">
-                        <a href="#">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20190709143904/391.png"
-                                class="img-responsive">
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="d-block w-100">
-                        <a href="#">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20190709143850/1382.png"
-                                class="img-responsive">
-                        </a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="d-block w-100">
-                        <a href="#">
-                            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20190709143855/223-1.png"
-                                class="img-responsive">
-                        </a>
-                    </div>
-                </div>
-            </div> <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <i class="glyphicon glyphicon-chevron-left">
-                </i>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <i class="glyphicon glyphicon-chevron-right">
-                </i>
-            </a>
-
-        </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Подключаем Bootstrap JS -->    
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Основной код -->
+  <!--Navbar-->   
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">photoRU</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Галерея</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Задания
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Математические формулы</a>
+            <a class="dropdown-item" href="#">SVG рисунок</a>
+            <a class="dropdown-item" href="#">Старая версия сайта</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Вход/Регистрация</a>
+        </li>
+      </ul>
     </div>
+  </nav>
+  <!--Карусель-->
+  <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="img/carusel/1.jpg" alt="Первый слайд">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Снимай</h3>
+          <p>Вдохновляйтесь лучшими работами с нашего сайта</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="img/carusel/2.jpg" alt="Второй слайд">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Получай</h3>
+          <p>Вдохновляйтесь лучшими работами с нашего сайта</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="img/carusel/3jpg.jpg" alt="Третий слайд">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>Вдохновляй</h3>
+          <p>Вдохновляйтесь лучшими работами с нашего сайта</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  
 </body>
-
-</html>
+</html> 
