@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Главная</title>
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/font-glyphicons.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Подключаем Bootstrap JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Подключаем Bootstrap JS -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!--Подключаем MathJax-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Основной код -->
+    <!--Навбар-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+            <a class="navbar-brand" href="#">photoRU и <h5>немного математики</h5></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand hid" href="#">photoRU</a>
+            <div class="container">
+                <div class="mx-auto">
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                            <li class="nav-item">
+                                <a class="nav-link hid" href="#">Вход/Регистрация</a>
+                            </li>
+                            <a class="nav-link" href="#">Главная
+                                <span class="sr-only">(current)</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Галерея</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Задания
+                                </a>
+                                <div class="container">
+                                    <div class="dropdown">
+                                        <ul class="dropdown-menu multi-level" role="menu"
+                                            aria-labelledby="navbarDropdownMenuLink">
+                                            <li class="divider"></li>
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item" tabindex="-1" href="#">Математические
+                                                    формулы</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Пределы</a></li>
+                                                    <li><a class="dropdown-item" href="#">Интегралы</a></li>
+                                                </ul>
+                                            <li><a class="dropdown-item" href="#">SVG Рисунок</a></li>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                </li>
+                </ul>
+            </div>
+            </div>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
+                    data-target="#exampleModal">Вход</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="col">
+
+                                <h5 class="modal-title" id="exampleModalLabel">Вход <span
+                                        class="badge badge-secondary">В
+                                        разработке</span></h5>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Извините, так как я только начал изучать веб програмирование, я еще не могу написать
+                            Back-end , чтобы
+                            здесь
+                            все работало. Но ничего - скоро все будет!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!--Хлебные крошки-->
+    <hr>
+    <div class="container-fluid p-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home"></i><a href="../index.html"> Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Пределы</li>
+        </ol>
+        <hr>
+    </div>
+
+    <div class="container">
+
+        <h1>Предел</h1>
+        <blockquote class="blockquote">
+            <p class="mb-0">Преде́л — одно из основных понятий математического анализа. Различают предел
+                последовательности и предел
+                функции.
+
+                Понятие предела на интуитивном уровне использовалось ещё во второй половине XVII века Ньютоном, а также
+                математиками XVIII века, такими как Эйлер и Лагранж. Первые строгие определения предела
+                последовательности дали
+                Больцано в 1816 году и Коши в 1821 году</p>
+            <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
+            </footer>
+        </blockquote>
+        <h3>Некотые виды пределов</h3>
+        <div>
+            <h5 class="text-center">Первый замечательный предел</h5>
+            $$\lim_{x\to 0}\frac{sin(x)}{x}$$
+        </div>
+        <div>
+            <h5 class="text-center">Второй замечательный предел</h5>
+            $$\lim_{x\to \infty}{(1 + \frac{1}{x})^x}$$
+        </div>
+
+        <h1>Интеграл</h1>
+        <blockquote class="blockquote">
+            <p class="mb-0">Интеграл — одно из важнейших понятий математического анализа, которое возникает при решении задач о нахождении площади под кривой, пройденного пути при неравномерном движении, массы неоднородного тела, и тому подобных, а также в задаче о восстановлении функции по её производной (неопределённый интеграл). Упрощённо интеграл можно представить как аналог суммы для бесконечного числа бесконечно малых слагаемых. В зависимости от пространства, на котором задана подынтегральная функция, интеграл может быть — двойной, тройной, криволинейный, поверхностный и так далее; также существуют разные подходы к определению интеграла — различают интегралы Римана, Лебега, Стилтьеса и другие</p>
+            <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
+            </footer>
+        </blockquote>
+        <h3>Примеры интегралов</h3>
+        <table class="table table-bordered">
+            <caption>Основные интегралы</caption>
+            <thead>
+              <tr>
+                <th scope="col">№</th>
+                <th scope="col">Интеграл</th>
+                <th scope="col">Значение</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>$$\int{u^a du}$$</td>
+                <td>$$\int{\frac {u^a+1}{du}}$$</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td> $$\int{(\frac{\sqrt x}{y^3})}$$</td>
+                <td>$$\sum_{i=0}^n i^2 = \int \frac{(n^2+n)(2n+1)}{6}$$</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Jacob</td>
+                <td>Mark</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>Mark</td>
+                <td>Mark</td>
+                
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <!--Footer-->
+</body>
+
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Главная</title>
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-glyphicons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Подключаем Bootstrap JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Подключаем Bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Основной код -->
+    <!--Навбар-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+            <a class="navbar-brand" href="#">photoRU</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand hid" href="#">photoRU</a>
+            <div class="container">
+                <div class="mx-auto">
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                            <li class="nav-item">
+                                <a class="nav-link hid" href="#">Вход/Регистрация</a>
+                            </li>
+                            <a class="nav-link" href="#">Главная
+                                <span class="sr-only">(current)</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Галерея</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Задания
+                                </a>
+                                <div class="container">
+                                    <div class="dropdown">
+                                        <ul class="dropdown-menu multi-level" role="menu"
+                                            aria-labelledby="navbarDropdownMenuLink">
+                                            <li class="divider"></li>
+                                            <li class="dropdown-submenu">
+                                                <a class="dropdown-item" tabindex="-1" href="#">Математические
+                                                    формулы</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Пределы</a></li>
+                                                    <li><a class="dropdown-item" href="#">Иннтегралы</a></li>
+                                                </ul>
+                                            <li><a class="dropdown-item" href="#">SVG Рисунок</a></li>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                </li>
+                </ul>
+            </div>
+            </div>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
+                    data-target="#exampleModal">Вход</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="col">
+
+                                <h5 class="modal-title" id="exampleModalLabel">Вход <span
+                                        class="badge badge-secondary">В
+                                        разработке</span></h5>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Извините, так как я только начал изучать веб програмирование, я еще не могу написать
+                            Back-end , чтобы
+                            здесь
+                            все работало. Но ничего - скоро все будет!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid p-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home"></i><a href="../index.html"> Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">SVG-рисунок</li>
+        </ol>
+        <hr>
+    </div>
+    <article>
+        <div class="container">
+            <h1 class="text-center">SVG</h1>
+            <blockquote class="blockquote">
+                <p class="mb-0">SVG (от англ. Scalable Vector Graphics — масштабируемая векторная графика) — язык разметки масштабируемой векторной графики, созданный Консорциумом Всемирной паутины (W3C) и входящий в подмножество расширяемого языка разметки XML, предназначен для описания двумерной векторной и смешанной векторно/растровой графики в формате XML.</p>
+                <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
+                </footer>
+            </blockquote>
+        </div>
+
+        <div class="container text-center">
+            <h3 class="text-center">Мое SVG изображение</h3>
+            <svg width="400" height="280">
+                <defs>
+                    <filter id="f4" x="0" y="0" width="200%" height="200%">
+                        <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+                        <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+                            values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
+                        <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="10" />
+                        <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                    </filter>
+                    <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgb(255, 251, 0);stop-opacity:0.3" />
+                    </radialGradient>
+                </defs>
+                <rect x="50" y="60" rx="20" ry="20" width="250" height="160"
+                    style="fill:red;stroke:black;stroke-width:5;opacity:0.5" filter="url(#f4)" />
+                <text x="230" y="80" fill="black">20 MPX</text>
+                <circle cx="177" cy="145" r="40" stroke="black" stroke-width="3" fill="grey" />
+                <circle cx="177" cy="145" r="35" stroke="black" stroke-width="3" fill="white" />
+                <circle cx="194" cy="135" r="4" stroke="black" stroke-width="0" fill="brown" />
+                <line x1="50" y1="90" x2="300" y2="90" style="stroke:rgba(170, 106, 9, 0.836);stroke-width:5" />
+                <circle cx="75" cy="75" r="6" stroke="black" stroke-width="1" fill="red" />
+                <circle cx="95" cy="75" r="6" stroke="black" stroke-width="1" fill="yellow" />
+                <circle cx="115" cy="75" r="6" stroke="black" stroke-width="1" fill="green" />
+                <polygon points="180,0,130,108 260,40,110,40 ,220,108" style=";fill-rule:nonzero;" fill="url(#grad1)" />
+
+            </svg>
+
+        </div>
+    </article>
+    <hr>
+    <!---
+    <svg>
+                <rect x="0" y="0" rx="0" ry="0" width="400" height="300"/>
+     
+      <polygon points="1.3,16 1.2,17 1,18 0.8,19 0.5,20 0.4,21 0.3,22 0.1,23 0,24 0,25 0.1,26 0.2,27 0.2,28 0.3,29 0.5,30 0.6,31 2,30 4,28 4,26 3,24 2,21 3,19 3,18 2,17 1.3,16" style="fill:#66ff66;" />
+                <rect x="0" y="-140" rx="0" ry="0" width="20" height="20" fill="black"/>
+                <rect x="0" y="0" rx="0" ry="0" width="300" height="300"
+                    style="fill:rgba(250, 194, 8, 0.76);stroke:black;stroke-width:1;" />
+
+                <rect x="280" y="180" rx="0" ry="0" width="20" height="20" fill="black"></rect>
+                <circle cx="150" cy="100" r="50" stroke="" stroke-width="" fill="white" />
+                <circle cx="130" cy="75" r="5" stroke="" stroke-width="" fill="grey" />
+            </svg> 
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Here you can use rows and columns to organize your footer content.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+</html>
+</body>
