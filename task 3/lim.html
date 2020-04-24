@@ -21,13 +21,14 @@
     <!--Подключаем MathJax-->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-     <!--Подключаем подсказки-->
-     <script src="js/script.js"></script>
+    <!--Подключаем подсказки-->
+    <script src="js/script.js"></script>
     <!-- Основной код -->
     <!--Навбар-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-camera"></i> photoRU и <h5>немного математики</h5></a>
+            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-camera"></i> photoRU и <h5>немного математики
+                </h5></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -55,28 +56,28 @@
                                 </a>
                                 <div class="container">
                                     <div class="dropdown">
-                                        <ul class="dropdown-menu multi-level" role="menu"
-                                            aria-labelledby="navbarDropdownMenuLink">
+                                        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="navbarDropdownMenuLink">
                                             <li class="divider"></li>
                                             <li class="dropdown-submenu">
                                                 <a class="dropdown-item" tabindex="-1" href="#">Математические
                                                     формулы</a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="lim.html">Пределы | Интегралы</a></li>
+                                                    <li><a class="dropdown-item" href="lim.html">Пределы | Интегралы</a>
+                                                    </li>
                                                 </ul>
                                             <li><a class="dropdown-item" href="draw.html">SVG Рисунок</a></li>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
-
                 </div>
-                </li>
-                </ul>
-            </div>
-            </div>
             </div>
             <div class="btn-group">
-                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal" title="Войти в свой аккаунт" data-target="#exampleModal">Вход</button>
+                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
+                    title="Войти в свой аккаунт" data-target="#exampleModal">Вход</button>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -109,101 +110,110 @@
         </nav>
     </header>
     <article>
-    <!--Хлебные крошки-->
-    <hr>
-    <div class="container-fluid p-5">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home"></i><a href="index.html"> Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Пределы</li>
-        </ol>
+        <!--Хлебные крошки-->
         <hr>
-    </div>
-
-    <div class="container">
-
-        <h1>Предел</h1>
-        <blockquote class="blockquote">
-            <p class="mb-0">Преде́л — одно из основных понятий математического анализа. Различают предел
-                последовательности и предел
-                функции.
-
-                Понятие предела на интуитивном уровне использовалось ещё во второй половине XVII века Ньютоном, а также
-                математиками XVIII века, такими как Эйлер и Лагранж. Первые строгие определения предела
-                последовательности дали
-                Больцано в 1816 году и Коши в 1821 году</p>
-            <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
-            </footer>
-        </blockquote>
-        <h3>Некотые виды пределов</h3>
-        <div>
-            <h5 class="text-center">Первый замечательный предел</h5>
-            $$\lim_{x\to 0}\frac{sin(x)}{x}$$
-        </div>
-        <div>
-            <h5 class="text-center">Второй замечательный предел</h5>
-            $$\lim_{x\to \infty}{(1 + \frac{1}{x})^x}$$
+        <div class="container-fluid p-5">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><i class="glyphicon glyphicon-home"></i><a href="index.html"> Главная</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Пределы</li>
+            </ol>
+            <hr>
         </div>
 
-        <h1>Интеграл</h1>
-        <blockquote class="blockquote">
-            <p class="mb-0">Интеграл — одно из важнейших понятий математического анализа, которое возникает при решении задач о нахождении площади под кривой, пройденного пути при неравномерном движении, массы неоднородного тела, и тому подобных, а также в задаче о восстановлении функции по её производной (неопределённый интеграл). Упрощённо интеграл можно представить как аналог суммы для бесконечного числа бесконечно малых слагаемых. В зависимости от пространства, на котором задана подынтегральная функция, интеграл может быть — двойной, тройной, криволинейный, поверхностный и так далее; также существуют разные подходы к определению интеграла — различают интегралы Римана, Лебега, Стилтьеса и другие</p>
-            <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
-            </footer>
-        </blockquote>
-        <h3>Примеры интегралов</h3>
-        <table class="table table-bordered">
-            <caption>Основные интегралы</caption>
-            <thead>
-              <tr>
-                <th scope="col">№</th>
-                <th scope="col">Интеграл</th>
-                <th scope="col">Значение</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>$$\int{u^a du}$$</td>
-                <td>$$\int{\frac {u^a+1}{du}}$$</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td> $$\int{(\frac{\sqrt x}{y^3})}$$</td>
-                <td>$$\sum_{i=0}^n i^2 = \int \frac{(n^2+n)(2n+1)}{6}$$</td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
-    
+        <div class="container">
+
+            <h1>Предел</h1>
+            <blockquote class="blockquote">
+                <p class="mb-0">Преде́л — одно из основных понятий математического анализа. Различают предел
+                    последовательности и предел
+                    функции.
+
+                    Понятие предела на интуитивном уровне использовалось ещё во второй половине XVII века Ньютоном, а
+                    также
+                    математиками XVIII века, такими как Эйлер и Лагранж. Первые строгие определения предела
+                    последовательности дали
+                    Больцано в 1816 году и Коши в 1821 году</p>
+                <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
+                </footer>
+            </blockquote>
+            <h3>Некотые виды пределов</h3>
+            <div>
+                <h5 class="text-center">Первый замечательный предел</h5>
+                $$\lim_{x\to 0}\frac{sin(x)}{x}$$
+            </div>
+            <div>
+                <h5 class="text-center">Второй замечательный предел</h5>
+                $$\lim_{x\to \infty}{(1 + \frac{1}{x})^x}$$
+            </div>
+
+            <h1>Интеграл</h1>
+            <blockquote class="blockquote">
+                <p class="mb-0">Интеграл — одно из важнейших понятий математического анализа, которое возникает при
+                    решении задач о нахождении площади под кривой, пройденного пути при неравномерном движении, массы
+                    неоднородного тела, и тому подобных, а также в задаче о восстановлении функции по её производной
+                    (неопределённый интеграл). Упрощённо интеграл можно представить как аналог суммы для бесконечного
+                    числа бесконечно малых слагаемых. В зависимости от пространства, на котором задана подынтегральная
+                    функция, интеграл может быть — двойной, тройной, криволинейный, поверхностный и так далее; также
+                    существуют разные подходы к определению интеграла — различают интегралы Римана, Лебега, Стилтьеса и
+                    другие</p>
+                <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
+                </footer>
+            </blockquote>
+            <h3>Примеры интегралов</h3>
+            <table class="table table-bordered">
+                <caption>Основные интегралы</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Интеграл</th>
+                        <th scope="col">Значение</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>$$\int{u^a du}$$</td>
+                        <td>$$\int{\frac {u^a+1}{du}}$$</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td> $$\int{(\frac{\sqrt x}{y^3})}$$</td>
+                        <td>$$\sum_{i=0}^n i^2 = \int \frac{(n^2+n)(2n+1)}{6}$$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </article>
-<!--Footer-->
-<hr>
-<footer class="page-footer font-small cyan darken-3">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-md-12 py-1">
-        <div class="mb-1 flex-center">
-          <!-- Facebook -->
-          <a class="fb-ic" href="https://www.facebook.com/profile.php?id=100007584138132" target="_blank">
-            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
-          <!-- Twitter -->
-          <a class="vk-ic" href="https://vk.com/ruslantopboy" target="_blank">
-            <i class="fab fa-vk fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
-          <!--Instagram-->
-          <a class="ins-ic" href="https://www.instagram.com/ruslan_tihonow/?hl=ru" target="_blank">
-            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-          </a>
+    <!--Footer-->
+    <hr>
+    <footer class="page-footer font-small cyan darken-3">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-12 py-1">
+                    <div class="mb-1 flex-center">
+                        <!-- Facebook -->
+                        <a class="fb-ic" href="https://www.facebook.com/profile.php?id=100007584138132" target="_blank">
+                            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="vk-ic" href="https://vk.com/ruslantopboy" target="_blank">
+                            <i class="fab fa-vk fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic" href="https://www.instagram.com/ruslan_tihonow/?hl=ru" target="_blank">
+                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
-  </div>
-</footer>
+        <hr>
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
+        </div>
+    </footer>
 </body>
 
 </html>

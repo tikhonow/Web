@@ -1,95 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC|Caveat|Comfortaa|EB+Garamond|IBM+Plex+Serif&display=swap');
-
-.font1 {
-  font-family: 'Caveat', cursive;
-  font-size: larger;
-}
-
-.font2 {
-  font-family: 'Comfortaa', cursive;
-}
-
-.carousel-inner img {
-  height: 635px;
-  width: 100%;
-}
-
+/*Меню*/
 .hid {
   display: none;
-}
-
-.mosaicflow__item {
-  padding: 3px;
-}
-
-.mosaicflow__column {
-  float: left;
-}
-
-.mosaicflow__item img {
-  display: block;
-  width: 100%;
-  height: auto;
-  padding: 4px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.mosaicflow__item img:hover {
-  opacity: 0.6;
-  filter: alpha(opacity=60);
-}
-
-.card {
-  float: left;
-  width: calc(30%);
-  margin: 0 10px;
-}
-
-.modal-backdrop {
-  z-index: 0 !important;
-}
-
-@media (max-width: 992px) {
-  .carousel-inner img {
-    height: 200px;
-    width: 100%;
-  }
-
-  h1 {
-    font-size: 34px
-  }
-
-  .btn-outline-info {
-    display: none;
-  }
-
-  .navbar-brand {
-    display: none;
-  }
-
-  .hid {
-    display: grid;
-
-  }
-
-  .top-buffer {
-    margin-top: 500px;
-    margin-bottom: 17px;
-
-  }
-
-  .float-left {
-    display: none;
-  }
-
-  .top-buffer1 {
-    margin-top: 17px;
-    margin-bottom: 17px;
-
-  }
-
 }
 
 .dropdown-submenu {
@@ -138,7 +50,12 @@
   -moz-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
 }
+/*Корректное тображение модульного окна*/
+.modal-backdrop {
+  z-index: 0 !important;
+}
 
+/*Отступы*/
 .top-buffer {
   margin-top: 70px;
 
@@ -149,11 +66,91 @@
   margin-bottom: 70px;
 
 }
+/*Шрифт*/
+.font1 {
+  font-family: 'Caveat', cursive;
+  font-size: larger;
+}
 
+.font2 {
+  font-family: 'Comfortaa', cursive;
+}
+
+/*Карусель*/
+.carousel-inner img {
+  height: 635px;
+  width: 100%;
+}
+/*Библиотека изображений*/
+.mosaicflow__item {
+  padding: 3px;
+}
+
+.mosaicflow__column {
+  float: left;
+}
+
+.mosaicflow__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.mosaicflow__item img:hover {
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+
+/*Иконки в footer*/
 .fb-ic {
   color: darkblue;
 }
 
 .ins-ic {
   color: crimson;
+}
+/*Мобильный запрос*/
+@media (max-width: 992px) {
+  .carousel-inner img {
+    height: 200px;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 34px
+  }
+
+  .btn-outline-info {
+    display: none;
+  }
+
+  .navbar-brand {
+    display: none;
+  }
+
+  .hid {
+    display: grid;
+
+  }
+
+  .top-buffer {
+    margin-top: 500px;
+    margin-bottom: 17px;
+
+  }
+
+  .float-left {
+    display: none;
+  }
+
+  .top-buffer1 {
+    margin-top: 17px;
+    margin-bottom: 17px;
+
+  }
+
 }
