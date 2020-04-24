@@ -1,63 +1,159 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Caveat|Comfortaa|EB+Garamond|IBM+Plex+Serif&display=swap');
+
+.font1 {
+  font-family: 'Caveat', cursive;
+  font-size: larger;
+}
+
+.font2 {
+  font-family: 'Comfortaa', cursive;
+}
+
 .carousel-inner img {
-    height: 400px;
-    width: 100%;
-  }
+  height: 635px;
+  width: 100%;
+}
+
 .hid {
   display: none;
 }
-.text-typewriter {
+
+.mosaicflow__item {
+  padding: 3px;
+}
+
+.mosaicflow__column {
+  float: left;
+}
+
+.mosaicflow__item img {
+  display: block;
   width: 100%;
-  height: 50%;
-  top: 0;
-  left: 0;
+  height: auto;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
-.typewriter {
-  position: absolute;
-  top: 1000px;
-  left: 30px;
-  right: auto;
-  width: auto;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation: typing 3s steps(30, end);
+
+.mosaicflow__item img:hover {
+  opacity: 0.6;
+  filter: alpha(opacity=60);
 }
-@keyframes typing {
-  from {
-      width: 0;
-  }
-  to {
-      width: 737px;
-  }
-}
+
 .card {
- float: left;
+  float: left;
   width: calc(30%);
   margin: 0 10px;
 }
+
 .modal-backdrop {
   z-index: 0 !important;
 }
 
 @media (max-width: 992px) {
-    .carousel-inner img {
-        height: 200px;
-        width: 100%;
-    }
-    
-    .btn-outline-info {
-      display: none;
-    }
-    
-    .navbar-brand {
-      display: none;
-    }
-    .hid {
-      display: grid;
-      
-      
-    }
-    
+  .carousel-inner img {
+    height: 200px;
+    width: 100%;
+  }
 
+  h1 {
+    font-size: 34px
+  }
+
+  .btn-outline-info {
+    display: none;
+  }
+
+  .navbar-brand {
+    display: none;
+  }
+
+  .hid {
+    display: grid;
+
+  }
+
+  .top-buffer {
+    margin-top: 500px;
+    margin-bottom: 17px;
+
+  }
+
+  .float-left {
+    display: none;
+  }
+
+  .top-buffer1 {
+    margin-top: 17px;
+    margin-bottom: 17px;
+
+  }
+
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px;
+  border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu>a:after {
+  display: block;
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+  border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+  float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  -moz-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+}
+
+.top-buffer {
+  margin-top: 70px;
+
+}
+
+.top-buffer1 {
+  margin-top: 170px;
+  margin-bottom: 70px;
+
+}
+
+.fb-ic {
+  color: darkblue;
+}
+
+.ins-ic {
+  color: crimson;
 }
