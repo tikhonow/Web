@@ -8,18 +8,39 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-glyphicons.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="galery_plagin/jquery.fancybox.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/77ebd5663e.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Подключаем Bootstrap JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--Подключаем Popper-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <!-- Подключаем Bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- Подключаем fancyBox JS -->
+    <script src="galery_plagin/jquery.fancybox.min.js"></script>
+    <!-- Mosiac Flow -->
+    <script src="galery_plagin/jquery.mosaicflow.js"></script>
+    <script>
+        $(function () {
+            $('#mycontainer').mosaicflow({
+                itemSelector: '.mosaicflow__item',
+                minItemWidth: 300
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="modal"]').tooltip()
+            });
+    </script>
     <!-- Основной код -->
     <!--Навбар-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-            <a class="navbar-brand" href="#">photoRU</a>
+            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-camera"></i> photoRU</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -69,8 +90,7 @@
             </div>
             </div>
             <div class="btn-group">
-                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
-                    data-target="#exampleModal">Вход</button>
+                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal" title="Войти в свой аккаунт" data-target="#exampleModal">Вход</button>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -102,35 +122,190 @@
             </div>
         </nav>
     </header>
-
+    <article>
     <!--Хлебные крошки-->
     <div class="container-fluid p-5">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home"></i><a href="#"> Главная</a></li>
+            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home" ></i><a href="#" data-placement="bottom"> Главная</a></li>
             <li class="breadcrumb-item active" aria-current="page">Галерея</li>
         </ol>
         <hr>
     </div>
-    <!--ОСнованая часть-->
+    <!--Основная часть-->
+    
+    <!--Галерея-->
     <div class="container">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Все</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Природа</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Города</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Consequat occaecat ullamco amet non eiusmod nostrud dolore irure incididunt est duis anim sunt officia. Fugiat velit proident aliquip nisi incididunt nostrud exercitation proident est nisi. Irure magna elit commodo anim ex veniam culpa eiusmod id nostrud sit cupidatat in veniam ad. Eiusmod consequat eu adipisicing minim anim aliquip cupidatat culpa excepteur quis. Occaecat sit eu exercitation irure Lorem incididunt nostrud.</div>
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Ad pariatur nostrud pariatur exercitation ipsum ipsum culpa mollit commodo mollit ex. Aute sunt incididunt amet commodo est sint nisi deserunt pariatur do. Aliquip ex eiusmod voluptate exercitation cillum id incididunt elit sunt. Qui minim sit magna Lorem id et dolore velit Lorem amet exercitation duis deserunt. Anim id labore elit adipisicing ut in id occaecat pariatur ut ullamco ea tempor duis.</div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Est quis nulla laborum officia ad nisi ex nostrud culpa Lorem excepteur aliquip dolor aliqua irure ex. Nulla ut duis ipsum nisi elit fugiat commodo sunt reprehenderit laborum veniam eu veniam. Eiusmod minim exercitation fugiat irure ex labore incididunt do fugiat commodo aliquip sit id deserunt reprehenderit aliquip nostrud. Amet ex cupidatat excepteur aute veniam incididunt mollit cupidatat esse irure officia elit do ipsum ullamco Lorem. Ullamco ut ad minim do mollit labore ipsum laboris ipsum commodo sunt tempor enim incididunt. Commodo quis sunt dolore aliquip aute tempor irure magna enim minim reprehenderit. Ullamco consectetur culpa veniam sint cillum aliqua incididunt velit ullamco sunt ullamco quis quis commodo voluptate. Mollit nulla nostrud adipisicing aliqua cupidatat aliqua pariatur mollit voluptate voluptate consequat non.</div>
-          </div>
+        <h1 class="text-center">Галерея</h1>
+        <blockquote class="blockquote">
+            <p class="mb-0">На нашем сайте вы можите выбрать для себя фотографии из любой категории: природа, портретная съемка, города и многое другое</p>
+            <p class="mb-0 text-center">Надеемся, что вы найдете то, что понравится вам</p>
+        </blockquote>
+        <div id="mycontainer">
+    
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/21.jpg">
+                    <img class="img-responsive" src="img/galery/21.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/02.jpg">
+                    <img class="img-responsive" src="img/galery/02.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/03.jpg">
+                    <img class="img-responsive" src="img/galery/03.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/04.jpg">
+                    <img class="img-responsive" src="img/galery/04.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/05.jpg">
+                    <img class="img-responsive" src="img/galery/05.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/06.jpg">
+                    <img class="img-responsive" src="img/galery/06.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/07.jpg">
+                    <img class="img-responsive" src="img/galery/07.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/08.jpg">
+                    <img class="img-responsive" src="img/galery/08.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/09.jpg">
+                    <img class="img-responsive" src="img/galery/09.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/10.jpg">
+                    <img class="img-responsive" src="img/galery/10.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/11.jpg">
+                    <img class="img-responsive" src="img/galery/11.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/12.jpg">
+                    <img class="img-responsive" src="img/galery/12.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/13.jpg">
+                    <img class="img-responsive" src="img/galery/13.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/14.jpg">
+                    <img class="img-responsive" src="img/galery/14.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/15.jpg">
+                    <img class="img-responsive" src="img/galery/15.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/16.jpg">
+                    <img class="img-responsive" src="img/galery/16.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/17.jpg">
+                    <img class="img-responsive" src="img/galery/17.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/18.jpg">
+                    <img class="img-responsive" src="img/galery/18.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/19.jpg">
+                    <img class="img-responsive" src="img/galery/19.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/20.jpg">
+                    <img class="img-responsive" src="img/galery/20.jpg" alt="">
+                </a>
+            </div>
+            <div class="mosaicflow__item">
+                <a data-fancybox="gallery" href="img/galery/22.jpg">
+                    <img class="img-responsive" src="img/galery/22.jpg" alt="">
+                </a>
+            </div>
+        </div>
     </div>
-    <!--Footer-->
+    <div class="container top-buffer1">
+        <h1 class="text-center">Комментарии</h1>
+    <div class="container">
+        <div class="media border p-3">
+            <img src="img/avatar/4.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+            <div class="media-body">
+              <h4>John CSS <small><i>25 марта, 2020, 20:59</i></small></h4>
+              <p>Прекрасные фотографии!! Фото с собачками мои любимые </p>
+              <div class="media p-3">
+                <img src="img/avatar/1.jpg" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+                <div class="media-body">
+                  <h4>Jane Doe <small><i>25 марта, 2020, 22:38</i></small></h4>
+                  <p>Да, согласна с вами :)))</p>
+                </div>
+              </div> 
+            </div>
+          </div>
+          <div class="media border p-3">
+            <img src="img/avatar/2.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+            <div class="media-body">
+              <h4>Владимир Ленин <small><i>1 января, 2020, 0:00</i></small></h4>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti necessitatibus aliquam porro, blanditiis ex atque voluptas sit fuga nisi illo voluptates tempora at quae quas provident delectus ut veritatis molestias! </p>
+            </div>
+          </div>
+          
+    </div>
+    </div>
+    
+    </article>
+  <!--Footer-->
+<hr>
+<footer class="page-footer font-small cyan darken-3">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12 py-1">
+        <div class="mb-1 flex-center">
+          <!-- Facebook -->
+          <a class="fb-ic" href="https://www.facebook.com/profile.php?id=100007584138132" target="_blank">
+            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="vk-ic" href="https://vk.com/ruslantopboy" target="_blank">
+            <i class="fab fa-vk fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic" href="https://www.instagram.com/ruslan_tihonow/?hl=ru" target="_blank">
+            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
+  </div>
+</footer>
 </body>
 
 </html>

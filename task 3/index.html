@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-glyphicons.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/77ebd5663e.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
   <!--Навбар-->
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-      <a class="navbar-brand" href="#">photoRU</a>
+      <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-camera"></i> photoRU</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -66,7 +67,7 @@
       </div>
       <div class="btn-group">
         <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
-          data-target="#exampleModal">Вход</button>
+          data-target="#exampleModal" title="Войти в свой аккаунт">Вход</button>
       </div>
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -84,7 +85,7 @@
               </button>
             </div>
             <div class="modal-body">
-              Извините, так как я только начал изучать веб програмирование, я еще не могу написать Back-end , чтобы
+              Извините, так как я только начал изучать <i class="fab fa-instagram"></i>веб програмирование, я еще не могу написать Back-end , чтобы
               здесь
               все работало. Но ничего - скоро все будет!
             </div>
@@ -96,6 +97,7 @@
       </div>
     </nav>
   </header>
+  <article>
   <!--Карусель-->
   <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -285,8 +287,36 @@
     </div>
   </div>
  </div >
+  </article>
+<!--Footer-->
+<hr>
+<footer class="page-footer font-small cyan darken-3">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12 py-1">
+        <div class="mb-1 flex-center">
+          <!-- Facebook -->
+          <a class="fb-ic" href="https://www.facebook.com/profile.php?id=100007584138132" target="_blank">
+            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="vk-ic" href="https://vk.com/ruslantopboy" target="_blank">
+            <i class="fab fa-vk fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic" href="https://www.instagram.com/ruslan_tihonow/?hl=ru" target="_blank">
+            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
+  </div>
+</footer>
 
-  <!--Footer-->
 
 </body>
 
