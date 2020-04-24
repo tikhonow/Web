@@ -3,39 +3,28 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Главная</title>
+    <title>Галерея</title>
+    <link rel="shortcut icon" href="img/png/1.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-glyphicons.css">
     <link rel="stylesheet" href="css/style.css">
-    <link href="galery_plagin/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="css/jquery.fancybox.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/77ebd5663e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
 
 <body>
     <!-- Подключаем Bootstrap JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!--Подключаем Popper-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <!-- Подключаем Bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Подключаем fancyBox JS -->
-    <script src="galery_plagin/jquery.fancybox.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
     <!-- Mosiac Flow -->
-    <script src="galery_plagin/jquery.mosaicflow.js"></script>
-    <script>
-        $(function () {
-            $('#mycontainer').mosaicflow({
-                itemSelector: '.mosaicflow__item',
-                minItemWidth: 300
-            });
-        });
-    </script>
-    <script>
-        $(function () {
-            $('[data-toggle="modal"]').tooltip()
-            });
-    </script>
+    <script src="js/jquery.mosaicflow.js"></script>
+    <!--Подключаем плагины для галереи и-->
+    <script src="js/script.js"></script>
     <!-- Основной код -->
     <!--Навбар-->
     <header>
@@ -54,12 +43,12 @@
                             <li class="nav-item">
                                 <a class="nav-link hid" href="#">Вход/Регистрация</a>
                             </li>
-                            <a class="nav-link" href="#">Главная
+                            <a class="nav-link" href="index.html">Главная
                                 <span class="sr-only">(current)</span>
                             </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Галерея</a>
+                                <a class="nav-link" href="galery.html">Галерея</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -75,10 +64,9 @@
                                                 <a class="dropdown-item" tabindex="-1" href="#">Математические
                                                     формулы</a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Пределы</a></li>
-                                                    <li><a class="dropdown-item" href="#">Иннтегралы</a></li>
+                                                    <li><a class="dropdown-item" href="lim.html">Пределы | Интегралы</a></li>
                                                 </ul>
-                                            <li><a class="dropdown-item" href="#">SVG Рисунок</a></li>
+                                            <li><a class="dropdown-item" href="draw.html">SVG Рисунок</a></li>
                             </li>
                         </ul>
                     </div>
@@ -126,7 +114,7 @@
     <!--Хлебные крошки-->
     <div class="container-fluid p-5">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home" ></i><a href="#" data-placement="bottom"> Главная</a></li>
+            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home" ></i><a href="index.html" data-placement="bottom"> Главная</a></li>
             <li class="breadcrumb-item active" aria-current="page">Галерея</li>
         </ol>
         <hr>
@@ -137,8 +125,8 @@
     <div class="container">
         <h1 class="text-center">Галерея</h1>
         <blockquote class="blockquote">
-            <p class="mb-0">На нашем сайте вы можите выбрать для себя фотографии из любой категории: природа, портретная съемка, города и многое другое</p>
-            <p class="mb-0 text-center">Надеемся, что вы найдете то, что понравится вам</p>
+            <p class="mb-0 font2">На нашем сайте вы можите выбрать для себя фотографии из любой категории: природа, портретная съемка, города и многое другое</p>
+            <p class="mb-0 text-center font2">Надеемся, что вы найдете то, что понравится вам</p>
         </blockquote>
         <div id="mycontainer">
     

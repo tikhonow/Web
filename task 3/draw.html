@@ -3,11 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Главная</title>
+    <title>Рисунок</title>
+    <link rel="shortcut icon" href="img/png/1.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-glyphicons.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/77ebd5663e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
 
 <body>
@@ -15,11 +18,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Подключаем Bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>
+    
+     <!--Подключаем подсказки-->
+    <script src="js/script.js"></script>
     <!-- Основной код -->
     <!--Навбар-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
-            <a class="navbar-brand" href="#">photoRU</a>
+            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-camera"></i> photoRU</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,12 +39,12 @@
                             <li class="nav-item">
                                 <a class="nav-link hid" href="#">Вход/Регистрация</a>
                             </li>
-                            <a class="nav-link" href="#">Главная
+                            <a class="nav-link" href="index.html">Главная
                                 <span class="sr-only">(current)</span>
                             </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Галерея</a>
+                                <a class="nav-link" href="galery.html">Галерея</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -54,10 +60,9 @@
                                                 <a class="dropdown-item" tabindex="-1" href="#">Математические
                                                     формулы</a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Пределы</a></li>
-                                                    <li><a class="dropdown-item" href="#">Иннтегралы</a></li>
+                                                    <li><a class="dropdown-item" href="lim.html">Пределы | Интегралы</a></li>
                                                 </ul>
-                                            <li><a class="dropdown-item" href="#">SVG Рисунок</a></li>
+                                            <li><a class="dropdown-item" href="draw.html">SVG Рисунок</a></li>
                             </li>
                         </ul>
                     </div>
@@ -69,8 +74,7 @@
             </div>
             </div>
             <div class="btn-group">
-                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
-                    data-target="#exampleModal">Вход</button>
+                <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal" title="Войти в свой аккаунт" data-target="#exampleModal">Вход</button>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -80,7 +84,7 @@
                         <div class="modal-header">
                             <div class="col">
 
-                                <h5 class="modal-title" id="exampleModalLabel">Вход <span
+                                <h5 class="modal-title" id="exampleModalLabel" ><i class="glyphicon glyphicon-user" ></i>Вход <span
                                         class="badge badge-secondary">В
                                         разработке</span></h5>
                             </div>
@@ -102,10 +106,11 @@
             </div>
         </nav>
     </header>
-
+    <article>
     <div class="container-fluid p-5">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home"></i><a href="../index.html"> Главная</a></li>
+            <li class="breadcrumb-item"><i class="glyphicon glyphicon-home"></i><a href="index.html"> Главная</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">SVG-рисунок</li>
         </ol>
         <hr>
@@ -114,7 +119,10 @@
         <div class="container">
             <h1 class="text-center">SVG</h1>
             <blockquote class="blockquote">
-                <p class="mb-0">SVG (от англ. Scalable Vector Graphics — масштабируемая векторная графика) — язык разметки масштабируемой векторной графики, созданный Консорциумом Всемирной паутины (W3C) и входящий в подмножество расширяемого языка разметки XML, предназначен для описания двумерной векторной и смешанной векторно/растровой графики в формате XML.</p>
+                <p class="mb-0">SVG (от англ. Scalable Vector Graphics — масштабируемая векторная графика) — язык
+                    разметки масштабируемой векторной графики, созданный Консорциумом Всемирной паутины (W3C) и входящий
+                    в подмножество расширяемого языка разметки XML, предназначен для описания двумерной векторной и
+                    смешанной векторно/растровой графики в формате XML.</p>
                 <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
                 </footer>
             </blockquote>
@@ -152,90 +160,33 @@
 
         </div>
     </article>
+    <!--Footer-->
     <hr>
-    <!-- Footer -->
-    <footer class="page-footer font-small blue pt-4">
-
-        <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left">
-
-            <!-- Grid row -->
+    <footer class="page-footer font-small cyan darken-3">
+        <div class="container text-center">
             <div class="row">
-
-                <!-- Grid column -->
-                <div class="col-md-6 mt-md-0 mt-3">
-
-                    <!-- Content -->
-                    <h5 class="text-uppercase">Footer Content</h5>
-                    <p>Here you can use rows and columns to organize your footer content.</p>
-
+                <div class="col-md-12 py-1">
+                    <div class="mb-1 flex-center">
+                        <!-- Facebook -->
+                        <a class="fb-ic" href="https://www.facebook.com/profile.php?id=100007584138132" target="_blank">
+                            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="vk-ic" href="https://vk.com/ruslantopboy" target="_blank">
+                            <i class="fab fa-vk fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic" href="https://www.instagram.com/ruslan_tihonow/?hl=ru" target="_blank">
+                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                    </div>
                 </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <!-- Grid column -->
-                <div class="col-md-3 mb-md-0 mb-3">
-
-                    <!-- Links -->
-                    <h5 class="text-uppercase">Links</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-3 mb-md-0 mb-3">
-
-                    <!-- Links -->
-                    <h5 class="text-uppercase">Links</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Grid column -->
-
             </div>
-            <!-- Grid row -->
-
         </div>
-        <!-- Footer Links -->
-
-        <!-- Copyright -->
+        <hr>
         <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+            <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
         </div>
-        <!-- Copyright -->
-
     </footer>
-    <!-- Footer -->
-
-</html>
 </body>
+</html>

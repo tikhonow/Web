@@ -4,11 +4,13 @@
 <head>
   <meta charset="utf-8">
   <title>Главная</title>
+  <link rel="shortcut icon" href="img/png/1.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial scale=1.0">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-glyphicons.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://kit.fontawesome.com/77ebd5663e.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
 
 <body>
@@ -16,6 +18,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- Подключаем Bootstrap JS -->
   <script src="js/bootstrap.min.js"></script>
+  <!--Подключаем подсказки-->
+  <script src="js/script.js"></script>
   <!-- Основной код -->
   <!--Навбар-->
   <header>
@@ -34,12 +38,12 @@
               <li class="nav-item">
                 <a class="nav-link hid" href="#">Вход/Регистрация</a>
               </li>
-              <a class="nav-link" href="#">Главная
+              <a class="nav-link" href="index.html">Главная
                 <span class="sr-only">(current)</span>
               </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Галерея</a>
+                <a class="nav-link" href="galery.html">Галерея</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -53,7 +57,7 @@
                       <li class="dropdown-submenu">
                         <a class="dropdown-item" tabindex="-1" href="#">Математические формулы</a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="math/lim.html">Пределы | Интегралы</a></li>
+                          <li><a class="dropdown-item" href="lim.html">Пределы | Интегралы</a></li>
                         </ul>
                       <li><a class="dropdown-item" href="draw.html">SVG Рисунок</a></li>
               </li>
@@ -66,8 +70,7 @@
       </div>
       </div>
       <div class="btn-group">
-        <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal"
-          data-target="#exampleModal" title="Войти в свой аккаунт">Вход</button>
+        <button type="button" class="nav-link btn btn-outline-info" data-toggle="modal" title="Войти в свой аккаунт" data-target="#exampleModal">Вход</button>
       </div>
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -158,9 +161,9 @@
  
  <div class="container top-buffer">
   <blockquote class="blockquote">
-    <p class="mb-0">
+    <p class="mb-0 font1">
       Делая первые шаги в новом занятии, будь то работа или хобби, каждый человек непременно сталкивается с трудностями. Вроде все делаешь, как надо, а результат все равно не тот, которого ожидаешь. И в такие моменты часто хочется все бросить и сильно-сильно загрустить…
-      <p class="p-3">
+      <p class="p-3 font1">
         Главная проблема новичка в чем-либо - отсутствие знаний или нужной информации. И тут каждый решает для себя, как поступать: учиться на собственных ошибках или же воспользоваться советами тех, кто уже давно “в деле” - они уже набили свои шишки и знают, как поступать в тех или иных ситуациях.
       </p>
       
