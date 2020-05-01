@@ -84,11 +84,33 @@
     </nav>
   </header>
   <article class="p-3">
+    <div class="container my-5">
+      <h1 class="text-center">Массивы</h1>
+      <blockquote class="blockquote">
+        <p class="mb-0">
+          Массив (в некоторых языках программирования также таблица, ряд, матрица) — структура данных, хранящая набор
+          значений (элементов массива), идентифицируемых по индексу или набору индексов, принимающих целые (или
+          приводимые к целым) значения из некоторого заданного непрерывного диапазона. Одномерный массив можно
+          рассматривать как реализацию абстрактного типа данных — вектор.
+          <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
+          </footer>
+      </blockquote>
+    </div>
+    <div class="container ">
+      <h3 class="text-center">Исходный массив</h3>
+      <div id="table1">
 
+      </div>
+      <button class="btn btn-success" type="button" onclick="division();">Изменить</button>
+      <button class="btn btn-light" type="button" onclick="clearTable();">Очистить </button>
+      <div id="table2">
+
+      </div>
+    </div>
   </article>
   <!--Footer-->
   <hr>
-  <footer class="page-footer font-small">
+  <footer class="page-footer font-small cyan darken-3">
     <div class="container text-center">
       <div class="row">
         <div class="col-md-12 py-1">
@@ -117,25 +139,38 @@
   <script>
     var table = ' ';
     var table2 = ' ';
-    var array = [[],[]];
+    var array = [];
     let rows = 6;
     let cols = 5;
     for (let r = 0; r < rows; r++) {
       array[r] = []
       table += '<tr>';
       table2 += '<tr>';
-      for (let c = 0; c <= cols; c++) {
+      for (let c = 0; c < cols; c++) {
         array[r][c] = 1;
         table += '<td>' + array[r][c] + '</td>';
-        table2 +='<td>' + (r + 1) * array[r][c] + '</td>';
+        table2 += '<td>' + (r + 1) * array[r][c] + '</td>';
 
       }
       table += '</tr>';
       table2 += '</tr>';
     }
-    document.write('<div class="container"><table class="table">' + table + '</table> </div>')
-    document.write('<br> <br> <br>')
-    document.write('<div class="container"><table class="table">' + table2 + '</table> </div>')
+    var html = '<div class="container"><table class="table table-bordered table-hover">' + table + '</table> </div>';
+    document.getElementById("table1").innerHTML = html;
+
+    function division() {
+      var html2 =
+        '<div class="container"><h3 class="text-center">Измененный массив</h3><table class="table table-bordered table-hover">' +
+        table2 + '</table> </div>';
+      document.getElementById("table2").innerHTML = html2;
+    }
+
+    function clearTable() {
+      document.getElementById("table2").innerHTML = "";
+    }
+    //document.write('<div class="container"><table class="table">' + table + '</table> </div>')
+    //document.write('<br> <br> <br>')
+    //document.write('<div class="container"><table class="table">' + table2 + '</table> </div>')
   </script>
   <!-- Подключаем Bootstrap JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
