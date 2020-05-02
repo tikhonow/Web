@@ -9,33 +9,10 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-glyphicons.css">
     <script src="https://kit.fontawesome.com/77ebd5663e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
 
 <body>
-    <script>
-        function division() {
-            var x = 0;
-            var y = 100;
-            for(let i = 1; i < 100;i +=2)
-            {
-                x += i;
-                y += 100 + i;
-            }
-
-            document.getElementById("result").value = x/y;
-        }
-    </script>
-    <!-- Подключаем Bootstrap JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Подключаем Bootstrap JS -->
-    <script src="js/bootstrap.min.js"></script>
-    <!--Подключаем подсказки-->
-    <script src="js/script.js"></script>
-    <!--Подключаем MathJax-->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <!-- Основной код -->
     <!--Навбар-->
     <header>
@@ -105,7 +82,7 @@
             </div>
         </nav>
     </header>
-    <article>
+    <article class="p-3">
         <div class="container my-5">
             <h1 class="text-center">Цикл (програмирование)</h1>
             <blockquote class="blockquote">
@@ -119,6 +96,7 @@
                 </footer>
             </blockquote>
         </div>
+
         <div class="container">
             <form class="form">
                 <h4 class="text-center">Пример</h5>
@@ -128,7 +106,7 @@
                     <button class="btn btn-success" type="button" onclick="division();">Расчитать</button>
                     <button class="btn btn-light" type="reset">Очистить</button>
                     <div class="col-md-3 mb-3 my-2">
-                        <label for="result" >Результат</label>
+                        <label for="result">Результат</label>
                         <input id="result" readonly type="number" class="form-control">
                     </div>
             </form>
@@ -162,6 +140,27 @@
             <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
         </div>
     </footer>
+    <script>
+        function division() {
+            var x = 0;
+            var y = 100;
+            for (let i = 1; i < 100; i += 2) {
+                x += i;
+                y += 100 + i;
+            }
+
+            document.getElementById("result").value = x / y;
+        }
+
+    </script>
+    <!-- Подключаем Bootstrap JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Подключаем Bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>
+    <!--Подключаем подсказки-->
+    <script src="js/script.js"></script>
+    <!--Подключаем MathJax-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 </body>
 
 </html>

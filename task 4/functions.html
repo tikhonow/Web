@@ -10,83 +10,9 @@
   <link rel="stylesheet" href="css/font-glyphicons.css">
   <script src="https://kit.fontawesome.com/77ebd5663e.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </head>
 
 <body>
-  <script>
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-
-    function getArray(n) {
-      let min = +document.getElementById("min").value;
-      let max = +document.getElementById("max").value;
-
-      if (min >= max) {
-        alert("Неправильный ввод! Максимум должен быть больше минимума");
-        return;
-      }
-
-      let array = [];
-      for (let i = 0; i < n; i++) {
-        array[i] = getRandomInt(min, max);
-      }
-      console.log(array)
-      return array;
-    }
-
-    function getResultArray(array) {
-      let sort_array = array.sort((a, b) => b - a);
-      return sort_array;
-    }
-
-    function genAndSortArray() {
-      let n = +document.getElementById("n").value;
-
-      let array = getArray(n*n);
-      let data = getResultArray(array);
-      let A = [];
-      for (let i = 0; i < n; i++) {
-        A[i] = [];
-      }
-      let index = 0;
-      alert(data);
-      for (let i = 0; i < n; i++) {
-        
-        if (i % 2 == 0) {
-          for (let j = 0; j < n; j++) {
-            A[j][i] = data[index++];
-          }
-        } else {
-          for (let j = n - 1; j >= 0; j--) {
-            A[j][i] = data[index++];
-          }
-        }
-      }
-
-      let html = "<table class=\"table text-center table-bordered table-hover\">";
-      for (let i = 0; i < n; i++) {
-        html += "<tr>";
-        for (let j = 0; j < n; j++) {
-          html += "<td>" + A[i][j] + "</td>";
-        }
-        html += "</tr>";
-      }
-      html += "</table>";
-
-      document.getElementById("cout").innerHTML = html;
-    }
-  </script>
-  <!-- Подключаем Bootstrap JQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!-- Подключаем Bootstrap JS -->
-  <script src="js/bootstrap.min.js"></script>
-  <!--Подключаем подсказки-->
-  <script src="js/script.js"></script>
-  <!--Подключаем MathJax-->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <!-- Основной код -->
   <!--Навбар-->
   <header>
@@ -158,21 +84,22 @@
   </header>
   <article class="p-3">
     <div class="container my-5">
-      <h1 class="text-center">Цикл (програмирование)</h1>
+      <h1 class="text-center">Функция (програмирование)</h1>
       <blockquote class="blockquote">
         <p class="mb-0">
-          Цикл — разновидность управляющей конструкции в высокоуровневых языках программирования,
-          предназначенная для организации многократного исполнения набора инструкций. Также циклом может
-          называться любая многократно исполняемая последовательность инструкций, организованная любым
-          способом (например, с помощью условного перехода).
+          Фу́нкция в программировании, или подпрограмма — фрагмент программного кода, к которому можно обратиться из
+          другого места программы. В большинстве случаев с функцией связывается идентификатор[en], но многие языки
+          допускают и безымянные функции. С именем функции неразрывно связан адрес первой инструкции (оператора),
+          входящей в функцию, которой передаётся управление при обращении к функции. После выполнения функции управление
+          возвращается обратно в адрес возврата — точку программы, где данная функция была вызвана.
         </p>
         <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
         </footer>
       </blockquote>
       <div class="container">
         <h5>Генерация рандомного числа и массива</h5>
-        <form class="form" onsubmit="genAndSortArray();" action="javascript:void(0);">
-          <div class="form-row" onsubmit="genAndSortArray();" action="javascript:void(0);">
+        <form class="form p-3" onsubmit="genSnakeArray();" action="javascript:void(0);">
+          <div class="form-row" onsubmit="genSnakeArray();" action="javascript:void(0);">
             <div class="col-md-3 mb-3">
               <input id="min" type="number" step="1" class="form-control" placeholder="Введите min" required>
             </div>
@@ -183,9 +110,16 @@
               <input id="n" type="number" step="1" class="form-control" placeholder="Введите n" min="0" required>
             </div>
           </div>
+          <div>
+            <small " class=" text-muted">
+              Генератор псевдослучайных чисел — алгоритм, порождающий последовательность чисел, элементы которой почти
+              независимы друг от друга и подчиняются заданному распределению.
+            </small>
+          </div>
+          <br>
           <button class="btn btn-success" type="submit">Вывести массив</button>
 
-          <button class="btn btn-light" type="reset">Очистить</button>
+          <button class="btn btn-light" type="reset" onclick=" clearCout();">Очистить</button>
           <hr>
         </form>
         <div id="cout">
@@ -223,6 +157,78 @@
       <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
     </div>
   </footer>
+  <script>
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function getArray(n) {
+      let min = +document.getElementById("min").value;
+      let max = +document.getElementById("max").value;
+
+      if (min >= max) {
+        alert("Неправильный ввод! Максимум должен быть больше минимума");
+        return;
+      }
+
+      let array = [];
+      for (let i = 0; i < n; i++) {
+        array[i] = getRandomInt(min, max);
+      }
+      return array;
+    }
+
+    function getResultArray(array) {
+      let sort_array = array.sort((a, b) => b - a);
+      return sort_array;
+    }
+
+    function genSnakeArray() {
+      let n = +document.getElementById("n").value;
+
+      let array = getArray(n * n);
+      let data = getResultArray(array);
+      let A = [];
+      for (let i = 0; i < n; i++) {
+        A[i] = [];
+      }
+      let index = 0;
+      for (let i = 0; i < n; i++) {
+
+        if (i % 2 == 0) {
+          for (let j = 0; j < n; j++) {
+            A[j][i] = data[index++];
+          }
+        } else {
+          for (let j = n - 1; j >= 0; j--) {
+            A[j][i] = data[index++];
+          }
+        }
+      }
+
+      let html = "<table class=\"table text-center table-bordered table-hover\">";
+      for (let i = 0; i < n; i++) {
+        html += "<tr>";
+        for (let j = 0; j < n; j++) {
+          html += "<td>" + A[i][j] + "</td>";
+        }
+        html += "</tr>";
+      }
+      html += "</table>";
+
+      document.getElementById("cout").innerHTML = html;
+    }
+    function clearCout() {
+      document.getElementById("cout").innerHTML = "";
+    }
+  </script>
+  <!-- Подключаем Bootstrap JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Подключаем Bootstrap JS -->
+  <script src="js/bootstrap.min.js"></script>
+  <!--Подключаем MathJax-->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 
 </html>

@@ -14,19 +14,10 @@
 </head>
 
 <body>
-  <script>
-    function calculate() {
-    var a = document.getElementById("side").value;
-    var h = document.getElementById("height").value;
-    document.getElementById("result").value = (a * h)/2 ;
-}
-  </script>
   <!-- Подключаем Bootstrap JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- Подключаем Bootstrap JS -->
   <script src="js/bootstrap.min.js"></script>
-  <!--Подключаем подсказки-->
-  <script src="js/script.js"></script>
   <!--Подключаем MathJax-->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -76,8 +67,8 @@
           <div class="modal-content">
             <div class="modal-header">
               <div class="col">
-                <h5 class="modal-title" id="exampleModalLabel"><i
-                  class="glyphicon glyphicon-user"></i> Вход <span class="badge badge-secondary">В
+                <h5 class="modal-title" id="exampleModalLabel"><i class="glyphicon glyphicon-user"></i> Вход <span
+                    class="badge badge-secondary">В
                     разработке</span>
                 </h5>
               </div>
@@ -99,60 +90,48 @@
       </div>
     </nav>
   </header>
-  <article>
+  <article class="p-3">
     <div class="container my-5">
       <h1 class="text-center">Треугольник</h1>
       <blockquote class="blockquote">
-          <p class="mb-0">
-            Треуго́льник (в евклидовом пространстве) — геометрическая фигура, образованная тремя отрезками, которые соединяют три точки, не лежащие на одной прямой. Указанные три точки называются вершинами треугольника, а отрезки — сторонами треугольника. Часть плоскости, ограниченная сторонами, называется внутренностью треугольника: нередко треугольник рассматривается вместе со своей внутренностью (например, для определения понятия площади)
-          </p>
-          <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
-          </footer>
+        <p class="mb-0">
+          Треуго́льник (в евклидовом пространстве) — геометрическая фигура, образованная тремя отрезками, которые
+          соединяют три точки, не лежащие на одной прямой. Указанные три точки называются вершинами треугольника, а
+          отрезки — сторонами треугольника. Часть плоскости, ограниченная сторонами, называется внутренностью
+          треугольника: нередко треугольник рассматривается вместе со своей внутренностью (например, для определения
+          понятия площади)
+        </p>
+        <footer class="blockquote-footer">Источник : <cite title="Название источника">Википедия</cite>
+        </footer>
       </blockquote>
-  </div>
+    </div>
     <div class="container">
       <form class="form" onsubmit="calculate();" action="javascript:void(0);">
         <h5 class="text-centre">Калькулятор</h5>
         <div class="form-row" onsubmit="calculate();" action="javascript:void(0);">
           <div class="col-md-3 mb-3">
-            <label for="height"></label>
             <input type="number" class="form-control" id="height" placeholder="Введите высоту" min="0" required>
-            <div class="invalid-feedback">
-              Please provide a valid city
-            </div>
           </div>
           <div class="col-md-3 mb-3">
-            <label for="side"></label>
             <input type="number" class="form-control" id="side" placeholder="Введите сторону" min="0" required>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
           </div>
         </div>
         <small id="passwordHelpInline" class="text-muted">
           Расчет производиться по формуле :
-            <div style="margin: 1em 0; text-align:left">
-              \(\displaystyle{ S =\frac{a * h}{2}}\)
-              </div>
+          <div style="margin: 1em 0; text-align:left">
+            \(\displaystyle{ S =\frac{a * h}{2}}\)
+          </div>
         </small>
-        <!--Ангелина
-        <button class="btn btn-success mb-2" type="submit">Рассчитать</button>
-        <button class="btn btn-light mb-2" type="reset">Очистить</button>
-        <hr>
-        
-        <div class="form-group mx-0 mb-2">
-            <label for="result">Результат</label>
-            <input id="result" readonly type="number" class="form-control">
-        </div> -->
-        <button class="btn btn-success" type="submit">Расчитать</button>
+        <button class="btn btn-success" type="submit" data-toggle="modal"
+          title="Найти площаль треугольника">Расчитать</button>
         <button class="btn btn-light" type="reset">Очистить</button>
         <div class="col-md-3 mb-3 my-2">
           <label for="result">Результат</label>
           <input id="result" readonly type="number" class="form-control">
-      </div>
+        </div>
       </form>
     </div>
-    
+
   </article>
   <!--Footer-->
   <hr>
@@ -182,6 +161,13 @@
       <a href="https://github.com/tikhonow/Web/tree/master/task%203" target="_blank"> GitHub</a>
     </div>
   </footer>
+  <script>
+    function calculate() {
+      var a = document.getElementById("side").value;
+      var h = document.getElementById("height").value;
+      document.getElementById("result").value = (a * h) / 2;
+    }
+  </script>
 </body>
 
 </html>
