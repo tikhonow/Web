@@ -143,13 +143,14 @@
     </footer>
     <script>
         function division() {
-            var x = 0;
-            var y = 100;
+            let x = 0;
+            let y = 100;
             for (let i = 1; i < 100; i += 2) {
                 x += i;
                 y += 100 + i;
             }
-
+            x += 100;
+            y += 100;
             document.getElementById("result").value = x / y;
         }
 
