@@ -86,7 +86,7 @@
                 ]
             }
         ];
-        function createList(children) {
+        function creating_list_programming_languages(children) {
 
             let ul = $('<ul/>')
             for (let child of children) {
@@ -96,7 +96,7 @@
                 if (typeof child !== 'object')
                     li.append(child)
                 else if (child.children !== undefined)
-                    li.append(createList(child.children))
+                    li.append(creating_list_programming_languages(child.children))
                 li.on('click', function () {
                     $(this.firstElementChild).slideToggle(1000)
                     return false
@@ -105,7 +105,7 @@
             }
             return ul
         }
-        $("body").append(createList(m))
+        $("body").append(creating_list_programming_languages(m))
         $( "li" ).each(function() {
 			var t = $(this).clone().children("ul").end();
 		    console.log( "Текст элемента:       " + t.text() + "\r\nКоличество вложенных: " + $(this).find("li").length );
