@@ -100,7 +100,9 @@
         function Take_information_about_DOM(element) {
             for (child of element.children) {
                 if (child.children) {
-                    console.log(child);
+                    console.dir(child);
+                    //console.log(child);
+                    //console.log(child.nodeName, child.nodeType, child.nodeValue)
                     Take_information_about_DOM(child);
                 }
             }
