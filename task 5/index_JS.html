@@ -82,18 +82,18 @@
             }
         ];
         var ul = document.body.appendChild(document.createElement('ul'));
-        function makeElements(element, ul) {
+        function creating_list_programming_languages(element, ul) {
             var li = ul.appendChild(document.createElement('li'));
             li.appendChild(document.createTextNode(element.text));
-            if (element.children) {
+            if (element.children && element.children!= undefined) {
                 var newUl = li.appendChild(document.createElement('ul'));
                 for (child of element.children) {
-                    makeElements(child, newUl);
+                    creating_list_programming_languages(child, newUl);
                 }
             }
         }
         for (child of m) {
-            makeElements(child, ul);
+            creating_list_programming_languages(child, ul);
         }
         var a = document;
         Take_information_about_DOM(a);
