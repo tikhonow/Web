@@ -97,9 +97,8 @@
                     li.append(child)
                 else if (child.children !== undefined)
                     li.append(createList(child.children))
-                li.on('click', function (e) {
-                    e.preventDefault()
-                    $(this.firstElementChild).slideToggle()
+                li.on('click', function () {
+                    $(this.firstElementChild).slideToggle(1000)
                     return false
                 })
                 ul.append(li)
@@ -108,7 +107,7 @@
         }
         $("body").append(createList(m))
         $( "li" ).each(function() {
-			var t = $(this).clone().children("ul").remove().end();
+			var t = $(this).clone().children("ul").end();
 		    console.log( "Текст элемента:       " + t.text() + "\r\nКоличество вложенных: " + $(this).find("li").length );
 		});
     </script>
