@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <script>
+        //объявляем структуру данных
+        var m = [
+            {
+                text: 'Процедурные',
+                children: [
+                    {
+                        text: 'Низкого уровня (или машинно-ориентированные)',
+                        children: [
+                            {
+                                text: 'Ассемблер',
+                                children: []
+                            },
+                            {
+                                text: 'Машинный код',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Высокого уровня',
+                        children: [
+                            {
+                                text: 'Python',
+                                children: []
+                            },
+                            {
+                                text: 'PHP',
+                                children: []
+                            },
+                            {
+                                text: 'Delphi',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                text: 'Непроцедурные',
+                children: [
+                    {
+                        text: 'Объектно-ориентированные',
+                        children: [
+                            {
+                                text: 'Java',
+                                children: []
+                            },
+                            {
+                                text: 'C#',
+                                children: []
+                            },
+                            {
+                                text: 'C++',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Декларативные языки',
+                        children: [
+                            {
+                                text: 'SQL',
+                                children: []
+                            },
+                            {
+                                text: 'HTML',
+                                children: []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+        var ul = document.body.appendChild(document.createElement('ul'));
+        function makeElements(element, ul) {
+            var li = ul.appendChild(document.createElement('li'));
+            li.appendChild(document.createTextNode(element.text));
+            if (element.children) {
+                var newUl = li.appendChild(document.createElement('ul'));
+                for (child of element.children) {
+                    makeElements(child, newUl);
+                }
+            }
+        }
+        for (child of m) {
+            makeElements(child, ul);
+        }
+        var a = document;
+        Take_information_about_DOM(a);
+        function Take_information_about_DOM(element) {
+            for (child of element.children) {
+                if (child.children) {
+                    console.log(child);
+                    Take_information_about_DOM(child);
+                }
+            }
+        }
+        var a = document;
+        Take_information_about_DOM(a);
+    </script>
+</body>
+
+</html>
