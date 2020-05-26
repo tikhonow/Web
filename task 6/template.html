@@ -183,6 +183,48 @@
 				} 
 			}
 		}
+		//хаотично
+		function moveBallChaos(){
+			//реализация движения вниз шариков, находящихся в массиве balls
+			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
+			for (var i = 0; i < balls.length;i){
+				var variant  = Math.floor(Math.random() * (5 - 1)) + 1;
+				if (variant == 1){
+					balls[i].posX = balls[i].posX + (Math.random()*1-1);
+					balls[i].posY = balls[i].posY + (Math.random()*1-1);
+					balls[i].draw(ctx);
+					}
+				if (variant == 2){
+					balls[i].posX = balls[i].posX - (Math.random()*1-1);
+					balls[i].posY = balls[i].posY - (Math.random()*1-1);
+					balls[i].draw(ctx);
+				} 
+				if (variant == 3){
+					balls[i].posX = balls[i].posX - (Math.random()*1-1);
+					balls[i].posY = balls[i].posY - (Math.random()*1-1);
+					balls[i].draw(ctx);
+				} 
+				if (variant == 4){
+					balls[i].posX = balls[i].posX  + (Math.random()*1-1);
+					balls[i].posY = balls[i].posY + (Math.random()*1-1);
+					balls[i].draw(ctx);
+				}
+				enlarge_the_ball(balls[i]);
+				if ( balls[i].rBall > 50){
+					balls.splice(i, 1);
+				}
+				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)) 
+					balls.splice(i,1);
+				else 
+					i++;
+			}
+		}
+		function moveChaos(){
+			clearInterval(idTimer);
+			idTimer = setInterval('moveBallChaos();',50);
+		}
+		//рандом
+		
 		//измение размера шарика при движении
 		function enlarge_the_ball(a) {
 			a.rBall = a.rBall + 0.3;
@@ -209,5 +251,5 @@
 		<input type = "button" value = "СТОП" onclick="clearInterval(idTimer);">
 	</form>
 </body>
-
+@Тихонов
 </html>
