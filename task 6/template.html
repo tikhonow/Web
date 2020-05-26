@@ -76,7 +76,7 @@
 			var item = new TBall(x, y);
 			item.draw(ctx);
 			balls.push(item);
-			
+
 		}
 		//движение вверх
 		function moveBall() {
@@ -132,99 +132,111 @@
 		}
 
 		//движение влево
-		function moveBallLeft(){
+		function moveBallLeft() {
 			//реализация движения вниз шариков, находящихся в массиве balls
-			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
-			for (var i = 0; i < balls.length;i){
-				balls[i].posX = balls[i].posX  + (Math.random()*2-4);
-				balls[i].posY = balls[i].posY + (Math.random()*4-2);
-				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)) 
-					balls.splice(i,1);
-				else{
+			drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
+			for (var i = 0; i < balls.length; i) {
+				balls[i].posX = balls[i].posX + (Math.random() * 2 - 4);
+				balls[i].posY = balls[i].posY + (Math.random() * 4 - 2);
+				if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
+					balls.splice(i, 1);
+				else {
 					enlarge_the_ball(balls[i]);
-					if ( balls[i].rBall > 50){
+					if (balls[i].rBall > 50) {
 						balls.splice(i, 1);
 					}
 					else {
 						balls[i].draw(ctx);
 					}
 					i++;
-				} 
-					
+				}
+
 			}
 		}
-		function moveLeft(){
+		function moveLeft() {
 			clearInterval(idTimer);
-			idTimer = setInterval('moveBallLeft();',50);
+			idTimer = setInterval('moveBallLeft();', 50);
 		}
 		//движение вправо
-		function moveRight(){
+		function moveRight() {
 			clearInterval(idTimer);
-			idTimer = setInterval('moveBallRight();',50);
+			idTimer = setInterval('moveBallRight();', 50);
 		}
-		function moveBallRight(){
+		function moveBallRight() {
 			//реализация движения вниз шариков, находящихся в массиве balls
-			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
-			for (var i = 0; i < balls.length;i){
-				balls[i].posX = balls[i].posX - (Math.random()*2-4);
-				balls[i].posY = balls[i].posY - (Math.random()*4-2);
+			drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
+			for (var i = 0; i < balls.length; i) {
+				balls[i].posX = balls[i].posX - (Math.random() * 2 - 4);
+				balls[i].posY = balls[i].posY - (Math.random() * 4 - 2);
 				balls[i].draw(ctx);
-				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)) 
-					balls.splice(i,1);
-				else{
+				if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
+					balls.splice(i, 1);
+				else {
 					enlarge_the_ball(balls[i]);
-					if ( balls[i].rBall > 50){
+					if (balls[i].rBall > 50) {
 						balls.splice(i, 1);
 					}
 					else {
 						balls[i].draw(ctx);
 					}
 					i++;
-				} 
+				}
 			}
 		}
 		//хаотично
-		function moveBallChaos(){
+		function moveBallChaos() {
 			//реализация движения вниз шариков, находящихся в массиве balls
-			drawBack(ctx,'#202020','#aaa',canvas.width,canvas.height);
-			for (var i = 0; i < balls.length;i){
-				var variant  = Math.floor(Math.random() * (5 - 1)) + 1;
-				if (variant == 1){
-					balls[i].posX = balls[i].posX + (Math.random()*1-1);
-					balls[i].posY = balls[i].posY + (Math.random()*1-1);
+			drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
+			for (var i = 0; i < balls.length; i) {
+				var variant = Math.floor(Math.random() * (5 - 1)) + 1;
+				if (variant == 1) {
+					balls[i].posX = balls[i].posX + (Math.random() * 1 - 1);
+					balls[i].posY = balls[i].posY + (Math.random() * 1 - 1);
 					balls[i].draw(ctx);
-					}
-				if (variant == 2){
-					balls[i].posX = balls[i].posX - (Math.random()*1-1);
-					balls[i].posY = balls[i].posY - (Math.random()*1-1);
+				}
+				if (variant == 2) {
+					balls[i].posX = balls[i].posX - (Math.random() * 1 - 1);
+					balls[i].posY = balls[i].posY - (Math.random() * 1 - 1);
 					balls[i].draw(ctx);
-				} 
-				if (variant == 3){
-					balls[i].posX = balls[i].posX - (Math.random()*1-1);
-					balls[i].posY = balls[i].posY - (Math.random()*1-1);
+				}
+				if (variant == 3) {
+					balls[i].posX = balls[i].posX - (Math.random() * 1 - 1);
+					balls[i].posY = balls[i].posY - (Math.random() * 1 - 1);
 					balls[i].draw(ctx);
-				} 
-				if (variant == 4){
-					balls[i].posX = balls[i].posX  + (Math.random()*1-1);
-					balls[i].posY = balls[i].posY + (Math.random()*1-1);
+				}
+				if (variant == 4) {
+					balls[i].posX = balls[i].posX + (Math.random() * 1 - 1);
+					balls[i].posY = balls[i].posY + (Math.random() * 1 - 1);
 					balls[i].draw(ctx);
 				}
 				enlarge_the_ball(balls[i]);
-				if ( balls[i].rBall > 50){
+				if (balls[i].rBall > 50) {
 					balls.splice(i, 1);
 				}
-				if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)) 
-					balls.splice(i,1);
-				else 
+				if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
+					balls.splice(i, 1);
+				else
 					i++;
 			}
 		}
-		function moveChaos(){
+
+		function moveChaos() {
 			clearInterval(idTimer);
-			idTimer = setInterval('moveBallChaos();',50);
+			idTimer = setInterval('moveBallChaos();', 50);
 		}
 		//рандом
-		
+
+		function moveRandom() {
+			GetArray();
+			clearInterval(idTimer);
+			idTimer = setInterval('moveBallRandom();', 50);
+		}
+
+		function GetArray() {
+			for (var i = 0; i < balls.length; i++) {
+				array[i] = Math.floor(Math.random() * (5 - 1)) + 1;
+			}
+		}
 		//измение размера шарика при движении
 		function enlarge_the_ball(a) {
 			a.rBall = a.rBall + 0.3;
@@ -242,14 +254,15 @@
 	<canvas id="canvas" width="600" height="400" onclick="goInput(event);">
 	</canvas>
 	<form>
-		<input type = "button" value = "Вниз" onclick="moveDown()">
-		<input type = "button" value = "Вверх" onclick="move()">
-		<input type = "button" value = "Вправо" onclick="moveRight()">
-		<input type = "button" value = "Влево" onclick="moveLeft()">
-		<input type = "button" value = "Хаотично" onclick="moveChaos()">
-		<input type = "button" value = "Рандомно" onclick="GetArray()">
-		<input type = "button" value = "СТОП" onclick="clearInterval(idTimer);">
+		<input type="button" value="Вниз" onclick="moveDown()">
+		<input type="button" value="Вверх" onclick="move()">
+		<input type="button" value="Вправо" onclick="moveRight()">
+		<input type="button" value="Влево" onclick="moveLeft()">
+		<input type="button" value="Хаотично" onclick="moveChaos()">
+		<input type="button" value="Рандомно" onclick="moveRandom()">
+		<input type="button" value="СТОП" onclick="clearInterval(idTimer);">
 	</form>
 </body>
-@Тихонов
+@Тихонов Руслан ПМИ 1 курс
+
 </html>
