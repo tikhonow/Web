@@ -1,12 +1,12 @@
 <html>
 
 <head>
-	<title>Canvas & Mootools</title>
+	<title>Canvas & Mootools Тихонов</title>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js"></script>
 	<script type="text/javascript">
-		var canvas, ctx, balls, idTimer, randomMove;
-		var array = []
+		var canvas, ctx, balls, idTimer;
+		var array = [];
 		TBall = new Class({
 			initialize: function (pX, pY) {
 				this.posX = pX; //позиция шарика по X
@@ -76,6 +76,7 @@
 			var item = new TBall(x, y);
 			item.draw(ctx);
 			balls.push(item);
+			arr[arr.length] = Math.floor(Math.random() * (5 - 1)) + 1;
 		}
 		function moveBall() {
 			//реализация движения шариков, находящихся в массиве balls
@@ -83,10 +84,9 @@
 			for (var i = 0; i < balls.length; i) {
 				balls[i].posX = balls[i].posX + (Math.random() * 4 - 2);
 				balls[i].posY = balls[i].posY + (Math.random() * 2 - 4);
-				balls[i].draw(ctx);
 				if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
 					balls.splice(i, 1);
-				else
+				else {
 					enlarge_the_ball(balls[i]);
 					if (balls[i].rBall > 50) {
 						balls.splice(i, 1);
@@ -95,15 +95,14 @@
 						balls[i].draw(ctx);
 					}
 					i++;
+				}
 			}
 		}
 		function move() {
+			clearInterval(idTimer);
 			idTimer = setInterval('moveBall();', 50);
 		}
-		function moveDown() {
-			clearInterval(idTimer);
-			idTimer = setInterval('moveBallDown();', 50);
-		}
+
 		//movedown
 		function moveBallDown() {
 			//реализация движения вниз шариков, находящихся в массиве balls
@@ -126,10 +125,15 @@
 				}
 			}
 		}
+		function moveDown() {
+			clearInterval(idTimer);
+			idTimer = setInterval('moveBallDown();', 50);
+		}
 
 		function enlarge_the_ball(a) {
 			a.rBall = a.rBall + 0.3;
 		}
+
 	</script>
 	<style type="text/css">
 		canvas {
@@ -142,9 +146,13 @@
 	<canvas id="canvas" width="600" height="400" onclick="goInput(event);">
 	</canvas>
 	<form>
-		<input type="button" value="Вверх" onclick="move()">
-		<input type="button" value="Вниз" onclick="moveDown()">
-		<input type="button" value="Стоп" onclick="clearInterval(idTimer);">
+		<input type = "button" value = "Вниз" onclick="moveDown()">
+		<input type = "button" value = "Вверх" onclick="move()">
+		<input type = "button" value = "Вправо" onclick="moveRight()">
+		<input type = "button" value = "Влеов" onclick="moveLeft()">
+		<input type = "button" value = "Хаотично" onclick="moveChaos()">
+		<input type = "button" value = "Рандомно" onclick="GetArray()">
+		<input type = "button" value = "СТОП" onclick="clearInterval(idTimer);">
 	</form>
 </body>
 
