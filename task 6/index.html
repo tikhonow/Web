@@ -1,0 +1,30 @@
+<html>
+
+<head>
+	<title>Canvas & Mootools Тихонов</title>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js"></script>
+	<script src="script.js" type="text/javascript"></script>
+	<style type="text/css">
+		canvas {
+			border: 1px solid blue;
+		}
+	</style>
+</head>
+
+<body onload="init();">
+	<canvas id="canvas" width="600" height="400" onclick="goInput(event);">
+	</canvas>
+	<form>
+		<input type="button" value="Вниз" onclick="moveDown()">
+		<input type="button" value="Вверх" onclick="move()">
+		<input type="button" value="Вправо" onclick="moveRight()">
+		<input type="button" value="Влево" onclick="moveLeft()">
+		<input type="button" value="Хаотично" onclick="moveChaos()">
+		<input type="button" value="Рандомно" onclick="moveRandom()">
+		<input type="button" value="СТОП" onclick="clearInterval(idTimer);">
+	</form>
+</body>
+@Тихонов Руслан ПМИ 1 курс
+
+</html>
