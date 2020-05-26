@@ -1,40 +1,81 @@
-var canvas, ctx, balls, idTimer;
+var canvas, ctx, figure, idTimer;
 var array = [];
-TBall = new Class({
-    initialize: function (pX, pY) {
+//классы фигур
+TFigure = new Class({
+    initialize: function(pX,pY) {
         this.posX = pX; //позиция шарика по X
         this.posY = pY; //позиция шарика по Y
         //цвет шарика, формируется случайным оьразом
-        this.colBall = 'rgb(' + Math.floor(Math.random() * 256) + ','
-            + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
-        // радиус шарика, случайное число от 5 до 30
-        this.rBall = 5 + Math.random() * 25;
-    },
-    posX: 0,
-    posY: 0,
-    colBall: "rgb(0,0,0)",
-    rBall: 0,
-    colorBall: function (ctx) {
-        // формируем градиентную заливку для шарика
-        with (this) {
-            var gradient = ctx.createRadialGradient(posX + rBall / 4,
-                posY - rBall / 6, rBall / 8, posX, posY, rBall);
+        // // радиус шарика, случайное число от 5 до 30
+        this.size = 5+Math.random()*25;// размер фигурки
+        this.colFigure = 'rgb('+Math.floor(Math.random()*256)+','
+        +Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+        },//цвет фигурки
+    //posX: 0,
+    //posY: 0,
+    //colBall:"rgb(0,0,0)",
+    //rBall: 0,
+    colorFigure: function(ctx){
+        // формируем градиентную заливку для шарикаc
+        with (this){
+            var gradient = ctx.createRadialGradient(posX+size/4,
+            posY-size/6, size/8, posX, posY, size);
             gradient.addColorStop(0, '#fff');
-            gradient.addColorStop(0.85, colBall);
+            gradient.addColorStop(0.85, colFigure);
             return gradient;
         }
     },
-    draw: function (ctx) {
+})
+TBall = new Class({
+    Extends: TFigure, //создание дочернего класса дл
+    draw: function(ctx){
         // рисуем шарик на canvas
-        with (this) {
-            ctx.fillStyle = colorBall(ctx);
+        with (this){
+            ctx.fillStyle = colorFigure(ctx);
             ctx.beginPath();
-            ctx.arc(posX, posY, rBall, 0, 2 * Math.PI, false);
+            ctx.arc(posX, posY, size/2, 0, 2*Math.PI, false); //дуги	
             ctx.closePath();
             ctx.fill();
         }
-    }
+    },
 });
+
+TSquare = new Class({
+    Extends: TFigure,
+    draw: function(ctx){
+        // рисуем шарик на canvas
+        with (this){
+            ctx.fillStyle = colFigure;
+            ctx.beginPath(); //Создает новый контур.
+            ctx.moveTo(posX - size / 2, posY - size / 2) //Перемещает перо в точку с координатами x и y.
+            ctx.lineTo(posX + size / 2, posY - size / 2)  //Рисует линию с текущей позиции до позиции, определенной x и y.
+            ctx.lineTo(posX + size / 2, posY + size / 2)
+            ctx.lineTo(posX - size / 2, posY + size / 2)
+            ctx.lineTo(posX - size / 2, posY - size / 2)
+            ctx.closePath(); //Закрывает контур, так что будущие команды рисования вновь направлены контекс
+            ctx.fill(); //Рисует фигуру с заливкой внутренней области.
+        }
+    },
+});
+
+TPackMan = new Class({
+    Extends: TFigure,
+    draw: function(ctx){
+        // рисуем шарик на canvas
+        with (this){
+            ctx.fillStyle = colFigure;
+            ctx.beginPath();
+            ctx.arc(posX, posY, size, 0.2 * Math.PI, 1.8 * Math.PI);
+            ctx.strokeStyle = '#000';
+            ctx.stroke();
+            ctx.lineTo(posX, posY);
+            ctx.closePath();
+            ctx.fill();
+            
+        }
+    },
+});
+
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
     ctx.save();
@@ -53,12 +94,24 @@ function init() {
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 шариков, заноси их в массив и выводим на canvas
-        balls = [];
-        for (var i = 1; i <= 10; i++) {
+        character = [];
+        for (var i = 1; i <= 5; i++) {
             var item = new TBall(10 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
-            balls.push(item);
+            character.push(item);
+        }
+        for (var i = 1; i <= 5; i++) {
+            var item = new TSquare(10 + Math.random() * (canvas.width - 30),
+                10 + Math.random() * (canvas.height - 30));
+            item.draw(ctx);
+            character.push(item);
+        }
+        for (var i = 1; i <= 5; i++) {
+            var item = new TPackMan(10 + Math.random() * (canvas.width - 30),
+                10 + Math.random() * (canvas.height - 30));
+            item.draw(ctx);
+            character.push(item);
         }
     }
 }
@@ -66,27 +119,33 @@ function init() {
 function goInput(event) {
     var x = event.clientX;
     var y = event.clientY;
-    var item = new TBall(x, y);
+    var item = Math.floor(1 + Math.random() * (3 + 1 - 1));
+    if (item == 1)  
+        item = new TBall(x,y)
+    else if (item == 2)  
+        item = new TPackMan(x,y)
+    else if (item == 3)
+        item = new TSquare(x,y)
     item.draw(ctx);
-    balls.push(item);
+    character.push(item);
 
 }
 //движение вверх
 function moveBall() {
-    //реализация движения шариков, находящихся в массиве balls
+    //реализация движения шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < balls.length; i) {
-        balls[i].posX = balls[i].posX + (Math.random() * 4 - 2);
-        balls[i].posY = balls[i].posY + (Math.random() * 2 - 4);
-        if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
-            balls.splice(i, 1);
+    for (var i = 0; i < character.length; i) {
+        character[i].posX = character[i].posX + (Math.random() * 4 - 2);
+        character[i].posY = character[i].posY + (Math.random() * 2 - 4);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+            character.splice(i, 1);
         else {
-            enlarge_the_ball(balls[i]);
-            if (balls[i].rBall > 50) {
-                balls.splice(i, 1);
+            enlarge_the_ball(character[i]);
+            if (character[i].rBall > 50) {
+                character.splice(i, 1);
             }
             else {
-                balls[i].draw(ctx);
+                character[i].draw(ctx);
             }
             i++;
         }
@@ -99,21 +158,21 @@ function move() {
 
 //движение вниз
 function moveBallDown() {
-    //реализация движения вниз шариков, находящихся в массиве balls
+    //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < balls.length; i) {
-        balls[i].posX = balls[i].posX - (Math.random() * 4 - 2);
-        balls[i].posY = balls[i].posY - (Math.random() * 2 - 4);
-        balls[i].draw(ctx);
-        if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
-            balls.splice(i, 1);
+    for (var i = 0; i < character.length; i) {
+        character[i].posX = character[i].posX - (Math.random() * 4 - 2);
+        character[i].posY = character[i].posY - (Math.random() * 2 - 4);
+        character[i].draw(ctx);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+            character.splice(i, 1);
         else {
-            enlarge_the_ball(balls[i]);
-            if (balls[i].rBall > 50) {
-                balls.splice(i, 1);
+            enlarge_the_ball(character[i]);
+            if (character[i].rBall > 50) {
+                character.splice(i, 1);
             }
             else {
-                balls[i].draw(ctx);
+                character[i].draw(ctx);
             }
             i++;
         }
@@ -126,20 +185,20 @@ function moveDown() {
 
 //движение влево
 function moveBallLeft() {
-    //реализация движения вниз шариков, находящихся в массиве balls
+    //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < balls.length; i) {
-        balls[i].posX = balls[i].posX + (Math.random() * 2 - 4);
-        balls[i].posY = balls[i].posY + (Math.random() * 4 - 2);
-        if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
-            balls.splice(i, 1);
+    for (var i = 0; i < character.length; i) {
+        character[i].posX = character[i].posX + (Math.random() * 2 - 4);
+        character[i].posY = character[i].posY + (Math.random() * 4 - 2);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+            character.splice(i, 1);
         else {
-            enlarge_the_ball(balls[i]);
-            if (balls[i].rBall > 50) {
-                balls.splice(i, 1);
+            enlarge_the_ball(character[i]);
+            if (character[i].rBall > 50) {
+                character.splice(i, 1);
             }
             else {
-                balls[i].draw(ctx);
+                character[i].draw(ctx);
             }
             i++;
         }
@@ -156,21 +215,21 @@ function moveRight() {
     idTimer = setInterval('moveBallRight();', 50);
 }
 function moveBallRight() {
-    //реализация движения вниз шариков, находящихся в массиве balls
+    //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < balls.length; i) {
-        balls[i].posX = balls[i].posX - (Math.random() * 2 - 4);
-        balls[i].posY = balls[i].posY - (Math.random() * 4 - 2);
-        balls[i].draw(ctx);
-        if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
-            balls.splice(i, 1);
+    for (var i = 0; i < character.length; i) {
+        character[i].posX = character[i].posX - (Math.random() * 2 - 4);
+        character[i].posY = character[i].posY - (Math.random() * 4 - 2);
+        character[i].draw(ctx);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+            character.splice(i, 1);
         else {
-            enlarge_the_ball(balls[i]);
-            if (balls[i].rBall > 50) {
-                balls.splice(i, 1);
+            enlarge_the_ball(character[i]);
+            if (character[i].rBall > 50) {
+                character.splice(i, 1);
             }
             else {
-                balls[i].draw(ctx);
+                character[i].draw(ctx);
             }
             i++;
         }
@@ -178,79 +237,78 @@ function moveBallRight() {
 }
 //хаотично
 function moveBallChaos() {
-    //реализация движения вниз шариков, находящихся в массиве balls
+    //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < balls.length; i) {
+    for (var i = 0; i < character.length; i) {
         var variant = Math.floor(Math.random() * (5 - 1)) + 1;
         if (variant == 1) {
-            balls[i].posX = balls[i].posX + (Math.random() * 1 - 1);
-            balls[i].posY = balls[i].posY + (Math.random() * 1 - 1);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX + (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY + (Math.random() * 1 - 1);
+            character[i].draw(ctx);
         }
         if (variant == 2) {
-            balls[i].posX = balls[i].posX - (Math.random() * 1 - 1);
-            balls[i].posY = balls[i].posY - (Math.random() * 1 - 1);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX - (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY - (Math.random() * 1 - 1);
+            character[i].draw(ctx);
         }
         if (variant == 3) {
-            balls[i].posX = balls[i].posX - (Math.random() * 1 - 1);
-            balls[i].posY = balls[i].posY - (Math.random() * 1 - 1);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX - (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY - (Math.random() * 1 - 1);
+            character[i].draw(ctx);
         }
         if (variant == 4) {
-            balls[i].posX = balls[i].posX + (Math.random() * 1 - 1);
-            balls[i].posY = balls[i].posY + (Math.random() * 1 - 1);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX + (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY + (Math.random() * 1 - 1);
+            character[i].draw(ctx);
         }
-        enlarge_the_ball(balls[i]);
-        if (balls[i].rBall > 50) {
-            balls.splice(i, 1);
+        enlarge_the_ball(character[i]);
+        if (character[i].rBall > 50) {
+            character.splice(i, 1);
         }
-        if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0))
-            balls.splice(i, 1);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+            character.splice(i, 1);
         else
             i++;
     }
 }
-
 function moveChaos() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBallChaos();', 50);
 }
 //рандом
 function moveBallRandom() {
-    //реализация рандомного движения шариков, находящихся в массиве balls
+    //реализация рандомного движения шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < balls.length; i) {
+    for (var i = 0; i < character.length; i) {
         if (array[i] == 1) {
-            balls[i].posX = balls[i].posX + (Math.random() * 4 - 2);
-            balls[i].posY = balls[i].posY + (Math.random() * 2 - 4);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX + (Math.random() * 4 - 2);
+            character[i].posY = character[i].posY + (Math.random() * 2 - 4);
+            character[i].draw(ctx);
         }
         if (array[i] == 2) {
-            balls[i].posX = balls[i].posX - (Math.random() * 4 - 2);
-            balls[i].posY = balls[i].posY - (Math.random() * 2 - 4);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX - (Math.random() * 4 - 2);
+            character[i].posY = character[i].posY - (Math.random() * 2 - 4);
+            character[i].draw(ctx);
         }
         if (array[i] == 3) {
-            balls[i].posX = balls[i].posX - (Math.random() * 2 - 4);
-            balls[i].posY = balls[i].posY - (Math.random() * 4 - 2);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX - (Math.random() * 2 - 4);
+            character[i].posY = character[i].posY - (Math.random() * 4 - 2);
+            character[i].draw(ctx);
         }
         if (array[i] == 4) {
-            balls[i].posX = balls[i].posX + (Math.random() * 2 - 4);
-            balls[i].posY = balls[i].posY + (Math.random() * 4 - 2);
-            balls[i].draw(ctx);
+            character[i].posX = character[i].posX + (Math.random() * 2 - 4);
+            character[i].posY = character[i].posY + (Math.random() * 4 - 2);
+            character[i].draw(ctx);
         }
 
-        enlarge_the_ball(balls[i]);
+        enlarge_the_ball(character[i]);
 
-        if (balls[i].rBall > 50) {
-            balls.splice(i, 1);
+        if (character[i].rBall > 50) {
+            character.splice(i, 1);
         }
 
-        if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0)) {
-            balls.splice(i, 1);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
+            character.splice(i, 1);
             array.splice(i, 1);
         }
         else
@@ -264,7 +322,7 @@ function moveRandom() {
 }
 
 function GetArray() {
-    for (var i = 0; i < balls.length; i++) {
+    for (var i = 0; i < character.length; i++) {
         array[i] = Math.floor(Math.random() * (5 - 1)) + 1;
     }
 }
@@ -272,4 +330,3 @@ function GetArray() {
 function enlarge_the_ball(a) {
     a.rBall = a.rBall + 0.3;
 }
-
