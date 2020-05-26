@@ -225,7 +225,45 @@
 			idTimer = setInterval('moveBallChaos();', 50);
 		}
 		//рандом
+		function moveBallRandom() {
+			//реализация движения вниз шариков, находящихся в массиве balls
+			drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
+			for (var i = 0; i < balls.length; i) {
+				if (array[i] == 1) {
+					balls[i].posX = balls[i].posX + (Math.random() * 4 - 2);
+					balls[i].posY = balls[i].posY + (Math.random() * 2 - 4);
+					balls[i].draw(ctx);
+				}
+				if (array[i] == 2) {
+					balls[i].posX = balls[i].posX - (Math.random() * 4 - 2);
+					balls[i].posY = balls[i].posY - (Math.random() * 2 - 4);
+					balls[i].draw(ctx);
+				}
+				if (array[i] == 3) {
+					balls[i].posX = balls[i].posX - (Math.random() * 2 - 4);
+					balls[i].posY = balls[i].posY - (Math.random() * 4 - 2);
+					balls[i].draw(ctx);
+				}
+				if (array[i] == 4) {
+					balls[i].posX = balls[i].posX + (Math.random() * 2 - 4);
+					balls[i].posY = balls[i].posY + (Math.random() * 4 - 2);
+					balls[i].draw(ctx);
+				}
 
+				enlarge_the_ball(balls[i]);
+
+				if (balls[i].rBall > 50) {
+					balls.splice(i, 1);
+				}
+
+				if ((balls[i].posX > canvas.width) || (balls[i].posX < 0) || (balls[i].posY < 0)) {
+					balls.splice(i, 1);
+					array.splice(i, 1);
+				}
+				else
+					i++;
+			}
+		}
 		function moveRandom() {
 			GetArray();
 			clearInterval(idTimer);
