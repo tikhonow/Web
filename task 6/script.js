@@ -1,25 +1,25 @@
-var canvas, ctx, figure, idTimer;
+var canvas, ctx, character, idTimer;
 var array = [];
 //классы фигур
 TFigure = new Class({
-    initialize: function(pX,pY) {
+    initialize: function (pX, pY) {
         this.posX = pX; //позиция шарика по X
         this.posY = pY; //позиция шарика по Y
         //цвет шарика, формируется случайным оьразом
         // // радиус шарика, случайное число от 5 до 30
-        this.size = 5+Math.random()*25;// размер фигурки
-        this.colFigure = 'rgb('+Math.floor(Math.random()*256)+','
-        +Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
-        },//цвет фигурки
+        this.size = 15 + Math.random() * 25;// размер фигурки
+        this.colFigure = 'rgb(' + Math.floor(Math.random() * 256) + ','
+            + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+    },//цвет фигурки
     //posX: 0,
     //posY: 0,
     //colBall:"rgb(0,0,0)",
     //rBall: 0,
-    colorFigure: function(ctx){
+    colorFigure: function (ctx) {
         // формируем градиентную заливку для шарикаc
-        with (this){
-            var gradient = ctx.createRadialGradient(posX+size/4,
-            posY-size/6, size/8, posX, posY, size);
+        with (this) {
+            var gradient = ctx.createRadialGradient(posX + size / 4,
+                posY - size / 6, size / 8, posX, posY, size);
             gradient.addColorStop(0, '#fff');
             gradient.addColorStop(0.85, colFigure);
             return gradient;
@@ -28,23 +28,22 @@ TFigure = new Class({
 })
 TBall = new Class({
     Extends: TFigure, //создание дочернего класса дл
-    draw: function(ctx){
+    draw: function (ctx) {
         // рисуем шарик на canvas
-        with (this){
+        with (this) {
             ctx.fillStyle = colorFigure(ctx);
             ctx.beginPath();
-            ctx.arc(posX, posY, size/2, 0, 2*Math.PI, false); //дуги	
+            ctx.arc(posX, posY, size / 2, 0, 2 * Math.PI, false); //дуги	
             ctx.closePath();
             ctx.fill();
         }
     },
 });
-
 TSquare = new Class({
     Extends: TFigure,
-    draw: function(ctx){
+    draw: function (ctx) {
         // рисуем шарик на canvas
-        with (this){
+        with (this) {
             ctx.fillStyle = colFigure;
             ctx.beginPath(); //Создает новый контур.
             ctx.moveTo(posX - size / 2, posY - size / 2) //Перемещает перо в точку с координатами x и y.
@@ -57,12 +56,11 @@ TSquare = new Class({
         }
     },
 });
-
 TPackMan = new Class({
     Extends: TFigure,
-    draw: function(ctx){
+    draw: function (ctx) {
         // рисуем шарик на canvas
-        with (this){
+        with (this) {
             ctx.fillStyle = colFigure;
             ctx.beginPath();
             ctx.arc(posX, posY, size, 0.2 * Math.PI, 1.8 * Math.PI);
@@ -71,7 +69,7 @@ TPackMan = new Class({
             ctx.lineTo(posX, posY);
             ctx.closePath();
             ctx.fill();
-            
+
         }
     },
 });
@@ -120,12 +118,12 @@ function goInput(event) {
     var x = event.clientX;
     var y = event.clientY;
     var item = Math.floor(1 + Math.random() * (3 + 1 - 1));
-    if (item == 1)  
-        item = new TBall(x,y)
-    else if (item == 2)  
-        item = new TPackMan(x,y)
+    if (item == 1)
+        item = new TBall(x, y)
+    else if (item == 2)
+        item = new TPackMan(x, y)
     else if (item == 3)
-        item = new TSquare(x,y)
+        item = new TSquare(x, y)
     item.draw(ctx);
     character.push(item);
 
@@ -141,7 +139,7 @@ function moveBall() {
             character.splice(i, 1);
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].rBall > 50) {
+            if (character[i].size > 50) {
                 character.splice(i, 1);
             }
             else {
@@ -168,7 +166,7 @@ function moveBallDown() {
             character.splice(i, 1);
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].rBall > 50) {
+            if (character[i].size > 50) {
                 character.splice(i, 1);
             }
             else {
@@ -194,7 +192,7 @@ function moveBallLeft() {
             character.splice(i, 1);
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].rBall > 50) {
+            if (character[i].size > 50) {
                 character.splice(i, 1);
             }
             else {
@@ -225,7 +223,7 @@ function moveBallRight() {
             character.splice(i, 1);
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].rBall > 50) {
+            if (character[i].size > 50) {
                 character.splice(i, 1);
             }
             else {
@@ -262,7 +260,7 @@ function moveBallChaos() {
             character[i].draw(ctx);
         }
         enlarge_the_ball(character[i]);
-        if (character[i].rBall > 50) {
+        if (character[i].size > 50) {
             character.splice(i, 1);
         }
         if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
@@ -303,7 +301,7 @@ function moveBallRandom() {
 
         enlarge_the_ball(character[i]);
 
-        if (character[i].rBall > 50) {
+        if (character[i].size > 50) {
             character.splice(i, 1);
         }
 
@@ -327,6 +325,37 @@ function GetArray() {
     }
 }
 //измение размера шарика при движении
+
+//измение размера шарика при движении
 function enlarge_the_ball(a) {
-    a.rBall = a.rBall + 0.3;
+    a.size = a.size + 0.7;
+}
+
+function deletefigure() {
+    var res = false;
+    for (var i = 0; i < character.length; i) {
+        for (var j = 0; j < character.length; j) {
+            if (i == j) {
+                j++
+                continue
+            }
+            if (((character[i] instanceof TSquare) && (character[j] instanceof TSquare)) || ((character[i] instanceof TSquare) && (character[j] instanceof TPackman)) || ((character[i] instanceof TPackman) && (character[j] instanceof TPackman)) || ((character[i] instanceof TBall) && (character[j] instanceof TBall)) || ((character[i] instanceof TSquare) && (character[j] instanceof TBall)) || ((character[i] instanceof TPackman) && (character[j] instanceof TBall))) {
+                if (((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posX - character[j].posX)) &&
+                    ((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posY - character[j].posY))) {
+                    res = true;
+                }
+            }
+            if (res) {
+                character.splice(j, 1)
+                character.splice(i, 1)
+                res = false
+                break
+            }
+            else {
+                figure[j].draw(ctx);
+                j++
+            }
+        }
+        i++
+    }
 }
