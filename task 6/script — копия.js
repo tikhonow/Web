@@ -152,7 +152,7 @@ function moveBall() {
             i++;
         }
     }
-    clash_of_figures();
+    deletefigure();
 }
 function move() {
     clearInterval(idTimer);
@@ -181,7 +181,7 @@ function moveBallDown() {
             i++;
         }
     }
-    clash_of_figures();
+    deletefigure();
 }
 function moveDown() {
     clearInterval(idTimer);
@@ -211,7 +211,7 @@ function moveBallLeft() {
         }
 
     }
-    clash_of_figures();
+    deletefigure();
 }
 function moveLeft() {
     clearInterval(idTimer);
@@ -245,7 +245,7 @@ function moveBallRight() {
         }
 
     }
-    clash_of_figures();
+    deletefigure();
 }
 //хаотичное движение
 function moveBallChaos() {
@@ -284,7 +284,7 @@ function moveBallChaos() {
         else
             i++;
     }
-    clash_of_figures();
+    deletefigure();
 }
 function moveChaos() {
     clearInterval(idTimer);
@@ -328,7 +328,8 @@ function moveBallRandom() {
         else
             i++;
     }
-    clash_of_charact();
+
+    deletefigure();
 }
 function moveRandom() {
     Random_array_for_move();
@@ -345,105 +346,34 @@ function Random_array_for_move() {
 function enlarge_the_ball(a) {
     a.radius = a.radius + 0.3;
 }
-function SegmentSegment(x11, y11, x12, y12, x21, y21, x22, y22) {
-    let maxx1 = Math.max(x11, x12), maxy1 = Math.max(y11, y12)
-    let minx1 = Math.min(x11, x12), miny1 = Math.min(y11, y12)
-    let maxx2 = Math.max(x21, x22), maxy2 = Math.max(y21, y22)
-    let minx2 = Math.min(x21, x22), miny2 = Math.min(y21, y22)
-    if (minx1 > maxx2 || maxx1 < minx2 || miny1 > maxy2 || maxy1 < miny2)
-        return false  // Момент, када линии имеют одну общую вершину...
 
-    let dx1 = x12 - x11, dy1 = y12 - y11 // Длина проекций первой линии на ось x и y
-    let dx2 = x22 - x21, dy2 = y22 - y21 // Длина проекций второй линии на ось x и y
-    let dxx = x11 - x21, dyy = y11 - y21
-    let mul
-    let div = dy2 * dx1 - dx2 * dy1
-    if (div === 0)
-        return false // Линии параллельны...
-    if (div > 0) {
-        mul = dx1 * dyy - dy1 * dxx
-        if (mul < 0 || mul > div)
-            return false // Первый отрезок пересекается за своими границами...
-        mul = dx2 * dyy - dy2 * dxx
-        if (mul < 0 || mul > div)
-            return false // Второй отрезок пересекается за своими границами...
-    }
-    mul = -(dx1 * dyy - dy1 * dxx)
-    if (mul < 0 || mul > -div)
-        return false // Первый отрезок пересекается за своими границами...
-    mul = -(dx2 * dyy - dy2 * dxx)
-    if (mul < 0 || mul > -div)
-        return false // Второй отрезок пересекается за своими границами...
-    return true
-}
-function SegmentCircle(x1, y1, x2, y2, xC, yC, R) {
-    x1 -= xC
-    y1 -= yC
-    x2 -= xC
-    y2 -= yC
 
-    let dx = x2 - x1
-    let dy = y2 - y1
-
-    //составляем коэффициенты квадратного уравнения на пересечение прямой и окружности.
-    //если на отрезке [0..1] есть отрицательные значения, значит отрезок пересекает окружность
-    let a = dx * dx + dy * dy
-    let b = 2 * (x1 * dx + y1 * dy)
-    let c = x1 * x1 + y1 * y1 - R * R
-
-    //а теперь проверяем, есть ли на отрезке [0..1] решения
-    if (-b < 0)
-        return (c < 0)
-    if (-b < (2. * a))
-        return ((4. * a * c - b * b) < 0)
-    return (a + b + c < 0)
-}
-
-//проверка столкновения фигур
-function clash_of_figures() {
-    for (let i = 0; i < character.length; i++) {
-        for (let j = i + 1; j < character.length; j++) {
-            let a = character[i], b = character[j]
-            if (a.constructor.name == 'TBall' && b.constructor.name == 'TBall') {
-                if (Math.pow(a.posX - b.posX, 2) + Math.pow(a.posY - b.posY, 2) < Math.pow(a.radius / 2 + b.radius / 2, 2)) {
-                    character.splice(character.indexOf(a), 1)
-                    character.splice(character.indexOf(b), 1)
+/////
+function deletefigure(){
+    var res = false;
+    for (var i = 0; i < character.length; i){
+        for (var j = 0; j < character.length; j){
+            if (i == j){
+                j++
+                continue
+            }
+            if (((character[i] instanceof TSquare) && (character[j] instanceof TSquare)) || ((character[i] instanceof TSquare) && (character[j] instanceof TPackMan)) || ((character[i] instanceof TPackMan) && (character[j] instanceof TPackMan)) || ((character[i] instanceof TBall) && (character[j] instanceof TBall)) || ((character[i] instanceof TSquare) && (character[j] instanceof TBall)) || ((character[i] instanceof TPackMan) && (character[j] instanceof TBall))){
+                if (((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posX - character[j].posX)) &&
+                     ((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posY - character[j].posY))){
+                    res = true;
                 }
             }
-            else if (a.constructor.name != 'TBall' && b.constructor.name != 'TBall') {
-                let good = true
-                for (let i = 0; i < a.lines.length; i++) {
-                    let l1 = a.lines[i]
-                    for (let j = 0; j < b.lines.length; j++) {
-                        let l2 = b.lines[j]
-                        good = !SegmentSegment(l1[0].x, l1[0].y, l1[1].x, l1[1].y, l2[0].x, l2[0].y, l2[1].x, l2[1].y)
-                        if (!good) break
-
-                    }
-                    if (!good) break
-                }
-                if (!good) {
-                    character.splice(i, 1);
-                    character.splice(character.indexOf(b), 1)
-                }
+            if (res){
+                character.splice(j, 1)
+                character.splice(i, 1)
+                res = false
+                break
             }
-            else {
-                if (a.constructor.name == 'TBall' && b.constructor.name != 'TBall') {
-                    a = character[j], b = character[i]
-                } // a - lines, b - ball
-                let good = true
-                for (let i = 0; i < a.lines.length; i++) {
-                    if (SegmentCircle(a.lines[i][0].x, a.lines[i][0].y, a.lines[i][1].x, a.lines[i][1].y, b.posX, b.posY, b.radius / 2)) {
-                        good = false
-                        break
-                    }
-                }
-                if (!good) {
-                    character.splice(character.indexOf(a), 1)
-                    character.splice(character.indexOf(b), 1)
-                }
-            }
-
+        else {
+            character[j].draw(ctx);
+            j++
         }
+        } 
+    i++  
     }
 }
