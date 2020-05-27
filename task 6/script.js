@@ -277,8 +277,8 @@ function moveBallChaos() {
         if (character[i].size > 50) {
             character.splice(i, 1);
         }
-        if ((figures[i].posX < 0) || (figures[i].posX > canvas.height) || (figures[i].posY > canvas.width) || (figures[i].posY < 0)){ 
-            figures.splice(i,1);
+        if ((character[i].posX < 0) || (character[i].posX > canvas.height) || (character[i].posY > canvas.width) || (character[i].posY < 0)){ 
+            character.splice(i,1);
             console.log("Выход за границы");
         }
         else
@@ -321,8 +321,8 @@ function moveBallRandom() {
         if (character[i].size > 50) {
             character.splice(i, 1);
         }
-        if ((figures[i].posX < 0) || (figures[i].posX > canvas.height) || (figures[i].posY > canvas.width) || (figures[i].posY < 0)){ 
-            figures.splice(i,1);
+        if ((character[i].posX < 0) || (character[i].posX > canvas.height) || (character[i].posY > canvas.width) || (character[i].posY < 0)){ 
+            character.splice(i,1);
             console.log("Выход за границы");
         }
         else
