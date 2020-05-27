@@ -1,6 +1,6 @@
 var canvas, ctx, character, idTimer;
 var array = [];
-//классы фигур
+//класс фигур, от которого наследуются все прочие классы
 TFigure = new Class({
     initialize: function (pX, pY) {
         this.posX = pX; //позиция шарика по X
@@ -26,6 +26,7 @@ TFigure = new Class({
         }
     },
 })
+//класс шарики
 TBall = new Class({
     Extends: TFigure, //создание дочернего класса дл
     draw: function (ctx) {
@@ -39,6 +40,7 @@ TBall = new Class({
         }
     },
 });
+//класс квадрата
 TSquare = new Class({
     Extends: TFigure,
     draw: function (ctx) {
@@ -56,6 +58,7 @@ TSquare = new Class({
         }
     },
 });
+//класс ПакМэна
 TPackMan = new Class({
     Extends: TFigure,
     draw: function (ctx) {
@@ -73,7 +76,7 @@ TPackMan = new Class({
         }
     },
 });
-
+//фон canvas
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
     ctx.save();
@@ -91,7 +94,7 @@ function init() {
         ctx = canvas.getContext('2d');
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-        //создаем 10 шариков, заноси их в массив и выводим на canvas
+        //создаем 5 различных фигур, заноси их в массив и выводим на canvas
         character = [];
         for (var i = 1; i <= 5; i++) {
             var item = new TBall(10 + Math.random() * (canvas.width - 30),
@@ -113,7 +116,7 @@ function init() {
         }
     }
 }
-// создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
+//создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
 function goInput(event) {
     var x = event.clientX;
     var y = event.clientY;
@@ -148,12 +151,12 @@ function moveBall() {
             i++;
         }
     }
+    clash_of_figures();
 }
 function move() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBall();', 50);
 }
-
 //движение вниз
 function moveBallDown() {
     //реализация движения вниз шариков, находящихся в массиве character
@@ -175,12 +178,12 @@ function moveBallDown() {
             i++;
         }
     }
+    clash_of_figures();
 }
 function moveDown() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBallDown();', 50);
 }
-
 //движение влево
 function moveBallLeft() {
     //реализация движения вниз шариков, находящихся в массиве character
@@ -202,6 +205,7 @@ function moveBallLeft() {
         }
 
     }
+    clash_of_figures();
 }
 function moveLeft() {
     clearInterval(idTimer);
@@ -231,9 +235,11 @@ function moveBallRight() {
             }
             i++;
         }
+        
     }
+    clash_of_figures();
 }
-//хаотично
+//хаотичное движение
 function moveBallChaos() {
     //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
@@ -268,12 +274,13 @@ function moveBallChaos() {
         else
             i++;
     }
+    clash_of_figures();
 }
 function moveChaos() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBallChaos();', 50);
 }
-//рандом
+//рандомное движение
 function moveBallRandom() {
     //реализация рандомного движения шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
@@ -312,26 +319,25 @@ function moveBallRandom() {
         else
             i++;
     }
+    clash_of_figures();
 }
 function moveRandom() {
-    GetArray();
+    Random_array_for_move();
     clearInterval(idTimer);
     idTimer = setInterval('moveBallRandom();', 50);
 }
-
-function GetArray() {
+//получение рандомного массив для метода moveBallRandom
+function Random_array_for_move() {
     for (var i = 0; i < character.length; i++) {
         array[i] = Math.floor(Math.random() * (5 - 1)) + 1;
     }
 }
 //измение размера шарика при движении
-
-//измение размера шарика при движении
 function enlarge_the_ball(a) {
     a.size = a.size + 0.7;
 }
-
-function deletefigure() {
+//проверка столкновения фигур
+function clash_of_figures() {
     var res = false;
     for (var i = 0; i < character.length; i) {
         for (var j = 0; j < character.length; j) {
@@ -352,7 +358,7 @@ function deletefigure() {
                 break
             }
             else {
-                figure[j].draw(ctx);
+                character[j].draw(ctx);
                 j++
             }
         }
