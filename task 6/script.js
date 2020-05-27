@@ -7,7 +7,7 @@ TFigure = new Class({
         this.posY = pY; //позиция шарика по Y
         //цвет шарика, формируется случайным оьразом
         // // радиус шарика, случайное число от 5 до 30
-        this.size = 15 + Math.random() * 25;// размер фигурки
+        this.size = 5 + Math.random() * 25;// размер фигурки
         this.colFigure = 'rgb(' + Math.floor(Math.random() * 256) + ','
             + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
     },//цвет фигурки
@@ -44,12 +44,11 @@ TBall = new Class({
 TSquare = new Class({
     Extends: TFigure,
     draw: function (ctx) {
-        // рисуем шарик на canvas
         with (this) {
             ctx.fillStyle = colFigure;
             ctx.beginPath(); //Создает новый контур.
-            ctx.moveTo(posX - size / 2, posY - size / 2) //Перемещает перо в точку с координатами x и y.
-            ctx.lineTo(posX + size / 2, posY - size / 2)  //Рисует линию с текущей позиции до позиции, определенной x и y.
+            ctx.moveTo(posX - size / 2, posY - size / 2)
+            ctx.lineTo(posX + size / 2, posY - size / 2)
             ctx.lineTo(posX + size / 2, posY + size / 2)
             ctx.lineTo(posX - size / 2, posY + size / 2)
             ctx.lineTo(posX - size / 2, posY - size / 2)
@@ -94,21 +93,21 @@ function init() {
         ctx = canvas.getContext('2d');
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-        //создаем 5 различных фигур, заноси их в массив и выводим на canvas
+        //создаем 10 различных фигур, заноси их в массив и выводим на canvas
         character = [];
-        for (var i = 1; i <= 5; i++) {
+        for (var i = 1; i <= 10; i++) {
             var item = new TBall(10 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
             character.push(item);
         }
-        for (var i = 1; i <= 5; i++) {
+        for (var i = 1; i <= 10; i++) {
             var item = new TSquare(10 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
             character.push(item);
         }
-        for (var i = 1; i <= 5; i++) {
+        for (var i = 1; i <= 10; i++) {
             var item = new TPackMan(10 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
@@ -138,8 +137,10 @@ function moveBall() {
     for (var i = 0; i < character.length; i) {
         character[i].posX = character[i].posX + (Math.random() * 4 - 2);
         character[i].posY = character[i].posY + (Math.random() * 2 - 4);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
             character.splice(i, 1);
+            console.log("Выход за границы");
+        }
         else {
             enlarge_the_ball(character[i]);
             if (character[i].size > 50) {
@@ -165,8 +166,10 @@ function moveBallDown() {
         character[i].posX = character[i].posX - (Math.random() * 4 - 2);
         character[i].posY = character[i].posY - (Math.random() * 2 - 4);
         character[i].draw(ctx);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
             character.splice(i, 1);
+            console.log("Выход за границы");
+        }
         else {
             enlarge_the_ball(character[i]);
             if (character[i].size > 50) {
@@ -191,8 +194,11 @@ function moveBallLeft() {
     for (var i = 0; i < character.length; i) {
         character[i].posX = character[i].posX + (Math.random() * 2 - 4);
         character[i].posY = character[i].posY + (Math.random() * 4 - 2);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
             character.splice(i, 1);
+            console.log("Выход за границы");
+        }
+
         else {
             enlarge_the_ball(character[i]);
             if (character[i].size > 50) {
@@ -223,8 +229,10 @@ function moveBallRight() {
         character[i].posX = character[i].posX - (Math.random() * 2 - 4);
         character[i].posY = character[i].posY - (Math.random() * 4 - 2);
         character[i].draw(ctx);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
             character.splice(i, 1);
+            console.log("Выход за границы");
+        }
         else {
             enlarge_the_ball(character[i]);
             if (character[i].size > 50) {
@@ -235,7 +243,7 @@ function moveBallRight() {
             }
             i++;
         }
-        
+
     }
     clash_of_figures();
 }
@@ -269,8 +277,10 @@ function moveBallChaos() {
         if (character[i].size > 50) {
             character.splice(i, 1);
         }
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0))
-            character.splice(i, 1);
+        if ((figures[i].posX < 0) || (figures[i].posX > canvas.height) || (figures[i].posY > canvas.width) || (figures[i].posY < 0)){ 
+            figures.splice(i,1);
+            console.log("Выход за границы");
+        }
         else
             i++;
     }
@@ -311,10 +321,9 @@ function moveBallRandom() {
         if (character[i].size > 50) {
             character.splice(i, 1);
         }
-
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
-            character.splice(i, 1);
-            array.splice(i, 1);
+        if ((figures[i].posX < 0) || (figures[i].posX > canvas.height) || (figures[i].posY > canvas.width) || (figures[i].posY < 0)){ 
+            figures.splice(i,1);
+            console.log("Выход за границы");
         }
         else
             i++;
@@ -334,7 +343,7 @@ function Random_array_for_move() {
 }
 //измение размера шарика при движении
 function enlarge_the_ball(a) {
-    a.size = a.size + 0.7;
+    a.size = a.size + 0.02;
 }
 //проверка столкновения фигур
 function clash_of_figures() {
@@ -345,7 +354,7 @@ function clash_of_figures() {
                 j++
                 continue
             }
-            if (((character[i] instanceof TSquare) && (character[j] instanceof TSquare)) || ((character[i] instanceof TSquare) && (character[j] instanceof TPackman)) || ((character[i] instanceof TPackman) && (character[j] instanceof TPackman)) || ((character[i] instanceof TBall) && (character[j] instanceof TBall)) || ((character[i] instanceof TSquare) && (character[j] instanceof TBall)) || ((character[i] instanceof TPackman) && (character[j] instanceof TBall))) {
+            if (((character[i] instanceof TSquare) && (character[j] instanceof TSquare)) || ((character[i] instanceof TSquare) && (character[j] instanceof TPackMan)) || ((character[i] instanceof TPackMan) && (character[j] instanceof TPackMan)) || ((character[i] instanceof TBall) && (character[j] instanceof TBall)) || ((character[i] instanceof TSquare) && (character[j] instanceof TBall)) || ((character[i] instanceof TPackMan) && (character[j] instanceof TBall))) {
                 if (((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posX - character[j].posX)) &&
                     ((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posY - character[j].posY))) {
                     res = true;
@@ -355,6 +364,7 @@ function clash_of_figures() {
                 character.splice(j, 1)
                 character.splice(i, 1)
                 res = false
+                console.log("Произошло удаление");
                 break
             }
             else {
