@@ -1,5 +1,6 @@
 var canvas, ctx, character, idTimer;
 var array = [];
+var speed = 1;
 //класс фигур, от которого наследуются все прочие классы
 TFigure = new Class({
     initialize: function (pX, pY) {
@@ -135,8 +136,8 @@ function moveBall() {
     //реализация движения шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX + (Math.random() * 4 - 2);
-        character[i].posY = character[i].posY + (Math.random() * 2 - 4);
+        character[i].posX = character[i].posX + speed * (Math.random() * 4 - 2);
+        character[i].posY = character[i].posY + speed * (Math.random() * 2 - 4);
         if ((character[i].posY > canvas.height) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
             console.log("Выход за границы");
@@ -163,8 +164,8 @@ function moveBallDown() {
     //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX - (Math.random() * 4 - 2);
-        character[i].posY = character[i].posY - (Math.random() * 2 - 4);
+        character[i].posX = character[i].posX - speed * (Math.random() * 4 - 2);
+        character[i].posY = character[i].posY - speed * (Math.random() * 2 - 4);
         character[i].draw(ctx);
         if ((character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
@@ -192,8 +193,8 @@ function moveBallLeft() {
     //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX + (Math.random() * 2 - 4);
-        character[i].posY = character[i].posY + (Math.random() * 4 - 2);
+        character[i].posX = character[i].posX + speed * (Math.random() * 2 - 4);
+        character[i].posY = character[i].posY + speed * (Math.random() * 4 - 2);
         if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
             console.log("Выход за границы");
@@ -226,8 +227,8 @@ function moveBallRight() {
     //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX - (Math.random() * 2 - 4);
-        character[i].posY = character[i].posY - (Math.random() * 4 - 2);
+        character[i].posX = character[i].posX - speed * (Math.random() * 2 - 4);
+        character[i].posY = character[i].posY - speed * (Math.random() * 4 - 2);
         character[i].draw(ctx);
         if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
@@ -254,23 +255,23 @@ function moveBallChaos() {
     for (var i = 0; i < character.length; i) {
         var variant = Math.floor(Math.random() * (5 - 1)) + 1;
         if (variant == 1) {
-            character[i].posX = character[i].posX + (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY + (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX + speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY + speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         if (variant == 2) {
-            character[i].posX = character[i].posX - (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY - (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX - speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY - speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         if (variant == 3) {
-            character[i].posX = character[i].posX - (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY - (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX - speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY - speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         if (variant == 4) {
-            character[i].posX = character[i].posX + (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY + (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX + speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY + speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         enlarge_the_ball(character[i]);
@@ -296,23 +297,23 @@ function moveBallRandom() {
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
         if (array[i] == 1) {
-            character[i].posX = character[i].posX + (Math.random() * 4 - 2);
-            character[i].posY = character[i].posY + (Math.random() * 2 - 4);
+            character[i].posX = character[i].posX + speed * (Math.random() * 4 - 2);
+            character[i].posY = character[i].posY + speed * (Math.random() * 2 - 4);
             character[i].draw(ctx);
         }
         if (array[i] == 2) {
-            character[i].posX = character[i].posX - (Math.random() * 4 - 2);
-            character[i].posY = character[i].posY - (Math.random() * 2 - 4);
+            character[i].posX = character[i].posX - speed * (Math.random() * 4 - 2);
+            character[i].posY = character[i].posY - speed * (Math.random() * 2 - 4);
             character[i].draw(ctx);
         }
         if (array[i] == 3) {
-            character[i].posX = character[i].posX - (Math.random() * 2 - 4);
-            character[i].posY = character[i].posY - (Math.random() * 4 - 2);
+            character[i].posX = character[i].posX - speed * (Math.random() * 2 - 4);
+            character[i].posY = character[i].posY - speed * (Math.random() * 4 - 2);
             character[i].draw(ctx);
         }
         if (array[i] == 4) {
-            character[i].posX = character[i].posX + (Math.random() * 2 - 4);
-            character[i].posY = character[i].posY + (Math.random() * 4 - 2);
+            character[i].posX = character[i].posX + speed * (Math.random() * 2 - 4);
+            character[i].posY = character[i].posY + speed * (Math.random() * 4 - 2);
             character[i].draw(ctx);
         }
 
@@ -375,5 +376,11 @@ function deletefigure(){
         }
         } 
     i++  
+    }
+}
+function changeSpeed(c) {
+    speed += c;
+    if (speed < 0) {
+        speed = 0;
     }
 }
