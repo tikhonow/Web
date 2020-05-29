@@ -77,7 +77,22 @@ TPackMan = new Class({
         }
     },
 });
+TTriangle = new Class({
+    Extends: TFigure,
+    draw : function(ctx){
 
+        with (this){
+            ctx.fillStyle = colorFigure(ctx)
+            ctx.beginPath()
+            ctx.moveTo(posX - size / 2, posY - size / 2)
+            ctx.lineTo(posX + size / 2, posY + size / 2)
+            ctx.lineTo(posX - size / 2, posY + size / 2)
+            ctx.lineTo(posX - size / 2, posY - size / 2)
+            ctx.closePath()
+            ctx.fill()
+        }
+    },
+});
 //фон canvas
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
