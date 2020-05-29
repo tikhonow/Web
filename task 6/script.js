@@ -131,19 +131,27 @@ function init() {
             item.draw(ctx);
             character.push(item);
         }
+        for (var i = 1; i <= 5; i++) {
+            var item = new TTriangle(10 + Math.random() * (canvas.width - 30),
+                10 + Math.random() * (canvas.height - 30));
+            item.draw(ctx);
+            character.push(item);
+        }
     }
 }
 //создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
 function goInput(event) {
     var x = event.clientX;
     var y = event.clientY;
-    var item = Math.floor(1 + Math.random() * (3 + 1 - 1));
+    var item = Math.floor(1 + Math.random() * (4));
     if (item == 1)
         item = new TBall(x, y)
     else if (item == 2)
         item = new TPackMan(x, y)
     else if (item == 3)
         item = new TSquare(x, y)
+    else if (item == 4)
+        item = new TTriangle(x, y)
     item.draw(ctx);
     character.push(item);
 
@@ -237,6 +245,7 @@ function deletefigure(){
                 character.splice(j, 1)
                 character.splice(i, 1)
                 collision = false
+                console.log("Обнаржено пересечение.Хлоп!")
                 break
             } else {
                 ballsj.draw(ctx);
@@ -246,6 +255,7 @@ function deletefigure(){
         i++
     }
 }
+//функция получающая данные об необходимости изменить скорость
 function changeSpeed(c) {
     speed += c;
     if (speed < 0) {
@@ -267,6 +277,7 @@ function moveBall() {
             enlarge_the_ball(character[i]);
             if (character[i].size > 100) {
                 character.splice(i, 1);
+                console.log("Превышен размер")
             }
             else {
                 character[i].draw(ctx);
@@ -296,6 +307,7 @@ function moveBallDown() {
             enlarge_the_ball(character[i]);
             if (character[i].size > 100) {
                 character.splice(i, 1);
+                console.log("Превышен размер")
             }
             else {
                 character[i].draw(ctx);
@@ -325,6 +337,7 @@ function moveBallLeft() {
             enlarge_the_ball(character[i]);
             if (character[i].size > 100) {
                 character.splice(i, 1);
+                console.log("Превышен размер")
             }
             else {
                 character[i].draw(ctx);
@@ -355,6 +368,7 @@ function moveBallRight() {
             enlarge_the_ball(character[i]);
             if (character[i].size > 100) {
                 character.splice(i, 1);
+                console.log("Превышен размер")
             }
             else {
                 character[i].draw(ctx);
@@ -398,6 +412,7 @@ function moveBallChaos() {
         enlarge_the_ball(character[i]);
         if (character[i].size > 100) {
             character.splice(i, 1);
+            console.log("Превышен размер")
         }
         if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
@@ -442,6 +457,7 @@ function moveBallRandom() {
 
         if (character[i].size > 100) {
             character.splice(i, 1);
+            console.log("Превышен размер")
         }
         if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
             character.splice(i, 1);
