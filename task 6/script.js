@@ -1,5 +1,6 @@
 var canvas, ctx, character, idTimer;
 var array = [];
+var speed = 1;
 //класс фигур, от которого наследуются все прочие классы
 TFigure = new Class({
     initialize: function (pX, pY) {
@@ -7,7 +8,7 @@ TFigure = new Class({
         this.posY = pY; //позиция шарика по Y
         //цвет шарика, формируется случайным оьразом
         // // радиус шарика, случайное число от 5 до 30
-        this.size = 5 + Math.random() * 25;// размер фигурки
+        this.size = 20 + Math.random() * 25;// размер фигурки
         this.colFigure = 'rgb(' + Math.floor(Math.random() * 256) + ','
             + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
     },//цвет фигурки
@@ -55,7 +56,8 @@ TSquare = new Class({
             ctx.closePath(); //Закрывает контур, так что будущие команды рисования вновь направлены контекс
             ctx.fill(); //Рисует фигуру с заливкой внутренней области.
         }
-    },
+    }
+
 });
 //класс ПакМэна
 TPackMan = new Class({
@@ -95,19 +97,19 @@ function init() {
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 различных фигур, заноси их в массив и выводим на canvas
         character = [];
-        for (var i = 1; i <= 10; i++) {
+        for (var i = 1; i <= 33; i++) {
             var item = new TBall(10 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
             character.push(item);
         }
-        for (var i = 1; i <= 10; i++) {
+        for (var i = 1; i <= 33; i++) {
             var item = new TSquare(10 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
             character.push(item);
         }
-        for (var i = 1; i <= 10; i++) {
+        for (var i = 1; i <= 33; i++) {
             var item = new TPackMan(10 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
@@ -135,9 +137,9 @@ function moveBall() {
     //реализация движения шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX + (Math.random() * 4 - 2);
-        character[i].posY = character[i].posY + (Math.random() * 2 - 4);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
+        character[i].posX = character[i].posX + speed * (Math.random() * 4 - 2);
+        character[i].posY = character[i].posY + speed * (Math.random() * 2 - 4);
+        if ((character[i].posY > canvas.height) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
             console.log("Выход за границы");
         }
@@ -152,7 +154,7 @@ function moveBall() {
             i++;
         }
     }
-    clash_of_figures();
+    deletefigure();
 }
 function move() {
     clearInterval(idTimer);
@@ -163,10 +165,10 @@ function moveBallDown() {
     //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX - (Math.random() * 4 - 2);
-        character[i].posY = character[i].posY - (Math.random() * 2 - 4);
+        character[i].posX = character[i].posX - speed * (Math.random() * 4 - 2);
+        character[i].posY = character[i].posY - speed * (Math.random() * 2 - 4);
         character[i].draw(ctx);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
+        if ((character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
             console.log("Выход за границы");
         }
@@ -181,7 +183,7 @@ function moveBallDown() {
             i++;
         }
     }
-    clash_of_figures();
+    deletefigure();
 }
 function moveDown() {
     clearInterval(idTimer);
@@ -192,9 +194,9 @@ function moveBallLeft() {
     //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX + (Math.random() * 2 - 4);
-        character[i].posY = character[i].posY + (Math.random() * 4 - 2);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
+        character[i].posX = character[i].posX + speed * (Math.random() * 2 - 4);
+        character[i].posY = character[i].posY + speed * (Math.random() * 4 - 2);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
             console.log("Выход за границы");
         }
@@ -211,7 +213,7 @@ function moveBallLeft() {
         }
 
     }
-    clash_of_figures();
+    deletefigure();
 }
 function moveLeft() {
     clearInterval(idTimer);
@@ -226,10 +228,10 @@ function moveBallRight() {
     //реализация движения вниз шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX - (Math.random() * 2 - 4);
-        character[i].posY = character[i].posY - (Math.random() * 4 - 2);
+        character[i].posX = character[i].posX - speed * (Math.random() * 2 - 4);
+        character[i].posY = character[i].posY - speed * (Math.random() * 4 - 2);
         character[i].draw(ctx);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
             console.log("Выход за границы");
         }
@@ -245,7 +247,7 @@ function moveBallRight() {
         }
 
     }
-    clash_of_figures();
+    deletefigure();
 }
 //хаотичное движение
 function moveBallChaos() {
@@ -254,37 +256,37 @@ function moveBallChaos() {
     for (var i = 0; i < character.length; i) {
         var variant = Math.floor(Math.random() * (5 - 1)) + 1;
         if (variant == 1) {
-            character[i].posX = character[i].posX + (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY + (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX + speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY + speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         if (variant == 2) {
-            character[i].posX = character[i].posX - (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY - (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX - speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY - speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         if (variant == 3) {
-            character[i].posX = character[i].posX - (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY - (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX - speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY - speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         if (variant == 4) {
-            character[i].posX = character[i].posX + (Math.random() * 1 - 1);
-            character[i].posY = character[i].posY + (Math.random() * 1 - 1);
+            character[i].posX = character[i].posX + speed * (Math.random() * 1 - 1);
+            character[i].posY = character[i].posY + speed * (Math.random() * 1 - 1);
             character[i].draw(ctx);
         }
         enlarge_the_ball(character[i]);
         if (character[i].size > 50) {
             character.splice(i, 1);
         }
-        if ((character[i].posX < 0) || (character[i].posX > canvas.height) || (character[i].posY > canvas.width) || (character[i].posY < 0)){ 
-            character.splice(i,1);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
+            character.splice(i, 1);
             console.log("Выход за границы");
         }
         else
             i++;
     }
-    clash_of_figures();
+    deletefigure();
 }
 function moveChaos() {
     clearInterval(idTimer);
@@ -296,23 +298,23 @@ function moveBallRandom() {
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
         if (array[i] == 1) {
-            character[i].posX = character[i].posX + (Math.random() * 4 - 2);
-            character[i].posY = character[i].posY + (Math.random() * 2 - 4);
+            character[i].posX = character[i].posX + speed * (Math.random() * 4 - 2);
+            character[i].posY = character[i].posY + speed * (Math.random() * 2 - 4);
             character[i].draw(ctx);
         }
         if (array[i] == 2) {
-            character[i].posX = character[i].posX - (Math.random() * 4 - 2);
-            character[i].posY = character[i].posY - (Math.random() * 2 - 4);
+            character[i].posX = character[i].posX - speed * (Math.random() * 4 - 2);
+            character[i].posY = character[i].posY - speed * (Math.random() * 2 - 4);
             character[i].draw(ctx);
         }
         if (array[i] == 3) {
-            character[i].posX = character[i].posX - (Math.random() * 2 - 4);
-            character[i].posY = character[i].posY - (Math.random() * 4 - 2);
+            character[i].posX = character[i].posX - speed * (Math.random() * 2 - 4);
+            character[i].posY = character[i].posY - speed * (Math.random() * 4 - 2);
             character[i].draw(ctx);
         }
         if (array[i] == 4) {
-            character[i].posX = character[i].posX + (Math.random() * 2 - 4);
-            character[i].posY = character[i].posY + (Math.random() * 4 - 2);
+            character[i].posX = character[i].posX + speed * (Math.random() * 2 - 4);
+            character[i].posY = character[i].posY + speed * (Math.random() * 4 - 2);
             character[i].draw(ctx);
         }
 
@@ -321,14 +323,15 @@ function moveBallRandom() {
         if (character[i].size > 50) {
             character.splice(i, 1);
         }
-        if ((character[i].posX < 0) || (character[i].posX > canvas.height) || (character[i].posY > canvas.width) || (character[i].posY < 0)){ 
-            character.splice(i,1);
+        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
+            character.splice(i, 1);
             console.log("Выход за границы");
         }
         else
             i++;
     }
-    clash_of_figures();
+
+    deletefigure();
 }
 function moveRandom() {
     Random_array_for_move();
@@ -343,10 +346,12 @@ function Random_array_for_move() {
 }
 //измение размера шарика при движении
 function enlarge_the_ball(a) {
-    a.size = a.size + 0.02;
+    a.radius = a.radius + 0.3;
 }
-//проверка столкновения фигур
-function clash_of_figures() {
+
+
+/////
+function deletefigure() {
     var res = false;
     for (var i = 0; i < character.length; i) {
         for (var j = 0; j < character.length; j) {
@@ -354,17 +359,46 @@ function clash_of_figures() {
                 j++
                 continue
             }
-            if (((character[i] instanceof TSquare) && (character[j] instanceof TSquare)) || ((character[i] instanceof TSquare) && (character[j] instanceof TPackMan)) || ((character[i] instanceof TPackMan) && (character[j] instanceof TPackMan)) || ((character[i] instanceof TBall) && (character[j] instanceof TBall)) || ((character[i] instanceof TSquare) && (character[j] instanceof TBall)) || ((character[i] instanceof TPackMan) && (character[j] instanceof TBall))) {
-                if (((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posX - character[j].posX)) &&
-                    ((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posY - character[j].posY))) {
+
+            if (((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posX - character[j].posX)) &&
+                ((character[i].size + character[j].size) / 2) > (Math.abs(character[i].posY - character[j].posY))) {
+                res = true;
+            }
+
+            /*if ((character[i] instanceof TSquare) && (character[j] instanceof TSquare)) {
+                ha = ((Math.sqrt(3)) * character[i].size) / 2
+                hb = ((Math.sqrt(3)) * character[j].size) / 2
+
+                ay = character[i].posY + ha
+                ay1 = character[i].posY - ha
+                ax1 = character[i].posX - ha
+
+                by = character[j].posY + hb
+                by1 = character[j].posY - hb
+                bx = character[i].posX + hb
+                if (ay < by1 || ay1 > by || ax1 < bx || ax > bx) {
                     res = true;
                 }
             }
+            if ((character[i] instanceof TSquare) && (character[j] instanceof TBal)) {
+                ha = ((Math.sqrt(3)) * character[i].size) / 2
+                hb = ((Math.sqrt(3)) * character[j].size) / 2
+
+                ay = character[i].posY + ha
+                ay1 = character[i].posY - ha
+                ax1 = character[i].posX - ha
+
+                by = character[j].posY + hb
+                by1 = character[j].posY - hb
+                bx = character[i].posX + hb
+                if (ay < by1 || ay1 > by || ax1 < bx || ax > bx) {
+                    res = true;
+                }
+            }*/
             if (res) {
                 character.splice(j, 1)
                 character.splice(i, 1)
                 res = false
-                console.log("Произошло удаление");
                 break
             }
             else {
@@ -373,5 +407,11 @@ function clash_of_figures() {
             }
         }
         i++
+    }
+}
+function changeSpeed(c) {
+    speed += c;
+    if (speed < 0) {
+        speed = 0;
     }
 }
