@@ -145,7 +145,7 @@ function moveBall() {
         }
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].size > 50) {
+            if (character[i].size > 100) {
                 character.splice(i, 1);
             }
             else {
@@ -174,7 +174,7 @@ function moveBallDown() {
         }
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].size > 50) {
+            if (character[i].size > 100) {
                 character.splice(i, 1);
             }
             else {
@@ -203,7 +203,7 @@ function moveBallLeft() {
 
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].size > 50) {
+            if (character[i].size > 100) {
                 character.splice(i, 1);
             }
             else {
@@ -237,7 +237,7 @@ function moveBallRight() {
         }
         else {
             enlarge_the_ball(character[i]);
-            if (character[i].size > 50) {
+            if (character[i].size > 100) {
                 character.splice(i, 1);
             }
             else {
@@ -276,7 +276,7 @@ function moveBallChaos() {
             character[i].draw(ctx);
         }
         enlarge_the_ball(character[i]);
-        if (character[i].size > 50) {
+        if (character[i].size > 100) {
             character.splice(i, 1);
         }
         if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
@@ -320,7 +320,7 @@ function moveBallRandom() {
 
         enlarge_the_ball(character[i]);
 
-        if (character[i].size > 50) {
+        if (character[i].size > 100) {
             character.splice(i, 1);
         }
         if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0) || (character[i].posY > canvas.height)) {
@@ -346,7 +346,7 @@ function Random_array_for_move() {
 }
 //измение размера шарика при движении
 function enlarge_the_ball(a) {
-    a.radius = a.radius + 0.3;
+    a.size = a.size + 0.9;
 }
 
 
