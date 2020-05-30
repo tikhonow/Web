@@ -29,10 +29,10 @@
 	<canvas id="canvas" width="800" height="500" onclick="goInput(event); ">
 	</canvas>
 	<form>
-		<input type="button" value="Вниз ↓" onclick="moveDown()">
-		<input type="button" value="Вверх ↑" onclick="move()">
-		<input type="button" value="Вправо →" onclick="moveRight()">
-		<input type="button" value="Влево ←" onclick="moveLeft()">
+		<input type="button" value="Вниз ↓" onclick="move_on_same_side(4)">
+		<input type="button" value="Вверх ↑" onclick="move_on_same_side(3)">
+		<input type="button" value="Вправо →" onclick="move_on_same_side(2)">
+		<input type="button" value="Влево ←" onclick="move_on_same_side(1)">
 		<input type="button" value="Хаотично" onclick="moveChaos()">
 		<input type="button" value="Рандомно" onclick="moveRandom()">
 		<input type="button" value="Медленнее" onclick="changeSpeed(-1)">

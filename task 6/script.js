@@ -263,13 +263,13 @@ function changeSpeed(c) {
         speed = 0;
     }
 }
-//движение вверх
-function moveBall() {
+//движение в стороны
+function moveBall(param1,param2) {
     //реализация движения шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
     for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX + speed * (Math.random() * 4 - 2);
-        character[i].posY = character[i].posY + speed * (Math.random() * 2 - 4);
+        character[i].posX = character[i].posX + speed * param1;
+        character[i].posY = character[i].posY + speed * param2;
         if ((character[i].posY > canvas.height) || (character[i].posX < 0) || (character[i].posY < 0)) {
             character.splice(i, 1);
             console.log("Выход за границы");
@@ -292,98 +292,7 @@ function move() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBall();', 50);
 }
-//движение вниз
-function moveBallDown() {
-    //реализация движения вниз шариков, находящихся в массиве character
-    drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX - speed * (Math.random() * 4 - 2);
-        character[i].posY = character[i].posY - speed * (Math.random() * 2 - 4);
-        character[i].draw(ctx);
-        if ((character[i].posX < 0) || (character[i].posY < 0)) {
-            character.splice(i, 1);
-            console.log("Выход за границы");
-        }
-        else {
-            enlarge_the_ball(character[i]);
-            if (character[i].size > 100) {
-                character.splice(i, 1);
-                console.log("Превышен размер")
-            }
-            else {
-                character[i].draw(ctx);
-            }
-            i++;
-        }
-    }
-    deletefigure();
-}
-function moveDown() {
-    clearInterval(idTimer);
-    idTimer = setInterval('moveBallDown();', 50);
-}
-//движение влево
-function moveBallLeft() {
-    //реализация движения вниз шариков, находящихся в массиве character
-    drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX + speed * (Math.random() * 2 - 4);
-        character[i].posY = character[i].posY + speed * (Math.random() * 4 - 2);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
-            character.splice(i, 1);
-            console.log("Выход за границы");
-        }
 
-        else {
-            enlarge_the_ball(character[i]);
-            if (character[i].size > 100) {
-                character.splice(i, 1);
-                console.log("Превышен размер")
-            }
-            else {
-                character[i].draw(ctx);
-            }
-            i++;
-        }
-
-    }
-    deletefigure();
-}
-function moveLeft() {
-    clearInterval(idTimer);
-    idTimer = setInterval('moveBallLeft();', 50);
-}
-//движение вправо
-function moveBallRight() {
-    //реализация движения вниз шариков, находящихся в массиве character
-    drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
-    for (var i = 0; i < character.length; i) {
-        character[i].posX = character[i].posX - speed * (Math.random() * 2 - 4);
-        character[i].posY = character[i].posY - speed * (Math.random() * 4 - 2);
-        character[i].draw(ctx);
-        if ((character[i].posX > canvas.width) || (character[i].posX < 0) || (character[i].posY < 0)) {
-            character.splice(i, 1);
-            console.log("Выход за границы");
-        }
-        else {
-            enlarge_the_ball(character[i]);
-            if (character[i].size > 100) {
-                character.splice(i, 1);
-                console.log("Превышен размер")
-            }
-            else {
-                character[i].draw(ctx);
-            }
-            i++;
-        }
-
-    }
-    deletefigure();
-}
-function moveRight() {
-    clearInterval(idTimer);
-    idTimer = setInterval('moveBallRight();', 50);
-}
 //хаотичное движение
 function moveBallChaos() {
     //реализация движения вниз шариков, находящихся в массиве character
@@ -479,5 +388,30 @@ function moveRandom() {
 function Random_array_for_move() {
     for (var i = 0; i < character.length; i++) {
         array[i] = Math.floor(Math.random() * (5 - 1)) + 1;
+    }
+}
+
+function move_on_same_side(movement){
+    mode = movement
+    if (mode == 1) {
+        //движение влево
+        clearInterval(idTimer);
+        idTimer = setInterval('moveBall((Math.random() * 2 - 4),(Math.random() * 4 - 2));', 50);
+    }
+    if (mode == 2) {
+        //движение вправо
+        clearInterval(idTimer);
+        idTimer = setInterval('moveBall((Math.random() * 2 - 4)*(-1), (Math.random() * 4 - 2)*(-1));', 50);
+    }
+    if (mode == 3) {
+        //движение вверх
+        clearInterval(idTimer);
+        idTimer = setInterval('moveBall((Math.random() * 4 - 2), (Math.random() * 2 - 4));', 50);
+
+    }
+    if (mode == 4) {
+        //вижение вниз
+        clearInterval(idTimer);
+        idTimer = setInterval('moveBall((Math.random() * 4 - 2)*(-1), (Math.random() * 2 - 4)*(-1));', 50);
     }
 }
