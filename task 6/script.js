@@ -65,10 +65,10 @@ TPackMan = new Class({
     draw: function (ctx) {
         // рисуем шарик на canvas
         with (this) {
-            ctx.fillStyle = colorFigure(ctx);
+            ctx.fillStyle = '#ffff00';
             ctx.beginPath();
             ctx.arc(posX, posY, size, 0.2 * Math.PI, 1.8 * Math.PI);
-            ctx.strokeStyle = '#000';
+            ctx.strokeStyle = '000';
             ctx.stroke();
             ctx.lineTo(posX, posY);
             ctx.closePath();
@@ -103,6 +103,7 @@ function drawBack(ctx, col1, col2, w, h) {
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
     ctx.restore();
+    
 }
 // инициализация работы
 function init() {
