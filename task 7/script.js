@@ -419,7 +419,7 @@ function check_name() {
 }
 function drawScore() {
     ctx.font = "30px Arial";
-    ctx.fillStyle = "grey";
+    ctx.fillStyle = level_of_complexity();
     ctx.fillText("Score:" + score, 10, 40);
     ctx.fillStyle = "red";
     ctx.fillText("Lives: " + minus_life() + user_live, 540, 40);
@@ -464,4 +464,24 @@ function user(){
     character.length = 0;
     user_live = 5;
     score = 0;
+}
+
+function level_of_complexity()
+{   
+
+    if (score < 10)
+    {
+        return("grey");
+    }
+    if (score >= 10)
+    {
+        speed = 1;
+        return("green");
+        
+    }
+    if (score >= 20)
+    {
+        speed = 1.5;
+        return("purple");
+    }
 }
