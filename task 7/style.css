@@ -46,3 +46,11 @@ td {
     background: #F5D7BF;
     padding: 10px;
     }
+fieldset {
+    background: #ECE9E0;
+    color: #656665;
+    border:2px solid rgb(70, 71, 58);
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;	
+    border-radius:8px;	
+    }
