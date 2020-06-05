@@ -1,6 +1,6 @@
-var canvas, ctx, idTimer;
+var canvas, ctx, idTimer, idTimer1;
 var character = [];
-var speed = 1;
+var speed = 0.5;
 //игра
 const airResistance = 0.05;
 var gunAngle = 0;
@@ -153,7 +153,7 @@ function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
     ctx.save();
     var img = new Image();
-    img.src = "game.jpg";
+    img.src = "games.jpg";
     var pat = ctx.createPattern(img, "repeat");
     ctx.rect(0, 0, w, h);
     ctx.fillStyle = pat;
@@ -163,13 +163,14 @@ function drawBack(ctx, col1, col2, w, h) {
 }
 // инициализация работы
 function init() {
+    check_name();
     canvas = document.getElementById('canvas');
     if (canvas.getContext) {
         ctx = canvas.getContext('2d');
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 различных фигур, заноси их в массив и выводим на canvas
-        setInterval('new_f()',10000);
+        idTimer1 = setInterval('new_f()',10000);
     }
 }
 function new_f() {
@@ -337,7 +338,7 @@ function moveBall(param1, param2) {
         }
         else {
             character[i].posX = character[i].posX + speed * param1;
-            character[i].posY = character[i].posY + speed * param2;
+            //character[i].posY = character[i].posY + speed * param2;
         }
         if (character[i].posX < 0) {
             character.splice(i, 1);
@@ -369,6 +370,13 @@ function move_on_same_side() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBall((Math.random() * 2 - 4),(Math.random() * 4 - 2));', 50);
 
+}
+function pause(){
+    clearInterval(idTimer);
+    clearInterval(idTimer1);
+    ctx.font = "60px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText("ПАУЗА", 300, 200);
 }
 function getMousePos(event) {
     let rect = canvas.getBoundingClientRect();
