@@ -1,0 +1,17 @@
+canvas {
+    border: 3px solid black;
+    margin: 0 0 5px 0;
+    background-image: url('game.jpg');
+}
+
+body,
+html {
+    margin: 5px;
+}
+
+input {
+    min-width: 70;
+    min-height: 45;
+    margin: 0 0 5px 10px;
+    background-color: rgba(222, 202, 135, 0.623);
+}

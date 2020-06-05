@@ -3,8 +3,10 @@ var array = [];
 var speed = 1;
 //игра
 const airResistance = 0.05;
-const gravity = 0.35;
+var gunAngle = 0;
+const gravity = 0.4;
 const freeFallAccel = 5;
+var bulletX = 0, bulletY = 0;
 var firstName = ""
 var counter = 0;
 var help = 0;
@@ -110,12 +112,12 @@ TTriangle = new Class({
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
     ctx.save();
-    var g = ctx.createLinearGradient(0, 0, 0, h);
-    g.addColorStop(1, col1);
-    g.addColorStop(0, col2);
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-    ctx.restore();
+    var img = new Image();
+    img.src = "game.jpg";
+    var pat = ctx.createPattern(img, "repeat");
+    ctx.rect(0, 0, w, h);
+    ctx.fillStyle = pat;
+    ctx.fill();
 
 }
 // инициализация работы
@@ -338,6 +340,7 @@ function calcGun(event) {
     let mousePos = getMousePos(event);
     let x = mousePos.x;
     let y = mousePos.y;
+
     gunAngle = Math.atan2(y, canvas.width - x);
     bulletX = 50 * Math.cos(gunAngle) - 20;
     bulletY = canvas.height - 50 * Math.sin(gunAngle) + 10;
