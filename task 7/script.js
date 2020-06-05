@@ -1,6 +1,6 @@
 var canvas, ctx, idTimer, idTimer1, character = [];
 //балистика
-const airResistance,gravity = 0.05,gravity = 0.35,freeFallAccel = 5;
+const airResistance = 0.05,gravity = 0.35,freeFallAccel = 5;
 var gunAngle = 0, bulletX = 0, bulletY = 0;
 //игровые данные
 var speed = 0.5,firstName = "",score = 0,user_live = 5,strlive = "❤❤❤❤❤",hardsize = 0;
@@ -136,6 +136,21 @@ TBullet = new Class({
         }
     },
 });
+//остаток от деленяи
+function mod(a)
+{   
+    if (a == 0)
+    {
+        return(1)
+    }
+    else
+    {
+       return(a%10); 
+    }
+    
+}
+
+
 //фон canvas, имя пользователя , опыт , жизнь
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
@@ -162,7 +177,48 @@ function init() {
         idTimer1 = setInterval('generate_figures()', 5000);
     }
 }
-//генерация фигур ха пределами поля
+//считывание данных о перемещении мыши
+function getMousePos(event) {
+    let rect = canvas.getBoundingClientRect();
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top
+    };
+}
+//расчет балистики
+function calcGun(event) {
+    let mousePos = getMousePos(event);
+    let x = mousePos.x;
+    let y = mousePos.y;
+
+    gunAngle = Math.atan2(y, canvas.width - x);
+    bulletX = 50 * Math.cos(gunAngle) - 20;
+    bulletY = canvas.height - 50 * Math.sin(gunAngle) + 10;
+}
+//запуск снаряда по нажатию
+function goInput(event) {
+    let mousePos = getMousePos(event);
+    let x = mousePos.x;
+    let y = mousePos.y;
+    let accelX = canvas.width * Math.sin(gunAngle) / 24;
+    let accelY = -canvas.height * Math.cos(gunAngle) / 24;
+    let bullet = new TBullet(bulletX, bulletY, accelX, accelY);
+    bullet.draw(ctx);
+    character.push(bullet);
+}
+//рисовать пушку
+function drawGun() {
+    ctx.save();
+    ctx.translate(-1, canvas.height);
+    ctx.rotate(gunAngle);
+    ctx.beginPath();
+    ctx.rect(-5, -45, 40, 100);
+    ctx.fillStyle = "brown";
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+}
+//генерация фигур за пределами поля
 function generate_figures() {
 
     for (var i = 1; i <= 1; i++) {
@@ -359,6 +415,13 @@ function move_on_same_side() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBall((Math.random() * 2 - 4),(Math.random() * 4 - 2));', 50);
 }
+
+
+//запрос имени в начале игры
+function check_name() {
+    firstName = prompt('Как Вас зовут?');
+    (Boolean(firstName)) ? alert("Приятной игры " + firstName) : check_name()
+}
 //пауза
 function pause() {
     clearInterval(idTimer);
@@ -367,51 +430,40 @@ function pause() {
     ctx.fillStyle = "red";
     ctx.fillText("ПАУЗА", 300, 200);
 }
-//считывание данных о перемещении мыши
-function getMousePos(event) {
-    let rect = canvas.getBoundingClientRect();
-    return {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-    };
+//перезапуск
+function restart() {
+    display_start_info();
+    ctx.clearRect(0, 0, canvas.width, canvas.h);
+    character.length = 0;
+    user_live = 5;
+    score = 0;
 }
-//расчет балистики
-function calcGun(event) {
-    let mousePos = getMousePos(event);
-    let x = mousePos.x;
-    let y = mousePos.y;
+//перезапуск со сменой пользователя
+function change_user() {
+    display_start_info();
+    check_name();
+    ctx.clearRect(0, 0, canvas.width, canvas.h);
+    character.length = 0;
+    user_live = 5;
+    score = 0;
+}
+//проверка уровня сложности
+function check_complexity() {
 
-    gunAngle = Math.atan2(y, canvas.width - x);
-    bulletX = 50 * Math.cos(gunAngle) - 20;
-    bulletY = canvas.height - 50 * Math.sin(gunAngle) + 10;
-}
-//запуск снаряда по нажатию
-function goInput(event) {
-    let mousePos = getMousePos(event);
-    let x = mousePos.x;
-    let y = mousePos.y;
-    let accelX = canvas.width * Math.sin(gunAngle) / 24;
-    let accelY = -canvas.height * Math.cos(gunAngle) / 24;
-    let bullet = new TBullet(bulletX, bulletY, accelX, accelY);
-    bullet.draw(ctx);
-    character.push(bullet);
-}
-//рисовать пушку
-function drawGun() {
-    ctx.save();
-    ctx.translate(-1, canvas.height);
-    ctx.rotate(gunAngle);
-    ctx.beginPath();
-    ctx.rect(-5, -45, 40, 100);
-    ctx.fillStyle = "brown";
-    ctx.fill();
-    ctx.closePath();
-    ctx.restore();
-}
-//запрос имени в начале игры
-function check_name() {
-    firstName = prompt('Как Вас зовут?');
-    (Boolean(firstName)) ? alert("Приятной игры " + firstName) : check_name()
+    if (score < 10) {
+        return ("grey");
+    }
+    if (score >= 10) {
+        speed = 1;
+        hardsize = 15;
+        return ("green");
+
+    }
+    if (score >= 20) {
+        speed = 1.5;
+        hardsize = 25;
+        return ("purple");
+    }
 }
 //вывод опыта и жизни
 function drawScore() {
@@ -448,44 +500,9 @@ function end_game() {
         alert("GAME OVER");
         localStorage.setItem(firstName, score);
         display_table();
+        change_user();
     }
 
-}
-//перезапуск
-function restart() {
-    display_start_info();
-    ctx.clearRect(0, 0, canvas.width, canvas.h);
-    character.length = 0;
-    user_live = 5;
-    score = 0;
-}
-//перезапуск со сменой пользователя
-function change_user() {
-    localStorage.setItem(firstName, score);
-    display_start_info();
-    check_name();
-    ctx.clearRect(0, 0, canvas.width, canvas.h);
-    character.length = 0;
-    user_live = 5;
-    score = 0;
-}
-//проверка уровня сложности
-function check_complexity() {
-
-    if (score < 10) {
-        return ("grey");
-    }
-    if (score >= 10) {
-        speed = 1;
-        hardsize = 15;
-        return ("green");
-
-    }
-    if (score >= 20) {
-        speed = 1.5;
-        hardsize = 25;
-        return ("purple");
-    }
 }
 //вывод турнирной таблицы
 function display_table() {
@@ -513,17 +530,4 @@ function display_start_info() {
     <dd>подряд активируется СУПЕР снаряд</dd><hr><dt>Уровни сложности:</dt><dd>Легкий (<10 очков)\
     </dd><dd>Средний (< 15 очков)</dd><dd>Трудный (> 15 очков)</dd></dl></fieldset>";
     document.getElementById("c").innerHTML = html;
-}
-//остаток от деленяи
-function mod(a)
-{   
-    if (a == 0)
-    {
-        return(1)
-    }
-    else
-    {
-       return(a%10); 
-    }
-    
 }
