@@ -164,6 +164,7 @@ function drawBack(ctx, col1, col2, w, h) {
 }
 // инициализация работы
 function init() {
+    wt();
     check_name();
     canvas = document.getElementById('canvas');
     if (canvas.getContext) {
@@ -439,16 +440,19 @@ function end_game() {
         alert("GAME OVER");
         localStorage.setItem(firstName, score);
         user();
+        w();
     }
 
 }
 function restart() {
+    wt();
     ctx.clearRect(0, 0, canvas.width, canvas.h);
     character.length = 0;
     user_live = 5;
     score = 0;
 }
 function user() {
+    wt();
     check_name();
     ctx.clearRect(0, 0, canvas.width, canvas.h);
     character.length = 0;
@@ -483,5 +487,14 @@ function w() {
     }
     html += "</table>";
 
+    document.getElementById("c").innerHTML = html;  
+}
+function wt() {
+    let html = "<fieldset><legend><h2>Игра Canvas</h2></legend><h4>\
+    Сбейте как можно больше противников</h4><dl><hr><dt>Враги</dt><dd>*Самолет(круг)\
+    </dd><dd>*Танк(квадрат) </dd><dd>*НЛО(треугольник) </dd><hr><dt>Правила:</dt>\
+    <dd>*У вас есть 5 ❤</dd><dd>*Не лайте врагу дойти до левой границы</dd>\
+    <dd>*Стрелять можно каждые 2 секунды</dd><dd>*При успешном попадании 5 раз</dd>\
+    <dd>подряд активируется СУПЕР снаряд</dd><hr></dl></fieldset>";
     document.getElementById("c").innerHTML = html;  
 }
