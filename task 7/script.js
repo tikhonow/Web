@@ -1,6 +1,7 @@
 var canvas, ctx, idTimer, idTimer1;
 var character = [];
 var speed = 0.5;
+var hardsize = 0;
 //игра
 const airResistance = 0.05;
 var gunAngle = 0;
@@ -87,24 +88,6 @@ TSquare = new Class({
     }
 
 });
-//класс ПакМэна
-TPackMan = new Class({
-    Extends: TFigure,
-    draw: function (ctx) {
-        // рисуем шарик на canvas
-        with (this) {
-            ctx.fillStyle = '#ffff00';
-            ctx.beginPath();
-            ctx.arc(posX, posY, size, 0.2 * Math.PI, 1.8 * Math.PI);
-            ctx.strokeStyle = '000';
-            ctx.stroke();
-            ctx.lineTo(posX, posY);
-            ctx.closePath();
-            ctx.fill();
-
-        }
-    },
-});
 
 TTriangle = new Class({
     Extends: TFigure,
@@ -133,7 +116,7 @@ TBullet = new Class({
         this.live = 1
         //цвет шарика, формируется случайным оьразом
         // // радиус шарика, случайное число от 5 до 30
-        this.size = 20 + Math.random() * 25;// размер фигурки
+        this.size = 40 - hardsize;// размер фигурки
         this.colFigure = 'rgb(' + Math.floor(Math.random() * 256) + ','
             + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
     },//цвет фигурки
@@ -141,11 +124,25 @@ TBullet = new Class({
     draw: function (ctx) {
         // рисуем шарик на canvas
         with (this) {
-            ctx.fillStyle = "red";
-            ctx.beginPath();
-            ctx.arc(posX, posY, size / 2, 0, 2 * Math.PI, false); //дуги	
-            ctx.closePath();
-            ctx.fill();
+            if (ost(score) == 0)
+            {
+                ctx.fillStyle = '#ffff00';
+                ctx.beginPath();
+                ctx.arc(posX, posY, size, 0.2 * Math.PI, 1.8 * Math.PI);
+                ctx.strokeStyle = '000';
+                ctx.stroke();
+                ctx.lineTo(posX, posY);
+                ctx.closePath();
+                ctx.fill();
+            }
+            else
+            {
+                ctx.fillStyle = "red";
+                ctx.beginPath();
+                ctx.arc(posX, posY, size / 2, 0, 2 * Math.PI, false); //дуги	
+                ctx.closePath();
+                ctx.fill();
+            }
         }
     },
 });
@@ -205,13 +202,34 @@ function new_f() {
 
 //измение размера шарика при движении
 function enlarge_the_ball(a) {
-
+    let add = 0;
+    if (ost(score) == 0)
+    {
+        add = 10;
+    }
+    else 
+    {
+        add = 0;
+    }
+    a.size = a.size + add;
 }
 //функция удаляющая пересекающиеся фигуры
 function deletefigure() {
     var collision = false
     for (var i = 0; i < character.length; i) {
         for (var j = 0; j < character.length; j) {
+            if (character[j].size > 200)
+            {   
+                score += character.length - 1;
+                character.length = 0;
+            }
+            else {
+                if (character[i].size > 200)
+                {
+                    score += character.length - 1;
+                    character.length = 0;
+                }
+            }
             var ballsi = character[i]
             ballsj = character[j]
             if (i == j) {
@@ -321,6 +339,7 @@ function moveBall(param1, param2) {
             character[i].accelX = Math.max(0, character[i].accelX - airResistance);
             character[i].posY += character[i].accelY;
             character[i].accelY = Math.min(freeFallAccel, character[i].accelY + gravity);
+            enlarge_the_ball(character[i]);
             character[i].draw(ctx);
 
         }
@@ -335,14 +354,7 @@ function moveBall(param1, param2) {
             end_game();
         }
         else {
-            enlarge_the_ball(character[i]);
-            if (character[i].size > 100) {
-                character.splice(i, 1);
-                console.log("Превышен размер")
-            }
-            else {
-                character[i].draw(ctx);
-            }
+            character[i].draw(ctx);
             i++;
         }
     }
@@ -466,28 +478,30 @@ function level_of_complexity() {
     }
     if (score >= 10) {
         speed = 1;
+        hardsize = 15;
         return ("green");
 
     }
     if (score >= 20) {
         speed = 1.5;
+        hardsize = 25;
         return ("purple");
     }
 }
 function w() {
     let html = "<table><h2>РЕЗУЛЬТАТЫ</h2><th>ИМЯ</th><th>ОЧКИ</th>";
     for (let i = 0; i < localStorage.length; i++) {
-      html += "<tr>";
-      for (let j = 0; j < 1; j++) {
-        let key = localStorage.key(i)
-        html += "<td>" + localStorage.key(i) + "</td>";
-        html += "<td>" + localStorage.getItem(key) + "</td>"
-      }
-      html += "</tr>";
+        html += "<tr>";
+        for (let j = 0; j < 1; j++) {
+            let key = localStorage.key(i)
+            html += "<td>" + localStorage.key(i) + "</td>";
+            html += "<td>" + localStorage.getItem(key) + "</td>"
+        }
+        html += "</tr>";
     }
     html += "</table>";
 
-    document.getElementById("c").innerHTML = html;  
+    document.getElementById("c").innerHTML = html;
 }
 function wt() {
     let html = "<fieldset><legend><h2>Игра Canvas</h2></legend><h4>\
@@ -497,5 +511,17 @@ function wt() {
     <dd>*Стрелять можно каждые 2 секунды</dd><dd>*При успешном попадании 5 раз</dd>\
     <dd>подряд активируется СУПЕР снаряд</dd><hr><dt>Уровни сложности:</dt><dd>Легкий (<10 очков)\
     </dd><dd>Средний (< 15 очков)</dd><dd>Трудный (> 15 очков)</dd></dl></fieldset>";
-    document.getElementById("c").innerHTML = html;  
+    document.getElementById("c").innerHTML = html;
+}
+function ost(a)
+{   
+    if (a == 0)
+    {
+        return(1)
+    }
+    else
+    {
+       return(a%10); 
+    }
+    
 }
