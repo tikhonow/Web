@@ -1,20 +1,21 @@
-var canvas, ctx, character, idTimer;
-var array = [];
+var canvas, ctx, idTimer;
+var character = [];
 var speed = 1;
 //игра
 const airResistance = 0.05;
 var gunAngle = 0;
-const gravity = 0.4;
+const gravity = 0.35;
 const freeFallAccel = 5;
 var bulletX = 0, bulletY = 0;
 var firstName = ""
-var counter = 0;
-var help = 0;
+var score = 0;
 var bulletX
 var bulletY
+var user_live = 5
+var first_play = 1;
 //класс фигур, от которого наследуются все прочие классы
 TFigure = new Class({
-    initialize: function (pX, pY,accelX, accelY) {
+    initialize: function (pX, pY, accelX, accelY) {
         this.posX = pX; //позиция шарика по X
         this.posY = pY; //позиция шарика по Y
         this.accelX = accelX;
@@ -44,7 +45,7 @@ TFigure = new Class({
 //класс шарики
 TBall = new Class({
     Extends: TFigure, //создание дочернего класса дл
-    initialize: function (pX, pY,accelX, accelY) {
+    initialize: function (pX, pY, accelX, accelY) {
         this.posX = pX; //позиция шарика по X
         this.posY = pY; //позиция шарика по Y
         this.accelX = accelX;
@@ -123,7 +124,7 @@ TTriangle = new Class({
 
 TBullet = new Class({
     Extends: TBall,
-    initialize: function (pX, pY,accelX, accelY) {
+    initialize: function (pX, pY, accelX, accelY) {
         this.posX = pX; //позиция шарика по X
         this.posY = pY; //позиция шарика по Y
         this.accelX = accelX;
@@ -135,7 +136,7 @@ TBullet = new Class({
         this.colFigure = 'rgb(' + Math.floor(Math.random() * 256) + ','
             + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
     },//цвет фигурки
-     //создание дочернего класса дл
+    //создание дочернего класса дл
     draw: function (ctx) {
         // рисуем шарик на canvas
         with (this) {
@@ -147,7 +148,7 @@ TBullet = new Class({
         }
     },
 });
-//фон canvas
+//фон canvas, имя пользователя и информация об игровых очках
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
     ctx.save();
@@ -157,6 +158,7 @@ function drawBack(ctx, col1, col2, w, h) {
     ctx.rect(0, 0, w, h);
     ctx.fillStyle = pat;
     ctx.fill();
+    drawScore();
 
 }
 // инициализация работы
@@ -167,38 +169,47 @@ function init() {
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 различных фигур, заноси их в массив и выводим на canvas
-        character = [];
-        for (var i = 1; i <= 5; i++) {
-            var item = new TBall(10 + Math.random() * (canvas.width - 30),
+        setInterval('new_f()',3000);
+    }
+}
+function new_f() {
+    if (user_live > 0) {
+        for (var i = 1; i <= 1; i++) {
+            var item = new TBall(400 + Math.random() * (canvas.width - 30),
+                500 - Math.random() * (canvas.height - 30));
+            item.draw(ctx);
+            character.push(item);
+        }
+        /*for (var i = 1; i <= 1; i++) {
+            var item = new TSquare(400 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
             character.push(item);
         }
-        for (var i = 1; i <= 5; i++) {
-            var item = new TSquare(10 + Math.random() * (canvas.width - 30),
+        for (var i = 1; i <= 1; i++) {
+            var item = new TPackMan(400 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
             character.push(item);
         }
-        for (var i = 1; i <= 5; i++) {
-            var item = new TPackMan(10 + Math.random() * (canvas.width - 30),
+        for (var i = 1; i <= 1; i++) {
+            var item = new TTriangle(400 + Math.random() * (canvas.width - 30),
                 10 + Math.random() * (canvas.height - 30));
             item.draw(ctx);
             character.push(item);
-        }
-        for (var i = 1; i <= 5; i++) {
-            var item = new TTriangle(10 + Math.random() * (canvas.width - 30),
-                10 + Math.random() * (canvas.height - 30));
-            item.draw(ctx);
-            character.push(item);
-        }
+        }*/
+    }
+    else {
+        alert("GAME OVER");
+        document.location.reload();
+        clearInterval(interval); // Needed for Chrome to end game
     }
 }
 //создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
 
 //измение размера шарика при движении
 function enlarge_the_ball(a) {
-    a.size = a.size + 0.2;
+    
 }
 //функция удаляющая пересекающиеся фигуры
 function deletefigure() {
@@ -211,12 +222,7 @@ function deletefigure() {
                 j++
                 continue
             }
-            if ((character[j] instanceof TSquare) && (character[i] instanceof TSquare)) {
-                if ((Math.abs(ballsi.posX - ballsj.posX) < ((ballsi.size + ballsj.size) / 2)) &&
-                    (Math.abs(ballsi.posY - ballsj.posY) < ((ballsi.size + ballsj.size) / 2))) {
-                    collision = true;
-                }
-            } else if ((character[j] instanceof TSquare) && !(character[i] instanceof TSquare)) {
+            if ((character[j] instanceof TBullet) && !(character[i] instanceof TBullet)) {
                 var y1 = ballsj.posY - ballsj.size / 2
                 var x0 = ballsi.posX; var y0 = ballsi.posY
                 var r = ballsi.size / 2
@@ -284,12 +290,17 @@ function deletefigure() {
             if (collision) {
                 character[i].live--;
                 character[j].live--;
-                if (character[j].live == 0){
+                if (character[j].live == 0) {
+                    if (!(character[j] instanceof TBullet)) {
+                        score++;
+                    }
                     character.splice(j, 1)
                     console.log("Минус жизнь")
                 }
-                if (character[i].live == 0)
-                {
+                if (character[i].live == 0) {
+                    if (!(character[i] instanceof TBullet)) {
+                        score++;
+                    }
                     character.splice(i, 1)
                     console.log("Минус жизнь")
                 }
@@ -328,8 +339,9 @@ function moveBall(param1, param2) {
             character[i].posX = character[i].posX + speed * param1;
             character[i].posY = character[i].posY + speed * param2;
         }
-        if ((character[i].posY > canvas.height) || (character[i].posX < 0) || (character[i].posY < 0)) {
+        if (character[i].posX < 0) {
             character.splice(i, 1);
+            user_live = user_live - 1;
             console.log("Выход за границы");
         }
         else {
@@ -353,29 +365,10 @@ function move() {
     idTimer = setInterval('moveBall();', 50);
 }
 
-function move_on_same_side(movement) {
-    mode = movement
-    if (mode == 1) {
-        //движение влево
-        clearInterval(idTimer);
-        idTimer = setInterval('moveBall((Math.random() * 2 - 4),(Math.random() * 4 - 2));', 50);
-    }
-    if (mode == 2) {
-        //движение вправо
-        clearInterval(idTimer);
-        idTimer = setInterval('moveBall((Math.random() * 2 - 4)*(-1), (Math.random() * 4 - 2)*(-1));', 50);
-    }
-    if (mode == 3) {
-        //движение вверх
-        clearInterval(idTimer);
-        idTimer = setInterval('moveBall((Math.random() * 4 - 2), (Math.random() * 2 - 4));', 50);
+function move_on_same_side() {
+    clearInterval(idTimer);
+    idTimer = setInterval('moveBall((Math.random() * 2 - 4),(Math.random() * 4 - 2));', 50);
 
-    }
-    if (mode == 4) {
-        //вижение вниз
-        clearInterval(idTimer);
-        idTimer = setInterval('moveBall((Math.random() * 4 - 2)*(-1), (Math.random() * 2 - 4)*(-1));', 50);
-    }
 }
 function getMousePos(event) {
     let rect = canvas.getBoundingClientRect();
@@ -414,5 +407,17 @@ function drawGun() {
     ctx.fill();
     ctx.closePath();
     ctx.restore();
+}
+
+function check_name() {
+    firstName = prompt('Как Вас зовут?');
+    (Boolean(firstName)) ? alert("Приятной игры " + firstName) : check_name()
+}
+
+function drawScore() {
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "grey";
+    ctx.fillText("Score:" + score, 10, 40);
+    ctx.fillText("Lives: ❤❤♡" + score, 600, 40);
 }
 
