@@ -171,47 +171,43 @@ function init() {
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 различных фигур, заноси их в массив и выводим на canvas
-        idTimer1 = setInterval('new_f()',10000);
+        idTimer1 = setInterval('new_f()', 10000);
     }
 }
 function new_f() {
-    if (user_live > 1) {
-        for (var i = 1; i <= 1; i++) {
-            var item = new TBall(650,
-                40 + Math.random() * (200));
-            item.draw(ctx);
-            character.push(item);
-        }
-        for (var i = 1; i <= 1; i++) {
-            var item = new TSquare(800,
+
+    for (var i = 1; i <= 1; i++) {
+        var item = new TBall(650,
             40 + Math.random() * (200));
-            item.draw(ctx);
-            character.push(item);
-        }
-        /*for (var i = 1; i <= 1; i++) {
-            var item = new TPackMan(900,
-            40 + Math.random() * (200));
-            item.draw(ctx);
-            character.push(item);
-        }*/
-        for (var i = 1; i <= 1; i++) {
-            var item = new TTriangle(700,
-            40 + Math.random() * (200));
-            item.draw(ctx);
-            character.push(item);
-        }
+        item.draw(ctx);
+        character.push(item);
     }
-    else {
-        alert("GAME OVER");
-        document.location.reload();
-        clearInterval(interval); // Needed for Chrome to end game
+    for (var i = 1; i <= 1; i++) {
+        var item = new TSquare(800,
+            40 + Math.random() * (200));
+        item.draw(ctx);
+        character.push(item);
+    }
+    /*for (var i = 1; i <= 1; i++) {
+        var item = new TPackMan(900,
+        40 + Math.random() * (200));
+        item.draw(ctx);
+        character.push(item);
+    }*/
+    for (var i = 1; i <= 1; i++) {
+        var item = new TTriangle(700,
+            40 + Math.random() * (200));
+        item.draw(ctx);
+        character.push(item);
     }
 }
+
+
 //создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
 
 //измение размера шарика при движении
 function enlarge_the_ball(a) {
-    
+
 }
 //функция удаляющая пересекающиеся фигуры
 function deletefigure() {
@@ -343,8 +339,9 @@ function moveBall(param1, param2) {
         }
         if (character[i].posX < 0) {
             character.splice(i, 1);
-            user_live = user_live - 1;
+            user_live --;
             console.log("Выход за границы");
+            enaf();
         }
         else {
             enlarge_the_ball(character[i]);
@@ -372,7 +369,7 @@ function move_on_same_side() {
     idTimer = setInterval('moveBall((Math.random() * 2 - 4),(Math.random() * 4 - 2));', 50);
 
 }
-function pause(){
+function pause() {
     clearInterval(idTimer);
     clearInterval(idTimer1);
     ctx.font = "60px Arial";
@@ -425,25 +422,33 @@ function drawScore() {
     ctx.fillStyle = "grey";
     ctx.fillText("Score:" + score, 10, 40);
     ctx.fillStyle = "red";
-    ctx.fillText("Lives: " + minus_life()+ user_live, 540, 40);
+    ctx.fillText("Lives: " + minus_life() + user_live, 540, 40);
 }
-function minus_life(){
-    if (user_live == 5){
-        return("❤❤❤❤❤");
+function minus_life() {
+    if (user_live == 5) {
+        return ("❤❤❤❤❤");
     }
-    if (user_live == 4){
-        return("❤❤❤❤♡");
+    if (user_live == 4) {
+        return ("❤❤❤❤♡");
     }
-    if (user_live == 3){
-        return("❤❤❤♡♡"); 
+    if (user_live == 3) {
+        return ("❤❤❤♡♡");
     }
-    if (user_live == 2){
-        return("❤❤♡♡♡");
+    if (user_live == 2) {
+        return ("❤❤♡♡♡");
     }
-    if (user_live == 1){
-        return("❤♡♡♡♡");
+    if (user_live == 1) {
+        return ("❤♡♡♡♡");
     }
-    if (user_live == 0){
+    if (user_live == 0) {
         return ("♡♡♡♡♡");
     }
+}
+function enaf() {
+    if (user_live == 0) {
+        alert("GAME OVER");
+        document.location.reload();
+        clearInterval(interval); // Needed for Chrome to end game
+    }
+
 }
