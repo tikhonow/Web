@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gun</title>
+    <meta charset="UTF-8" />
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+
+    <style type="text/css">
+        canvas {
+            border: 1px solid blue;
+            background-image: url('game.jpg');
+        }
+    </style>
+</head>
+
+<body onload="init();">
+    <canvas id="canvas" width="1000" height="500" onclick="goInput(event);" onmousemove="calcGun(event);"></canvas>
+    <form>
+        <input type="button" value="Движение" onclick="move()"><br>
+        <input type="button" value="Стоп" onclick="clearInterval(idTimer);idTimer=-1;"><br>
+        <fieldset>
+            <legend>Направление движения</legend>
+            <input type="radio" name="dir" id="UP" onclick="setDirection(this)" checked /> Вверх<br>
+            <input type="radio" name="dir" id="DOWN" onclick="setDirection(this)" /> Вниз<br>
+            <input type="radio" name="dir" id="LEFT" onclick="setDirection(this)" /> Влево<br>
+            <input type="radio" name="dir" id="RIGHT" onclick="setDirection(this)" /> Вправо<br>
+            <input type="radio" name="dir" id="CHAOS" onclick="setDirection(this)" /> Рандомно<br>
+        </fieldset>
+    </form>
+</body>
+
+</html>
