@@ -161,7 +161,7 @@ function drawBack(ctx, col1, col2, w, h) {
 }
 // инициализация работы
 function init() {
-    wt();
+    display_start_info();
     check_name();
     canvas = document.getElementById('canvas');
     if (canvas.getContext) {
@@ -169,10 +169,10 @@ function init() {
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 различных фигур, заноси их в массив и выводим на canvas
-        idTimer1 = setInterval('new_f()', 5000);
+        idTimer1 = setInterval('generate_figures()', 5000);
     }
 }
-function new_f() {
+function generate_figures() {
 
     for (var i = 1; i <= 1; i++) {
         var item = new TBall(810,
@@ -422,7 +422,7 @@ function check_name() {
 }
 function drawScore() {
     ctx.font = "30px Arial";
-    ctx.fillStyle = level_of_complexity();
+    ctx.fillStyle = check_complexity();
     ctx.fillText("Score:" + score, 10, 40);
     ctx.fillStyle = "red";
     ctx.fillText("Lives: " + minus_life() + user_live, 540, 40);
@@ -451,27 +451,27 @@ function end_game() {
     if (user_live == 0) {
         alert("GAME OVER");
         localStorage.setItem(firstName, score);
-        user();
-        w();
+        change_user();
+        display_table();
     }
 
 }
 function restart() {
-    wt();
+    display_start_info();
     ctx.clearRect(0, 0, canvas.width, canvas.h);
     character.length = 0;
     user_live = 5;
     score = 0;
 }
-function user() {
-    wt();
+function change_user() {
+    display_start_info();
     check_name();
     ctx.clearRect(0, 0, canvas.width, canvas.h);
     character.length = 0;
     user_live = 5;
     score = 0;
 }
-function level_of_complexity() {
+function check_complexity() {
 
     if (score < 10) {
         return ("grey");
@@ -488,7 +488,7 @@ function level_of_complexity() {
         return ("purple");
     }
 }
-function w() {
+function display_table() {
     let html = "<table><h2>РЕЗУЛЬТАТЫ</h2><th>ИМЯ</th><th>ОЧКИ</th>";
     for (let i = 0; i < localStorage.length; i++) {
         html += "<tr>";
@@ -503,7 +503,7 @@ function w() {
 
     document.getElementById("c").innerHTML = html;
 }
-function wt() {
+function display_start_info() {
     let html = "<fieldset><legend><h2>Игра Canvas</h2></legend><h4>\
     Сбейте как можно больше противников</h4><dl><hr><dt>Враги</dt><dd>*Самолет(круг)\
     </dd><dd>*Танк(квадрат) </dd><dd>*НЛО(треугольник) </dd><hr><dt>Правила:</dt>\
