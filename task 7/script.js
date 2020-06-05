@@ -169,35 +169,35 @@ function init() {
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 различных фигур, заноси их в массив и выводим на canvas
-        setInterval('new_f()',3000);
+        setInterval('new_f()',10000);
     }
 }
 function new_f() {
     if (user_live > 0) {
         for (var i = 1; i <= 1; i++) {
-            var item = new TBall(400 + Math.random() * (canvas.width - 30),
-                500 - Math.random() * (canvas.height - 30));
+            var item = new TBall(650,
+                40 + Math.random() * (200));
+            item.draw(ctx);
+            character.push(item);
+        }
+        for (var i = 1; i <= 1; i++) {
+            var item = new TSquare(800,
+            40 + Math.random() * (200));
             item.draw(ctx);
             character.push(item);
         }
         /*for (var i = 1; i <= 1; i++) {
-            var item = new TSquare(400 + Math.random() * (canvas.width - 30),
-                10 + Math.random() * (canvas.height - 30));
-            item.draw(ctx);
-            character.push(item);
-        }
-        for (var i = 1; i <= 1; i++) {
-            var item = new TPackMan(400 + Math.random() * (canvas.width - 30),
-                10 + Math.random() * (canvas.height - 30));
-            item.draw(ctx);
-            character.push(item);
-        }
-        for (var i = 1; i <= 1; i++) {
-            var item = new TTriangle(400 + Math.random() * (canvas.width - 30),
-                10 + Math.random() * (canvas.height - 30));
+            var item = new TPackMan(900,
+            40 + Math.random() * (200));
             item.draw(ctx);
             character.push(item);
         }*/
+        for (var i = 1; i <= 1; i++) {
+            var item = new TTriangle(700,
+            40 + Math.random() * (200));
+            item.draw(ctx);
+            character.push(item);
+        }
     }
     else {
         alert("GAME OVER");
