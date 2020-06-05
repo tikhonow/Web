@@ -341,7 +341,7 @@ function moveBall(param1, param2) {
             character.splice(i, 1);
             user_live --;
             console.log("Выход за границы");
-            enaf();
+            end_game();
         }
         else {
             enlarge_the_ball(character[i]);
@@ -444,11 +444,24 @@ function minus_life() {
         return ("♡♡♡♡♡");
     }
 }
-function enaf() {
+function end_game() {
     if (user_live == 0) {
         alert("GAME OVER");
         document.location.reload();
         clearInterval(interval); // Needed for Chrome to end game
     }
 
+}
+function restart(){
+    ctx.clearRect(0,0,canvas.width, canvas.h);
+    character.length = 0;
+    user_live = 5;
+    score = 0;
+}
+function user(){
+    check_name();
+    ctx.clearRect(0,0,canvas.width, canvas.h);
+    character.length = 0;
+    user_live = 5;
+    score = 0;
 }
