@@ -19,6 +19,7 @@ TFigure = new Class({
         this.posY = pY; //позиция шарика по Y
         this.accelX = accelX;
         this.accelY = accelY;
+        this.live = 2
         //цвет шарика, формируется случайным оьразом
         // // радиус шарика, случайное число от 5 до 30
         this.size = 20 + Math.random() * 25;// размер фигурки
@@ -43,6 +44,18 @@ TFigure = new Class({
 //класс шарики
 TBall = new Class({
     Extends: TFigure, //создание дочернего класса дл
+    initialize: function (pX, pY,accelX, accelY) {
+        this.posX = pX; //позиция шарика по X
+        this.posY = pY; //позиция шарика по Y
+        this.accelX = accelX;
+        this.accelY = accelY;
+        this.live = 1
+        //цвет шарика, формируется случайным оьразом
+        // // радиус шарика, случайное число от 5 до 30
+        this.size = 20 + Math.random() * 25;// размер фигурки
+        this.colFigure = 'rgb(' + Math.floor(Math.random() * 256) + ','
+            + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+    },
     draw: function (ctx) {
         // рисуем шарик на canvas
         with (this) {
@@ -108,6 +121,32 @@ TTriangle = new Class({
     },
 });
 
+TBullet = new Class({
+    Extends: TBall,
+    initialize: function (pX, pY,accelX, accelY) {
+        this.posX = pX; //позиция шарика по X
+        this.posY = pY; //позиция шарика по Y
+        this.accelX = accelX;
+        this.accelY = accelY;
+        this.live = 1
+        //цвет шарика, формируется случайным оьразом
+        // // радиус шарика, случайное число от 5 до 30
+        this.size = 20 + Math.random() * 25;// размер фигурки
+        this.colFigure = 'rgb(' + Math.floor(Math.random() * 256) + ','
+            + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+    },//цвет фигурки
+     //создание дочернего класса дл
+    draw: function (ctx) {
+        // рисуем шарик на canvas
+        with (this) {
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.arc(posX, posY, size / 2, 0, 2 * Math.PI, false); //дуги	
+            ctx.closePath();
+            ctx.fill();
+        }
+    },
+});
 //фон canvas
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
@@ -243,8 +282,17 @@ function deletefigure() {
                 collision = true;
             }
             if (collision) {
-                character.splice(j, 1)
-                character.splice(i, 1)
+                character[i].live--;
+                character[j].live--;
+                if (character[j].live == 0){
+                    character.splice(j, 1)
+                    console.log("Минус жизнь")
+                }
+                if (character[i].live == 0)
+                {
+                    character.splice(i, 1)
+                    console.log("Минус жизнь")
+                }
                 collision = false
                 console.log("Обнаржено пересечение.Хлоп!")
                 break
@@ -368,16 +416,3 @@ function drawGun() {
     ctx.restore();
 }
 
-TBullet = new Class({
-    Extends: TBall, //создание дочернего класса дл
-    draw: function (ctx) {
-        // рисуем шарик на canvas
-        with (this) {
-            ctx.fillStyle = "red";
-            ctx.beginPath();
-            ctx.arc(posX, posY, size / 2, 0, 2 * Math.PI, false); //дуги	
-            ctx.closePath();
-            ctx.fill();
-        }
-    },
-});
