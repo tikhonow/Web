@@ -172,19 +172,19 @@ function init() {
         //рисуем фон
         drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
         //создаем 10 различных фигур, заноси их в массив и выводим на canvas
-        idTimer1 = setInterval('new_f()', 10000);
+        idTimer1 = setInterval('new_f()', 5000);
     }
 }
 function new_f() {
 
     for (var i = 1; i <= 1; i++) {
-        var item = new TBall(650,
+        var item = new TBall(810,
             40 + Math.random() * (200));
         item.draw(ctx);
         character.push(item);
     }
     for (var i = 1; i <= 1; i++) {
-        var item = new TSquare(800,
+        var item = new TSquare(850,
             40 + Math.random() * (200));
         item.draw(ctx);
         character.push(item);
@@ -196,7 +196,7 @@ function new_f() {
         character.push(item);
     }*/
     for (var i = 1; i <= 1; i++) {
-        var item = new TTriangle(700,
+        var item = new TTriangle(900,
             40 + Math.random() * (200));
         item.draw(ctx);
         character.push(item);
