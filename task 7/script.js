@@ -202,9 +202,6 @@ function new_f() {
     }
 }
 
-
-//создаем новый шарик по щелчку мыши, добавляем его в массив шариков и рисуем его
-
 //измение размера шарика при движении
 function enlarge_the_ball(a) {
 
@@ -313,13 +310,6 @@ function deletefigure() {
         i++
     }
 }
-//функция получающая данные об необходимости изменить скорость
-function changeSpeed(c) {
-    speed += c;
-    if (speed < 0) {
-        speed = 0;
-    }
-}
 //движение в стороны
 function moveBall(param1, param2) {
     //реализация движения шариков, находящихся в массиве character
@@ -339,7 +329,7 @@ function moveBall(param1, param2) {
         }
         if (character[i].posX < 0) {
             character.splice(i, 1);
-            user_live --;
+            user_live--;
             console.log("Выход за границы");
             end_game();
         }
@@ -447,41 +437,51 @@ function minus_life() {
 function end_game() {
     if (user_live == 0) {
         alert("GAME OVER");
-        document.location.reload();
-        clearInterval(interval); // Needed for Chrome to end game
+        localStorage.setItem(firstName, score);
+        user();
     }
 
 }
-function restart(){
-    ctx.clearRect(0,0,canvas.width, canvas.h);
+function restart() {
+    ctx.clearRect(0, 0, canvas.width, canvas.h);
     character.length = 0;
     user_live = 5;
     score = 0;
 }
-function user(){
+function user() {
     check_name();
-    ctx.clearRect(0,0,canvas.width, canvas.h);
+    ctx.clearRect(0, 0, canvas.width, canvas.h);
     character.length = 0;
     user_live = 5;
     score = 0;
 }
+function level_of_complexity() {
 
-function level_of_complexity()
-{   
-
-    if (score < 10)
-    {
-        return("grey");
+    if (score < 10) {
+        return ("grey");
     }
-    if (score >= 10)
-    {
+    if (score >= 10) {
         speed = 1;
-        return("green");
-        
+        return ("green");
+
     }
-    if (score >= 20)
-    {
+    if (score >= 20) {
         speed = 1.5;
-        return("purple");
+        return ("purple");
     }
+}
+function w() {
+    let html = "<table><h2>РЕЗУЛЬТАТЫ</h2><th>ИМЯ</th><th>ОЧКИ</th>";
+    for (let i = 0; i < localStorage.length; i++) {
+      html += "<tr>";
+      for (let j = 0; j < 1; j++) {
+        let key = localStorage.key(i)
+        html += "<td>" + localStorage.key(i) + "</td>";
+        html += "<td>" + localStorage.getItem(key) + "</td>"
+      }
+      html += "</tr>";
+    }
+    html += "</table>";
+
+    document.getElementById("c").innerHTML = html;  
 }
