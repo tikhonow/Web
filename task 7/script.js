@@ -1,20 +1,10 @@
-var canvas, ctx, idTimer, idTimer1;
-var character = [];
-var speed = 0.5;
-var hardsize = 0;
-//игра
-const airResistance = 0.05;
-var gunAngle = 0;
-const gravity = 0.35;
-const freeFallAccel = 5;
-var bulletX = 0, bulletY = 0;
-var firstName = ""
-var score = 0;
-var bulletX
-var bulletY
-var user_live = 5
-var first_play = 1;
-var strlive = "❤❤❤❤❤"
+var canvas, ctx, idTimer, idTimer1, character = [];
+//балистика
+const airResistance,gravity = 0.05,gravity = 0.35,freeFallAccel = 5;
+var gunAngle = 0, bulletX = 0, bulletY = 0;
+//игровые данные
+var speed = 0.5,firstName = "",score = 0,user_live = 5,strlive = "❤❤❤❤❤",hardsize = 0;
+
 //класс фигур, от которого наследуются все прочие классы
 TFigure = new Class({
     initialize: function (pX, pY, accelX, accelY) {
@@ -88,7 +78,7 @@ TSquare = new Class({
     }
 
 });
-
+//класс треугольника
 TTriangle = new Class({
     Extends: TFigure,
     draw: function (ctx) {
@@ -105,7 +95,7 @@ TTriangle = new Class({
         }
     },
 });
-
+//класс снаряда пушки
 TBullet = new Class({
     Extends: TBall,
     initialize: function (pX, pY, accelX, accelY) {
@@ -124,7 +114,7 @@ TBullet = new Class({
     draw: function (ctx) {
         // рисуем шарик на canvas
         with (this) {
-            if (ost(score) == 0)
+            if (mod(score) == 0)
             {
                 ctx.fillStyle = '#ffff00';
                 ctx.beginPath();
@@ -146,7 +136,7 @@ TBullet = new Class({
         }
     },
 });
-//фон canvas, имя пользователя и информация об игровых очках
+//фон canvas, имя пользователя , опыт , жизнь
 function drawBack(ctx, col1, col2, w, h) {
     // закрашиваем канвас градиентным фоном
     ctx.save();
@@ -172,6 +162,7 @@ function init() {
         idTimer1 = setInterval('generate_figures()', 5000);
     }
 }
+//генерация фигур ха пределами поля
 function generate_figures() {
 
     for (var i = 1; i <= 1; i++) {
@@ -199,11 +190,10 @@ function generate_figures() {
         character.push(item);
     }
 }
-
-//измение размера шарика при движении
+//измение размера снаряда при кратности опыта 10
 function enlarge_the_ball(a) {
     let add = 0;
-    if (ost(score) == 0)
+    if (mod(score) == 0)
     {
         add = 10;
     }
@@ -329,7 +319,7 @@ function deletefigure() {
         i++
     }
 }
-//движение в стороны
+//движение 
 function moveBall(param1, param2) {
     //реализация движения шариков, находящихся в массиве character
     drawBack(ctx, '#202020', '#aaa', canvas.width, canvas.height);
@@ -361,17 +351,15 @@ function moveBall(param1, param2) {
     deletefigure();
     drawGun();
 }
-
 function move() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBall();', 50);
 }
-
 function move_on_same_side() {
     clearInterval(idTimer);
     idTimer = setInterval('moveBall((Math.random() * 2 - 4),(Math.random() * 4 - 2));', 50);
-
 }
+//пауза
 function pause() {
     clearInterval(idTimer);
     clearInterval(idTimer1);
@@ -379,6 +367,7 @@ function pause() {
     ctx.fillStyle = "red";
     ctx.fillText("ПАУЗА", 300, 200);
 }
+//считывание данных о перемещении мыши
 function getMousePos(event) {
     let rect = canvas.getBoundingClientRect();
     return {
@@ -386,6 +375,7 @@ function getMousePos(event) {
         y: event.clientY - rect.top
     };
 }
+//расчет балистики
 function calcGun(event) {
     let mousePos = getMousePos(event);
     let x = mousePos.x;
@@ -395,6 +385,7 @@ function calcGun(event) {
     bulletX = 50 * Math.cos(gunAngle) - 20;
     bulletY = canvas.height - 50 * Math.sin(gunAngle) + 10;
 }
+//запуск снаряда по нажатию
 function goInput(event) {
     let mousePos = getMousePos(event);
     let x = mousePos.x;
@@ -405,6 +396,7 @@ function goInput(event) {
     bullet.draw(ctx);
     character.push(bullet);
 }
+//рисовать пушку
 function drawGun() {
     ctx.save();
     ctx.translate(-1, canvas.height);
@@ -416,10 +408,12 @@ function drawGun() {
     ctx.closePath();
     ctx.restore();
 }
+//запрос имени в начале игры
 function check_name() {
     firstName = prompt('Как Вас зовут?');
     (Boolean(firstName)) ? alert("Приятной игры " + firstName) : check_name()
 }
+//вывод опыта и жизни
 function drawScore() {
     ctx.font = "30px Arial";
     ctx.fillStyle = check_complexity();
@@ -427,6 +421,7 @@ function drawScore() {
     ctx.fillStyle = "red";
     ctx.fillText("Lives: " + minus_life() + user_live, 540, 40);
 }
+//уменьшение жизни
 function minus_life() {
     if (user_live == 5) {
         return ("❤❤❤❤❤");
@@ -447,15 +442,16 @@ function minus_life() {
         return ("♡♡♡♡♡");
     }
 }
+//конец игры
 function end_game() {
     if (user_live == 0) {
         alert("GAME OVER");
         localStorage.setItem(firstName, score);
-        change_user();
         display_table();
     }
 
 }
+//перезапуск
 function restart() {
     display_start_info();
     ctx.clearRect(0, 0, canvas.width, canvas.h);
@@ -463,7 +459,9 @@ function restart() {
     user_live = 5;
     score = 0;
 }
+//перезапуск со сменой пользователя
 function change_user() {
+    localStorage.setItem(firstName, score);
     display_start_info();
     check_name();
     ctx.clearRect(0, 0, canvas.width, canvas.h);
@@ -471,6 +469,7 @@ function change_user() {
     user_live = 5;
     score = 0;
 }
+//проверка уровня сложности
 function check_complexity() {
 
     if (score < 10) {
@@ -488,6 +487,7 @@ function check_complexity() {
         return ("purple");
     }
 }
+//вывод турнирной таблицы
 function display_table() {
     let html = "<table><h2>РЕЗУЛЬТАТЫ</h2><th>ИМЯ</th><th>ОЧКИ</th>";
     for (let i = 0; i < localStorage.length; i++) {
@@ -503,6 +503,7 @@ function display_table() {
 
     document.getElementById("c").innerHTML = html;
 }
+//вывод начальной инфомациии
 function display_start_info() {
     let html = "<fieldset><legend><h2>Игра Canvas</h2></legend><h4>\
     Сбейте как можно больше противников</h4><dl><hr><dt>Враги</dt><dd>*Самолет(круг)\
@@ -513,7 +514,8 @@ function display_start_info() {
     </dd><dd>Средний (< 15 очков)</dd><dd>Трудный (> 15 очков)</dd></dl></fieldset>";
     document.getElementById("c").innerHTML = html;
 }
-function ost(a)
+//остаток от деленяи
+function mod(a)
 {   
     if (a == 0)
     {
