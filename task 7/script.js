@@ -13,6 +13,7 @@ var bulletX
 var bulletY
 var user_live = 5
 var first_play = 1;
+var strlive = "❤❤❤❤❤"
 //класс фигур, от которого наследуются все прочие классы
 TFigure = new Class({
     initialize: function (pX, pY, accelX, accelY) {
@@ -174,7 +175,7 @@ function init() {
     }
 }
 function new_f() {
-    if (user_live > 0) {
+    if (user_live > 1) {
         for (var i = 1; i <= 1; i++) {
             var item = new TBall(650,
                 40 + Math.random() * (200));
@@ -404,7 +405,6 @@ function goInput(event) {
     bullet.draw(ctx);
     character.push(bullet);
 }
-
 function drawGun() {
     ctx.save();
     ctx.translate(-1, canvas.height);
@@ -416,16 +416,34 @@ function drawGun() {
     ctx.closePath();
     ctx.restore();
 }
-
 function check_name() {
     firstName = prompt('Как Вас зовут?');
     (Boolean(firstName)) ? alert("Приятной игры " + firstName) : check_name()
 }
-
 function drawScore() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "grey";
     ctx.fillText("Score:" + score, 10, 40);
-    ctx.fillText("Lives: ❤❤♡" + score, 600, 40);
+    ctx.fillStyle = "red";
+    ctx.fillText("Lives: " + minus_life()+ user_live, 540, 40);
 }
-
+function minus_life(){
+    if (user_live == 5){
+        return("❤❤❤❤❤");
+    }
+    if (user_live == 4){
+        return("❤❤❤❤♡");
+    }
+    if (user_live == 3){
+        return("❤❤❤♡♡"); 
+    }
+    if (user_live == 2){
+        return("❤❤♡♡♡");
+    }
+    if (user_live == 1){
+        return("❤♡♡♡♡");
+    }
+    if (user_live == 0){
+        return ("♡♡♡♡♡");
+    }
+}
